@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import homeView from '../views/users/homeView.vue'
 import navBar from '../components/navbar/navbar.vue'
+import signIn from '../views/users/signIn.vue'
 
 const routes = [
   
@@ -8,10 +9,10 @@ const routes = [
     path: '/',
     redirect: '/home',
     component: navBar,
-    meta: { requiresAuth: true },
     children: [
 
       { path: '/home', name: 'homeView', component: homeView },
+      { path: '/signIn', name: 'signIn', component: signIn },
      
     ]
   },

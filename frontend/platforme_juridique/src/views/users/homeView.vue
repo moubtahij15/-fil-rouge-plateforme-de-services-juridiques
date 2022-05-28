@@ -2,7 +2,7 @@
     <div class=" bg-white">
         <!-- start header -->
 
-        <section class="relative overflow-hidden">
+        <section class=" overflow-hidden">
 
 
 
@@ -16,7 +16,7 @@
 
 
 
-            <div class="   bg-white relative z-30 flex flex-col px-10 pt-10 pb-20 mx-auto md:flex-row  max-w-7xl">
+            <div class="   bg-white  z-30 flex flex-col px-10 pt-10 pb-20 mx-auto md:flex-row  max-w-7xl">
 
                 <div class="flex flex-col items-center  justify-center w-full space-y-8 md:w-1/2 sm:pr-8">
                     <h1 class="text-5xl font-extrabold leading-tight sm:text-6xl md:text-6xl ">Trouvez un
