@@ -69,11 +69,11 @@ export default {
                 password: ""
             },
             message: "",
-// 
+            // 
         }
     },
     methods: {
-        ...mapActions(["redirectTo", "loginUser"]),
+        ...mapActions(["redirectTo", "loginUser", "isLogin"]),
 
         //user methods
         login(ev) {
@@ -104,7 +104,7 @@ export default {
                             this.user.password = ""
                         if (response.message == "success") {
                             // this.error = true
-                                console.log("z");
+                            console.log("z");
                             this.redirectTo({ val: "homeView" });
                         } else {
 
@@ -145,6 +145,15 @@ export default {
     mounted() {
         // console.log(this.$store.state.login.email);
         // console.log(this.$store.state.login.pass);
+        this.isLogin()
+            .then((response) => {
+                if (response) {
+
+                    this.redirectTo({ val: "homeView" });
+                } 
+                
+            })
+
 
     },
 

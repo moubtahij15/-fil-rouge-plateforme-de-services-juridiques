@@ -9,9 +9,8 @@ const store = createStore({
     user: {
 
     },
-    login: {
-      email: "",
-      pass: ""
+    villes: {
+
     }
 
 
@@ -39,10 +38,11 @@ const store = createStore({
         });
     },
     // end login user
-    //
+    // start rgister user
+
     registerUser({ commit }, user) {
 
-      return axios.post('client/register', user)
+      return axiosClient.post('client/register', user)
         .then(response => {
           if (response.status == 200) {
             return response.data;
@@ -50,8 +50,30 @@ const store = createStore({
           }
 
         })
+    },
+    // end register user
+    // check if is login
+    isLogin({ commit }) {
+      if (sessionStorage.getItem("idUser")) {
+        return true
+      }return false
+
+    },
+    // get ville
+
+    getVilles({ commit }) {
+
+      return axiosClient.get('client/villes')
+        .then(response => {
+          if (response.status == 200) {
+            commit('setVilles', response.data.villes);
+
+            return response.data;
+
+          }
+
+        })
     }
-    
 
     //  end user actions
 
@@ -77,6 +99,14 @@ const store = createStore({
 
     },
     // end login user
+    // set villes
+    setVilles: (state, villes) => {
+      state.villes = villes;
+
+
+
+
+    },
     //  end user mutations
 
   },

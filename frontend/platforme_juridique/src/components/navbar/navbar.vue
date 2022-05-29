@@ -2,7 +2,8 @@
 
     <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div class="relative flex cursor-pointer items-center justify-between">
-            <a  @click="redirectTo({ val: 'homeView' })" aria-label="Company" title="Company" class="inline-flex items-center">
+            <a @click="redirectTo({ val: 'homeView' })" aria-label="Company" title="Company"
+                class="inline-flex items-center">
                 <!-- <svg class="w-8 text-deep-purple-accent-400" viewBox="0 0 24 24" stroke-linejoin="round"
                     stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" stroke="currentColor" fill="none">
                     <rect x="3" y="1" width="7" height="12"></rect>
@@ -39,8 +40,10 @@
                         aria-label="Sign up" title="Sign up">
                         Sign up
                     </a> -->
-                    <FIcons id="delete" :icon="['fas', 'user']" class="h-5 w-5 cursor-pointer"
+                    <FIcons id="delete" :icon="['fas', 'user']" class="h-6 w-6 cursor-pointer"
                         @click="redirectTo({ val: 'signIn' })" />
+                           <!-- <FIcons id="delete" :icon="['fas', 'arrow-right-from-bracket']" class=" pl-5 h-5 w-5 cursor-pointer"
+                        @click="redirectTo({ val: 'signIn' })" /> -->
                 </li>
             </ul>
             <div class="lg:hidden">
