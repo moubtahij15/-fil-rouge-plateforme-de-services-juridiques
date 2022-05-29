@@ -1,5 +1,7 @@
-<template lang="">
-    <section class="  py-0 bg-white ">
+<template>
+
+    <!-- end footer -->
+    <section class="relative py-0 bg-white ">
 
         <div class="flex flex-col items-center justify-between px-10 mx-auto max-w-7xl xl:px-5 lg:flex-row">
 
@@ -9,7 +11,7 @@
                         <img src="../../assets/Law.svg">
                     </div>
                 </div>
-                <signInComponent />
+                <signUpComponent />
 
             </div>
 
@@ -18,16 +20,14 @@
     </section>
 </template>
 <script>
-import SignInComponent from '@/components/signIn.vue'
-
+import signUpComponent from '@/components/signUp.vue'
 export default {
-    name: "signIn",
-    components: {
-        SignInComponent
+    name: "signUp",
 
-    }
+    components: {
+        signUpComponent
+
+    },
 }
+
 </script>
-<style lang="">
-    
-</style>

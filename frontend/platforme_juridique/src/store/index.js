@@ -1,14 +1,30 @@
 import { createStore } from 'vuex'
+import router from "../router";
 
-export default createStore({
+
+const store = createStore({
   state: {
+
+
   },
-  getters: {
+  getters: {},
+
+  actions: {
+    redirectTo({ commit }, payload) {
+      // eslint-disable-next-line no-undef
+      commit("redirectTo", payload.val);
+    },
+
   },
   mutations: {
+
+    redirectTo(state, payload) {
+      router.push({ name: payload });
+    },
+
   },
-  actions: {
-  },
-  modules: {
-  }
+  modules: {},
+
+
 })
+export default store;

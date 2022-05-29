@@ -100,7 +100,7 @@
                                     height=".30">
                                     <circle cx="1" cy="1" r=".7"></circle>
                                 </pattern>
-                                
+
                             </defs>
                             <rect fill="url(#df31b9f6-a505-42f8-af91-d2b7c3218e5c)" width="52" height="24"></rect>
                         </svg>
@@ -279,19 +279,25 @@
 
         <!-- end section counter card -->
         <!-- start footer -->
-            <Footer/>
+        <Footer />
     </div>
     <!-- end footer -->
 
 </template>
 <script>
+import { mapActions } from "vuex";
+
 import Footer from '../../components/footer/footer.vue'
 export default {
     name: "homeView",
 
-   components: {
-    Footer
-},
+    components: {
+        Footer
+    },
+    methods: {
+        ...mapActions(["redirectTo"]),
+
+    },
 }
 
 </script>
