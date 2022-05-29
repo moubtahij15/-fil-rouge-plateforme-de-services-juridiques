@@ -9,8 +9,8 @@ const store = createStore({
 
     },
     login: {
-      email: "qqq",
-      pass: "qqqq"
+      email: "",
+      pass: ""
     }
 
 
@@ -26,7 +26,7 @@ const store = createStore({
     // start user actions
     // login user
 
-    login({ commit }, user) {
+    loginUser({ commit }, user) {
 
       return axiosClient.post('client/login', user)
         .then(response => {
@@ -34,7 +34,7 @@ const store = createStore({
             commit('setUser', response.data.client);
           }
 
-          return response
+          return response.data
         });
     },
     // end login user
