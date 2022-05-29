@@ -13,7 +13,7 @@
                        
                        <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Email</label>
-                            <input type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="******@example.com">
+                            <input v-on:input="(event) =>this.$emit(inputChange,event)" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="******@example.com">
                       
                       </div>
                        
@@ -37,12 +37,18 @@
 </template>
 <script>
 import { mapActions } from "vuex";
+import { mapState } from 'vuex'
 
 export default {
     name: "signInComponent",
     methods: {
         ...mapActions(["redirectTo"]),
+        ...mapState(["login"]),
 
+    },
+
+    mounted() {
+        // console.log(login);
     },
 
 }
