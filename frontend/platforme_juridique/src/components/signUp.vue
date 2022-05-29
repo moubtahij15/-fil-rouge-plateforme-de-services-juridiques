@@ -12,30 +12,30 @@
                        
                        <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Nom</label>
-                            <input type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Nom">
+                            <input  v-model="user.nom" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Nom">
                       
                       </div>
                        <div class="relative">
-                            <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Prenom</label>
-                            <input type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Prenom">
+                            <label  class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Prenom</label>
+                            <input v-model="user.prenom" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Prenom">
                       
                       </div>
                        <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Email</label>
-                            <input type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="******@example.com">
+                            <input  v-model="user.email" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="******@example.com">
                       
                       </div>
                         <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Ville</label>
-                            <input type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ville">
+                            <input v-model="user.ville" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Ville">
                         </div>
                         <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">telephone</label>
-                            <input type="number" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="tel">
+                            <input v-model="user.tel" type="number" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="tel">
                         </div>
                         <div class="relative">
                             <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">password</label>
-                            <input type="password" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="password">
+                            <input  v-model="user.password" type="password" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="password">
                         </div>
                         <div class="relative">
                             <a href="#_" class="inline-block w-full px-5 py-4 text-xl font-medium text-center text-primary transition duration-200 bg-yellow-300 rounded-lg hover:bg-gray ease">Submit</a>
@@ -56,6 +56,22 @@ import { mapActions } from "vuex";
 
 export default {
     name: "signUpComponent",
+
+    data() {
+        return {
+            user: {
+                nom: "",
+                prenom: "",
+                email: "",
+                tel: "",
+                pass: "",
+                ville: "",
+
+
+            }
+        }
+    },
+
     methods: {
         ...mapActions(["redirectTo"]),
 

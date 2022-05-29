@@ -20,6 +20,7 @@
     </section>
 </template>
 <script>
+
 import signUpComponent from '@/components/signUp.vue'
 export default {
     name: "signUp",

@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import router from "../router";
 import axiosClient from "../axios";
+import axios from 'axios';
 
 
 const store = createStore({
@@ -38,6 +39,19 @@ const store = createStore({
         });
     },
     // end login user
+    //
+    registerUser({ commit }, user) {
+
+      return axios.post('client/register', user)
+        .then(response => {
+          if (response.status == 200) {
+            return response.data;
+
+          }
+
+        })
+    }
+    
 
     //  end user actions
 
