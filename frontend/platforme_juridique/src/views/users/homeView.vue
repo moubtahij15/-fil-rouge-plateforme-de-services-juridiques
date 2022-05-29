@@ -34,7 +34,7 @@
                                     class=" peer h-10 w-full border border-1.5 rounded-md border-primary-300 text-primary-900 placeholder-transparent focus:outline-none focus:border-b-600 focus:border-2 p-3"
                                     placeholder=" " />
                                 <label for="departure"
-                                    class="absolute left-2 px-1 -top-2.5 bg-white text-primary text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-900 peer-placeholder-shown:top-2 peer-focus:-top-2.5 peer-focus:text-blue-600 peer-focus:text-sm">Départ
+                                    class="absolute left-2 px-1 -top-2.5 bg-white text-primary text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-900 peer-placeholder-shown:top-2 peer-focus:-top-2.5 peer-focus:text-blue-600 peer-focus:text-sm">avocat?
                                     :</label>
                                 <div class="absolute right-0 top-0 mt-2 mr-2">
 
