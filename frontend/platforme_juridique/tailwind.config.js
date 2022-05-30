@@ -5,12 +5,14 @@ module.exports = {
   ],
   theme: {
     colors: {
-      'primary': '#04070B',
+      // 'primary': '#04070B',
+       'primary': '#0C342D',
       'gray' : '#6b7280',
       'white': '#FAFAFA',
       'white1': '#ffffff',
       'purple': '#3f3cbb',
       'midnight': '#121063',
+      'secondary': '#C39652',
       'metal': '#565584',
       'tahiti': '#3ab7bf',
       'silver': '#ecebff',

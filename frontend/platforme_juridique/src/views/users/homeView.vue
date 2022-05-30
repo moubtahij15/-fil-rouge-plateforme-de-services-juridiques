@@ -1,5 +1,6 @@
 <template>
-    <div class=" bg-white">
+    <div  class="  text-primary
+ ">
         <!-- start header -->
 
         <section class=" overflow-hidden">
@@ -16,16 +17,17 @@
 
 
 
-            <div class="   bg-white  z-30 flex flex-col px-10 pt-10 pb-20 mx-auto md:flex-row  max-w-7xl">
+            <div class="     z-30 flex flex-col px-10 pt-10 pb-20 mx-auto md:flex-row  max-w-7xl">
 
                 <div class="flex flex-col items-center  justify-center w-full space-y-8 md:w-1/2 sm:pr-8">
-                    <h1 class="text-5xl font-extrabold leading-tight sm:text-6xl md:text-6xl ">Trouvez un
+                    <h1 class="  
+text-5xl font-extrabold text-primary leading-tight sm:text-6xl md:text-6xl ">Trouvez un
                         avocat simplement
                     </h1>
                     <p class="text-xl text-blue-200">Nous offrons toutes les réponses à vos questions juridiques,
                         rédigées par de vrais avocats.</p>
 
-                   <Search/>
+                    <Search />
                 </div>
 
                 <!-- <div class="relative z-0 w-full  mt-8 lg:w-1/2 ">
@@ -34,7 +36,7 @@
                 </div> -->
                 <div class="relative flex-1 w-full pt-6 text-black lg:pt-12 lg:pl-12 lg:w-6/12 ">
                     <!-- Start of Image -->
-                    <img src="../../assets/Law.svg" class="w-full">
+                    <img src="../../assets/Law2.svg" class="w-full">
                     <!-- End of Image -->
                 </div>
             </div>
@@ -261,3 +263,10 @@ export default {
 }
 
 </script>
+<style>
+#t {
+
+    background: url("../../assets/body.png");
+
+}
+</style>

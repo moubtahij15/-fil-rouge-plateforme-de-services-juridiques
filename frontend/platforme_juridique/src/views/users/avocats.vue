@@ -1,5 +1,6 @@
 <template lang="">
-    <section class=" bg-white overflow-hidden">
+    <section class=" bg-white overflow-hidden pattern-diagonal-lines-xl
+">
 
 
             <Search/>
@@ -16,23 +17,22 @@
 						<img src="../../assets/search.svg" alt="aji" class=" w-32 h-32 object-cover rounded-2xl">
 						
 					    </div>
-					    <div class="flex-auto sm:ml-5 justify-between">
-						<div class="flex items-center justify-between sm:mt-2">
+					    <div class="flex-auto mt-2 sm:ml-5 justify-between">
+						<div class="flex items-center  justify-between sm:mt-2">
 							<div class="flex items-center">
 								<div class="flex flex-col">
 									<div class="w-full flex-none text-lg text-primary font-bold leading-none"> {{elem.prenom}} {{elem.nom}}</div>
-									<div class="flex-auto text-gray-500 my-1">
+									<div class="flex-auto mt-2  font-bold text-xs my-1">
 										<span class="mr-3 ">{{elem.adresse}}</span><span class="mr-3 border-r border-gray-200  max-h-0"></span><span>{{elem.ville}}</span>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="flex flex-row items-center">
+						<div class="flex flex-row items-center"  v-for="elm in elem['0']">
 							
 							<div class="flex">
-                                categorie
-							</div><div class="flex">
-                                categorie
+                                       <div class="text-xs text-gray-400/80 hover:text-gray-400">{{elm.nom_categorie}}</div>
+									   <br>
 							</div>
 							<div class="flex-1 inline-flex  hidden items-center">
 								<img class="w-5 h-5" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDY0IDY0IiBoZWlnaHQ9IjY0cHgiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0cHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxwYXRoIGQ9Ik0zMiw3LjE3NEMxOC4zMTEsNy4xNzQsNy4xNzQsMTguMzExLDcuMTc0LDMyYzAsMTMuNjg5LDExLjEzNywyNC44MjYsMjQuODI2LDI0LjgyNmMxMy42ODksMCwyNC44MjYtMTEuMTM3LDI0LjgyNi0yNC44MjYgIEM1Ni44MjYsMTguMzExLDQ1LjY4OSw3LjE3NCwzMiw3LjE3NHogTTM4LjE3NCwzMi44NzRoLTQuMDM5YzAsNi40NTMsMCwxNC4zOTgsMCwxNC4zOThoLTUuOTg1YzAsMCwwLTcuODY4LDAtMTQuMzk4aC0yLjg0NXYtNS4wODggIGgyLjg0NXYtMy4yOTFjMC0yLjM1NywxLjEyLTYuMDQsNi4wNC02LjA0bDQuNDMzLDAuMDE3djQuOTM5YzAsMC0yLjY5NSwwLTMuMjE5LDBjLTAuNTI0LDAtMS4yNjgsMC4yNjItMS4yNjgsMS4zODZ2Mi45OWg0LjU2ICBMMzguMTc0LDMyLjg3NHoiLz48L3N2Zz4=">
@@ -41,30 +41,12 @@
 
                             </div>
 							</div>
-							<div class="flex pt-2  text-sm text-gray-500">
-								<div class="flex-1 inline-flex items-center">
-									<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
-										fill="currentColor">
-										<path
-											d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
-										</path>
-									</svg><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
-										fill="currentColor">
-										<path
-											d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
-										</path>
-									</svg><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
-										fill="currentColor">
-										<path
-											d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
-										</path>
-									</svg>
-									<p class="">1.2k Followers</p>
-								</div>
-								<div class="flex-1 inline-flex items-center">
-								<button  class="flex-no-shrink bg-green-400 hover:bg-green-500 px-5 ml-4 py-2 text-xs shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-green-300 hover:bg-primary hover:text-white   text-primary rounded-full transition ease-in duration-300">FOLLOW</button>
+							<div class="flex pt-2  justify-end text-sm text-gray-500">
+								
+							
+								<button  class="flex-no-shrink bg-green-400 hover:bg-green-500 px-5  py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 border-green-300 hover:bg-primary hover:text-white   text-primary rounded-full transition ease-in duration-300">Voir Profile</button>
 									
-								</div>
+							
 							</div>
 						</div>
 				    	</div> 
