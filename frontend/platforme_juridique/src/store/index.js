@@ -12,7 +12,7 @@ const store = createStore({
     villes: {
 
     },
-    avocats:{
+    avocats: {
 
     }
 
@@ -59,7 +59,7 @@ const store = createStore({
     isLogin({ commit }) {
       if (sessionStorage.getItem("idUser")) {
         return true
-      }return false
+      } return false
 
     },
     // get ville
@@ -90,9 +90,22 @@ const store = createStore({
           }
 
         })
+    },
+    // get avocats 
+
+    getAvocats({ commit }) {
+
+      return axiosClient.get('avocat')
+        .then(response => {
+          if (response.status == 200) {
+            commit('setAvocats', response.data.Avocat);
+
+            return response.data.Avocat;
+
+          }
+
+        })
     }
-
-
     //  end user actions
 
 
@@ -123,6 +136,11 @@ const store = createStore({
 
 
 
+
+    },
+    // set avocats
+    setAvocats: (state, avocats) => {
+      state.avocats = avocats;
 
     },
     //  end user mutations
