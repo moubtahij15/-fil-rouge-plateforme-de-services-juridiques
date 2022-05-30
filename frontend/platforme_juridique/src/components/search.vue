@@ -18,19 +18,22 @@
 
                             </div>
                             <div class="relative flex-1">
-                                <select class="border p-2 rounded w-full">
-                                    <option>Round-trip</option>
-                                    <option>Missouri</option>
-                                    <option>texas</option>
-                                </select>
+                                 <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white ">categorie</label>
+
+                                     <select  v-model="this.avocat.categorie_id" required class="border p-2 rounded w-full" >
+                                <option v-for="elem in this.categories" :value="elem.id">{{elem.nom_categorie}}</option>
+                               
+                            </select>
                             </div>
                             <div></div>
                             <div class="relative flex-1">
-                                <select class="border p-2 rounded w-full">
-                                    <option>Round-trip</option>
-                                    <option>Missouri</option>
-                                    <option>texas</option>
-                                </select>
+                                <!-- <select class=""> -->
+                              <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white ">Ville</label>
+
+                                     <select  v-model="this.avocat.ville_id" required class="border p-2 rounded w-full" >
+                                <option v-for="elem in $store.state.villes" :value="elem.id">{{elem.nom}}</option>
+                               
+                            </select>
 
 
                             </div>
@@ -44,8 +47,39 @@
                     </div>
 </template>
 <script>
+import store from "../store";
+import { mapActions } from "vuex";
+
 export default {
-    name: search
+    name: "search",
+    data() {
+        return {
+            avocat: {
+                ville_id: "",
+                categorie_id: ""
+            },
+            categories: {
+
+            }
+        }
+    },
+    methods: {
+        ...mapActions(["redirectTo", "getVilles", "getCategorie", "registerUser", "isLogin"]),
+
+    },
+    mounted() {
+        this.getVilles()
+            .then((response) => {
+                console.log(response);
+                console.log(store.state.villes);
+            })
+        this.getCategorie()
+            .then((response) => {
+                console.log(response);
+                this.categories = response;
+            })
+    },
+
 }
 </script>
 <style lang="">

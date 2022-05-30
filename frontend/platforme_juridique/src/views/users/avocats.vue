@@ -1,5 +1,5 @@
 <template lang="">
-    < class=" bg-white overflow-hidden">
+    <section class=" bg-white overflow-hidden">
 
 
             <Search/>

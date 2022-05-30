@@ -11,6 +11,9 @@ const store = createStore({
     },
     villes: {
 
+    },
+    avocats:{
+
     }
 
 
@@ -73,7 +76,22 @@ const store = createStore({
           }
 
         })
+    },
+    // get categorie
+    getCategorie({ commit }) {
+
+      return axiosClient.get('Categorie')
+        .then(response => {
+          if (response.status == 200) {
+            // commit('setAvocats', response.data.categorie);
+
+            return response.data.categories;
+
+          }
+
+        })
     }
+
 
     //  end user actions
 
