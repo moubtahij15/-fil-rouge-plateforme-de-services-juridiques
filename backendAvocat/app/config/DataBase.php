@@ -3,7 +3,7 @@
 class Database {
     // DB Params
     private $host = 'localhost';
-    private $db_name = 'gestion_rdv_cabinet';
+    private $db_name = 'avocatplateforme';
     private $username = 'root';
     private $password = '';
     private $conn;

@@ -6,17 +6,25 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
-class ClientController
+class CategorieController
 {
 
 
       public  function index()
       {
 
+            if ($_SERVER["REQUEST_METHOD"] == "GET") {
+                  $categorie = new Categorie();
 
 
-            echo "heelooo";
+                  echo $categorie->read();
+            } else  echo json_encode(
+                  array('message' => 'change method to Get')
+            );
       }
+            
+      
+     
       // register client
       public function register()
       {
