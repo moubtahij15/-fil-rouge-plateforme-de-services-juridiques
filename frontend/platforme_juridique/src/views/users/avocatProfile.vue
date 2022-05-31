@@ -91,19 +91,19 @@
                 <div class="bg-white p-3 shadow-sm rounded-sm">
 
                    
-                       <div class="grid border divide-x divide-y rounded-xl overflow-hidden sm:grid-cols-2 lg:divide-y-0 lg:grid-cols-3 xl:grid-cols-4">
+                       <div class="grid border divide-x divide-y rounded-xl overflow-hidden sm:grid-cols-2 lg:divide-y-0 lg:grid-cols-3 xl:grid-cols-3 text-primary">
            <div class="relative group bg-gray-100 transition hover:z-[1] hover:shadow-2xl lg:hidden xl:block">
-                <div class="relative p-4 space-y-3 border-dashed rounded-lg transition duration-300 group-hover:bg-white group-hover:border group-hover:scale-90">
+                <div class="relative p-4 space-y-3 border-dashed rounded-lg transition duration-300 group-hover:bg-white1 cursor-pointer group-hover:border group-hover:scale-90">
                     <img src="https://tailus.io/sources/blocks/stacked/preview/images/avatars/metal.png" class="mx-auto w-12 h-12" width="512" height="512" alt="burger illustration">
                     
                     <div class="space-y-2">
-                        <h5 class="text-xl text-gray-800 font-medium transition group-hover:text-yellow-600">Consultations</h5>
+                        <h5 class="text-xl text-gray-800 font-medium transition group-hover:text-primary">Consultation Juridique</h5>
                     </div>
                    
                 </div>
               </div>
            <div class="relative group bg-gray-100 transition hover:z-[1] hover:shadow-2xl lg:hidden xl:block">
-                <div class="relative p-4 space-y-3 border-dashed rounded-lg transition duration-300 group-hover:bg-white group-hover:border group-hover:scale-90">
+                <div class="relative p-4 space-y-3 border-dashed rounded-lg transition duration-300  cursor-pointer group-hover:bg-white group-hover:border group-hover:scale-90">
                     <img src="https://tailus.io/sources/blocks/stacked/preview/images/avatars/metal.png" class="mx-auto w-12 h-12" width="512" height="512" alt="burger illustration">
                     
                     <div class="space-y-2">
@@ -113,6 +113,16 @@
                 </div>
               </div>
             <div class="relative group bg-gray-100 transition hover:z-[1] hover:shadow-2xl lg:hidden xl:block">
+                <div class="relative p-4 space-y-3 border-dashed rounded-lg transition duration-300  cursor-pointer group-hover:bg-white group-hover:border group-hover:scale-90">
+                    <img src="https://tailus.io/sources/blocks/stacked/preview/images/avatars/metal.png" class="mx-auto w-12 h-12" width="512" height="512" alt="burger illustration">
+                    
+                    <div class="space-y-2">
+                        <h5 class="text-xl text-gray-800 font-medium transition group-hover:text-yellow-600">Télécharger ou rédiger  un document juridique </h5>
+                    </div>
+                   
+                </div>
+              </div>
+            <!-- <div class="relative group bg-gray-100 transition hover:z-[1] hover:shadow-2xl lg:hidden xl:block">
                 <div class="relative p-4 space-y-3 border-dashed rounded-lg transition duration-300 group-hover:bg-white group-hover:border group-hover:scale-90">
                     <img src="https://tailus.io/sources/blocks/stacked/preview/images/avatars/metal.png" class="mx-auto w-12 h-12" width="512" height="512" alt="burger illustration">
                     
@@ -121,17 +131,7 @@
                     </div>
                    
                 </div>
-              </div>
-            <div class="relative group bg-gray-100 transition hover:z-[1] hover:shadow-2xl lg:hidden xl:block">
-                <div class="relative p-4 space-y-3 border-dashed rounded-lg transition duration-300 group-hover:bg-white group-hover:border group-hover:scale-90">
-                    <img src="https://tailus.io/sources/blocks/stacked/preview/images/avatars/metal.png" class="mx-auto w-12 h-12" width="512" height="512" alt="burger illustration">
-                    
-                    <div class="space-y-2">
-                        <h5 class="text-xl text-gray-800 font-medium transition group-hover:text-yellow-600">More features</h5>
-                    </div>
-                   
-                </div>
-              </div>
+              </div> -->
              </div>
                     <!-- End of Experience and education grid -->
                 </div>
