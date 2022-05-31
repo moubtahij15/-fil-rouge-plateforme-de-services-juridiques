@@ -7,9 +7,10 @@
                                 <!-- <select class=""> -->
                               <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white ">nom</label>
 
-                                    <input value="" class="form-select border p-2 rounded w-full " list="list" />
+                                    <input  :value="tesst" class="form-select border p-2 rounded w-full " list="list" />
                             <datalist  id="list">
-                            <option v-for="elem in $store.state.avocats" :value="elem.id" >{{elem.prenom}} {{elem.nom}}</option>
+                            <option v-for="elem in $store.state.avocats"  :value="elem.prenom+' '+elem.nom+' '+elem.id " > 
+                                </option>
                             </datalist>
 {{this.tesst}}
 
@@ -21,7 +22,8 @@
                                  <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white ">categorie</label>
 
                                      <select  v-model="this.avocat.categorie_id" required class="border p-2 rounded w-full" >
-                                <option v-for="elem in this.categories" :value="elem.id">{{elem.nom_categorie}}</option>
+                                <option v-for="elem in this.categories" :value="elem.id">{{elem.nom_categorie}} 
+                                            </option>
                                
                             </select>
                             </div>
@@ -63,7 +65,7 @@ export default {
             categories: {
 
             },
-            tesst:""
+            tesst: ""
         }
     },
     methods: {
@@ -86,9 +88,9 @@ export default {
                 console.log(response);
                 console.log(store.state.avocats);
             })
-    
-},
-    
+
+    },
+
 
 }
 </script>
