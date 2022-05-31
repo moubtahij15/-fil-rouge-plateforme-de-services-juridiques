@@ -4,6 +4,7 @@ import navBar from '../components/navbar/navbar.vue'
 import signUp from '../views/users/signUp.vue'
 import signIn from '../views/users/signIn.vue'
 import avocats from '../views/users/avocats.vue'
+import avocatProfile from '../views/users/avocatProfile.vue'
 
 
 const routes = [
@@ -18,6 +19,7 @@ const routes = [
       { path: '/signUp', name: 'signUp', component: signUp },
       { path: '/signIn', name: 'signIn', component: signIn },
       { path: '/avocats', name: 'avocats', component: avocats },
+      { path: '/avocatProfile', name: 'avocatProfile', component: avocatProfile },
 
     ]
   },

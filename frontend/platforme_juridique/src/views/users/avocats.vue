@@ -4,15 +4,21 @@
 
 
             <Search/>
+			
 
             <div class="   bg-white  z-30 flex flex-col px-10  mx-auto md:flex-row  max-w-7xl">
 
                 <div class=" flex flex-col   border-solid-primary border- w-full space-y-8 md:w-1/2 sm:pr-8">
                    
-
+<div class="max-w-md flex items-center my-auto justify-center   p-4   sm:flex"  v-if="$store.state.avocatsSearch.length==0">
+      		
+            <p
+              class="text-2xl  text-primary md:text-3xl font-light leading-normal"
+            >Aucun résultat correspondant ! </p>
+         </div>
                     <!-- serach result -->
 		
-			     <div class=" mt-20 hover:bg-white1 rounded-3xl p-4    shadow-md  hover:shadow-2xl  flex-none sm:flex" v-for="elem in $store.state.avocats">
+			     <div class=" mt-20 hover:bg-white1 rounded-3xl p-4    shadow-md  hover:shadow-2xl  flex-none sm:flex" v-for="elem in $store.state.avocatsSearch">
 					<div class=" relative h-32 w-32   sm:mb-0 mb-3" >
 						<img src="../../assets/search.svg" alt="aji" class=" w-32 h-32 object-cover rounded-2xl">
 						
@@ -28,6 +34,7 @@
 								</div>
 							</div>
 						</div>
+						
 						<div class="flex flex-row items-center"  v-for="elm in elem['0']">
 							
 							<div class="flex">
@@ -84,15 +91,15 @@ export default {
 		Search
 	},
 	methods: {
-		...mapActions(["getAvocats", "getVilles", "getCategorie", "registerUser", "isLogin"]),
+		...mapActions(["getAvocats", "getVilles", "getCategorie", "registerUser", "isLogin", "getAvocatsBySearch"]),
 
 	},
 	mounted() {
-		this.getAvocats()
-			.then((response) => {
-				console.log(response);
-				console.log(store.state.avocats);
-			})
+		// this.getAvocats()
+		// 	.then((response) => {
+		// 		console.log(response);
+		// 		console.log(store.state.avocats);
+		// 	})
 	},
 }
 </script>

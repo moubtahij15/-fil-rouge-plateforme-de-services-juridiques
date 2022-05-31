@@ -14,6 +14,9 @@ const store = createStore({
     },
     avocats: {
 
+    },
+    avocatsSearch: {
+
     }
 
 
@@ -105,6 +108,23 @@ const store = createStore({
           }
 
         })
+    },
+    //search avocats by nom/ville/categorie
+    getAvocatsBySearch({ commit }, data) {
+
+      return axiosClient.post('avocat/search', data)
+        .then(response => {
+          console.log(response);
+
+          if (response.status == 200) {
+            commit('setAvocatsSearch', response.data.Avocat);
+            
+            return response.data.Avocat;
+
+          }
+
+        })
+
     }
     //  end user actions
 
@@ -141,6 +161,11 @@ const store = createStore({
     // set avocats
     setAvocats: (state, avocats) => {
       state.avocats = avocats;
+
+    },
+    // set avocats search
+    setAvocatsSearch: (state, avocats) => {
+      state.avocatsSearch = avocats;
 
     },
     //  end user mutations
