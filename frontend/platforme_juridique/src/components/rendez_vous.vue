@@ -51,7 +51,7 @@
 
 
     <!-- step1 horaires -->
-	<div class="max-w-xl mt-5  md:mx-auto sm:text-center lg:max-w-xl ">
+	<div  v-if="step1" class="max-w-xl mt-5  md:mx-auto sm:text-center lg:max-w-xl ">
                 <h2
                     class="max-w-lg mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto">
             Vos préférences horaires :                
@@ -128,19 +128,69 @@
                           </tr>
                         </tbody>
                     </table>
-                  
-	</div>
-</div>
+                
             </div>
-            <!-- component -->
+            </div>
             
+            </div>
+            <!-- step2 -->
+            	<div   v-if="step1" class="max-w-xl mt-5  md:mx-auto sm:text-center lg:max-w-xl ">
+                <h2
+                    class="max-w-lg mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto">
+           Entrer votre Sujet :                
+                       
+                </h2>
+                <div class="w-full mt-4">
 
+                <textarea class="block w-full h-40 px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"></textarea>
+            </div>
+                                        <button class=" mt-3 px-5 py-2  border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none">Valider</button>
+
+</div>
+<!-- step3 -->
+<div  class="max-w-xl mt-5  md:mx-auto sm:text-center lg:max-w-xl ">
+               
+                <div class="bg-gray-100 h-screen">
+      <div class="bg-white1 p-6  md:mx-auto">
+        <svg viewBox="0 0 24 24" class="text-primary w-16 h-16 mx-auto my-6">
+            <path fill="currentColor"
+                d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z">
+            </path>
+        </svg>
+        <div class="text-center">
+            <h3 class="md:text-2xl text-base text-gray-900 font-semibold text-center">votre rendez-vous est bien passé </h3>
+          
+            
+        </div>
+    </div>
+  </div>
+
+</div>
+
+            <!-- component -->
+            <!-- <div   class="max-w-xl mt-5  md:mx-auto sm:text-center lg:max-w-xl ">
+                <h2
+                    class="max-w-lg mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto">
+           Entrer votre Sujet :                
+                       
+                </h2>
+                
+                                        <button class=" mt-3 px-5 py-2  border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none">Valider</button>
+
+</div> -->
+
+                
 
 </div>
 </template>
 <script>
 export default {
-    name: "Rendez_vous"
+    name: "Rendez_vous",
+    data() {
+        return {
+            step1: false
+        }
+    },
 }
 </script>
 <style lang="">
