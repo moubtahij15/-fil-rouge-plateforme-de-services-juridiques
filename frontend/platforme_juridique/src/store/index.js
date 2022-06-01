@@ -139,13 +139,27 @@ const store = createStore({
     getCreneaux({ commit }, date) {
 
       return axiosClient.post('creneau/read', {
-        date : date
+        date: date
       })
         .then(response => {
           // console.log(response.data);
 
           if (response.status == 200) {
             commit('setCreneaux', response.data);
+            console.log(response.data);
+            return response.data;
+
+          }
+
+        })
+    },
+    // validate rdv
+    vaidateRdv({ }, data) {
+      return axiosClient.post('Rdv/create', data)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
             console.log(response.data);
             return response.data;
 

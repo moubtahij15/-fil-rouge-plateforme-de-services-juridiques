@@ -89,14 +89,14 @@
 					<!-- Navigation Bar -->
 				<div class="flex flex-wrap   mt-8 bg-white pb-3 rounded-2xl border-primary border-solid">
 					<div   class="w-full cursor-pointer md:w-1/2 lg:w-1/3   border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
-							<div class="px-6">
+							<div class="px-6" @click="choix('rdv')">
                     <img src="../../assets/Calendarsvg.svg" class=" w-12 h-12  mx-auto text-deep-purple-accent-400 sm:w-20 sm:h-20">
 						</div>
 						<div class="px-6">
 						<h3 class="m-0 text-xl font-medium leading-tight border-0 border-gray-300 lg:text-xl md:text-2xl"> Rendez-vous</h3>
 							</div>
 					</div>
-					<div class="w-full cursor-pointer md:w-1/2 lg:w-1/3   border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
+					<div @click="choix('consultation')" class=" w-full cursor-pointer md:w-1/2 lg:w-1/3   border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
 							<div class="px-6">
                     <img src="../../assets/adistance.svg"  class=" w-12 h-12  mx-auto text-deep-purple-accent-400 sm:w-20 sm:h-20">
 						</div>
@@ -104,7 +104,7 @@
 						<h3 class="m-0 text-xl font-medium leading-tight border-0 border-gray-300 lg:text-xl md:text-2xl"> Consultation Juridique</h3>
 							</div>
 					</div>
-					<div  class="w-full cursor-pointer md:w-1/2 lg:w-1/3   border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
+					<div  @click="choix('document')" class="w-full cursor-pointer md:w-1/2 lg:w-1/3   border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
 							<div class="px-6">
                     <img src="../../assets/Calendarsvg.svg"  class=" w-12 h-12  mx-auto text-deep-purple-accent-400 sm:w-20 sm:h-20">
 						</div>
@@ -116,7 +116,19 @@
                     <!-- End of Experience and education grid -->
                 </div>
                 <!-- End of profile tab -->
-						<Rendez_vous/>
+                    <!-- rdv -->
+					<div v-if="rdv">
+											<Rendez_vous />
+
+					</div>
+                    <!-- <div c>
+											<Rendez_vous />
+
+					</div>
+                    <div c>
+											<Rendez_vous />
+
+					</div> -->
 
             </div>
 			
@@ -126,21 +138,57 @@
 </template>
 <script>
 import store from "@/store";
+import { mapActions } from "vuex";
+
 import Rendez_vous from '@/components/rendez_vous.vue'
 export default {
-	name: "avocatProfile",
-	data() {
-		return {
-			avocat:""
-		}
-	},
-	components:{
-			Rendez_vous
-	},
-	mounted() {
-		this.avocat=JSON.parse(sessionStorage.getItem('avocatProfile'));
-;
-	},
+    name: "avocatProfile",
+    data() {
+        return {
+            avocat: "",
+            rdv: false,
+            consultation: false,
+            document: false
+        }
+    },
+    components: {
+        Rendez_vous
+    },
+
+    methods: {
+        ...mapActions(["redirectTo", "getVilles", "getCategorie", "registerUser", "isLogin", "getAvocats", "getAvocatsBySearch"]),
+
+        choix(choix) {
+            this.isLogin()
+                .then((response) => {
+                    if (!response) {
+
+                        this.redirectTo({ val: "signIn" });
+                    }
+
+                })
+            if (choix == "rdv") {
+                this.rdv = true
+                this.consultation = false
+                this.document = false
+
+            } else if (choix == "consultation") {
+                this.rdv = false
+                this.consultation = true
+                this.document = false
+
+            } else if (choix == "document") {
+                this.rdv = false
+                this.consultation = false
+                this.document = true
+
+            }
+        }
+    },
+    mounted() {
+        this.avocat = JSON.parse(sessionStorage.getItem('avocatProfile'));
+        ;
+    },
 
 }
 </script>

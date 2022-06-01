@@ -72,7 +72,9 @@
         placeholder="date Creneau"
         class="border p-2 rounded w-full"
         onfocus="(this.type = 'date')"
-        v-model="date_creneau"
+       
+        :min="this.min"
+       v-model="date_creneau"
         required
       />
     </div>
@@ -120,9 +122,9 @@
                 </h2>
                 <div class="w-full mt-4">
 
-                <textarea class="block w-full h-40 px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"></textarea>
+                <textarea v-model="this.rdv.sjt_RDV" class="block w-full h-40 px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"></textarea>
             </div>
-                                        <button class=" mt-3 px-5 py-2  border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none">Valider</button>
+                                        <button class=" mt-3 px-5 py-2  border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none" @click="validationRdv">Valider</button>
 
 </div>
 <!-- step3 -->
@@ -138,7 +140,8 @@
         <div class="text-center">
             <h3 class="md:text-2xl text-base text-gray-900 font-semibold text-center">votre rendez-vous est bien passé </h3>
           
-            
+            <p class="text-primary y-2"> vous pouvez voir ton rendez-vous dans votre profile </p>
+            <p> Passez une bonne journée !  </p>
         </div>
     </div>
   </div>
@@ -173,8 +176,8 @@ export default {
                 id_creneau: "",
                 date_creneau: "",
                 sjt_RDV: "",
-                id_client: "",
-                id_avocat: ""
+                id_client: sessionStorage.getItem("idUser"),
+                id_avocat: JSON.parse(sessionStorage.getItem('avocatProfile')).id
 
             },
             date_creneau: "",
@@ -182,18 +185,34 @@ export default {
 
             step1: true,
             step2: false,
-            step3: false
+            step3: false,
+            min: ""
+
         }
     },
     methods: {
-        ...mapActions(["redirectTo", "getVilles", "getCategorie", "registerUser", "isLogin", "getAvocats", "getAvocatsBySearch", "getCreneaux"]),
+        ...mapActions(["redirectTo", "getVilles", "getCategorie", "registerUser", "isLogin", "getAvocats", "getAvocatsBySearch", "getCreneaux", "vaidateRdv"]),
 
         dateValidate(elem) {
             this.step1 = false,
                 this.step2 = true
             this.rdv.date_creneau = this.date_creneau;
-            this.rdv.id_creneau= elem.id
+            this.rdv.id_creneau = elem.id
             console.log(this.rdv);
+        },
+        validationRdv() {
+            console.log(this.rdv);
+
+            this.vaidateRdv(this.rdv).then((response) => {
+                console.log(response);
+                if (response.message == "Created") {
+
+                    this.step3 = true;
+                    this.step2 = false;
+                    // this.step1 = false;
+                }
+            })
+
         }
     },
     watch: {
@@ -202,6 +221,8 @@ export default {
         },
     },
     mounted() {
+            this.min = new Date().toISOString().slice(0, 10);
+
         this.getCreneaux(this.rdv.date_creneau).then((response) => {
             console.log(response);
             console.log(store.state.creneaux);
