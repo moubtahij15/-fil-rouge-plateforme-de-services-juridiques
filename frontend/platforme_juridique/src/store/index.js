@@ -186,6 +186,7 @@ const store = createStore({
       // state.user.id = user.id;
 
       sessionStorage.setItem('idUser', state.user.id);
+      sessionStorage.setItem('User', JSON.stringify(state.user));
       // sessionStorage.setItem('userInfo', JSON.stringify(state.user.data));
       // sessionStorage.setItem('userInfos', "state.user.data");
 
