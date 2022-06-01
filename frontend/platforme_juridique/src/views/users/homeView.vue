@@ -264,9 +264,6 @@ export default {
 
 </script>
 <style>
-#t {
 
-    background: url("../../assets/body.png");
 
-}
 </style>

@@ -90,111 +90,33 @@
                 <!-- Experience and education -->
 
                    
-                      <div class="w-full  px-7 py-10 mx-auto bg-white rounded-2xl shadow-xl">
 			<!-- Navigation Bar -->
-			<div class="px-5 pt-3 bg-white shadow-lg rounded-2xl">
-				<div class="flex flex-row space-x-3">
-					<!-- Item #1 -->
-					<div class="flex group">
-						<a href="#" class="p-3 text-gray-400 hover:text-yellow-500">
-							<span class="flex flex-col items-center">
-								<!-- Icon -->
-								<i class="mdi mdi-home-outline mdi-24px mx-1 text-gray-500 group-hover:text-gray-700
-									transition-color duration-200"></i>
-
-								<!-- Text -->
-								<span class="text-xs mb-2 transition-all duration-200">
-									Home
-								</span>
-
-								<!-- Focus Dot -->
-								<span class="h-2 w-2 rounded-full group-hover:bg-yellow-500
-									transition-all duration-150 delay-100"></span>
-							</span>
-						</a>
+			<div class="flex flex-wrap   mt-8 bg-white pb-3 rounded-2xl border-primary border-solid">
+					<div   class="w-full cursor-pointer md:w-1/2 lg:w-1/3   border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
+							<div class="px-6">
+                    <img src="../../assets/Calendarsvg.svg" class=" w-12 h-12  mx-auto text-deep-purple-accent-400 sm:w-20 sm:h-20">
+						</div>
+						<div class="px-6">
+						<h3 class="m-0 text-xl font-medium leading-tight border-0 border-gray-300 lg:text-xl md:text-2xl"> Rendez-vous</h3>
+							</div>
 					</div>
-
-					<!-- Item #2 -->
-					<div class="flex group">
-						<a href="#" class="p-3 text-gray-400 hover:text-yellow-500">
-							<span class="flex flex-col items-center">
-								<!-- Icon -->
-								<i class="mdi mdi-compass-outline mdi-24px mx-1 text-gray-500 group-hover:text-gray-700
-									transition-color duration-200"></i>
-
-								<!-- Text -->
-								<span class="text-xs mb-2 transition-all duration-200">
-									Explore
-								</span>
-
-								<!-- Focus Dot -->
-								<span class="h-2 w-2 rounded-full group-hover:bg-yellow-500
-									transition-all duration-150 delay-100"></span>
-							</span>
-						</a>
+					<div class="w-full cursor-pointer md:w-1/2 lg:w-1/3   border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
+							<div class="px-6">
+                    <img src="../../assets/adistance.svg"  class=" w-12 h-12  mx-auto text-deep-purple-accent-400 sm:w-20 sm:h-20">
+						</div>
+						<div class="px-6">
+						<h3 class="m-0 text-xl font-medium leading-tight border-0 border-gray-300 lg:text-xl md:text-2xl"> Consultation Juridique</h3>
+							</div>
 					</div>
-
-					<!-- Item #3 Active -->
-					<div class="flex group">
-						<a href="#" class="p-3 text-yellow-500 hover:text-yellow-500">
-							<span class="flex flex-col items-center">
-								<!-- Icon -->
-								<i class="mdi mdi-layers-outline mdi-24px mx-1 text-gray-700 group-hover:text-gray-700
-									transition-color duration-200"></i>
-
-								<!-- Text -->
-								<span class="text-xs mb-2 transition-all duration-200">
-									Feeds
-								</span>
-
-								<!-- Focus Dot -->
-								<span class="h-1 w-5 rounded-full bg-yellow-500 group-hover:bg-yellow-500
-									hover:h-3 hover:w-3 transition-all duration-150 delay-100"></span>
-							</span>
-						</a>
+					<div  class="w-full cursor-pointer md:w-1/2 lg:w-1/3   border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
+							<div class="px-6">
+                    <img src="../../assets/Calendarsvg.svg"  class=" w-12 h-12  mx-auto text-deep-purple-accent-400 sm:w-20 sm:h-20">
+						</div>
+						<div class="px-6">
+						<h3 class="m-0 text-xl font-medium leading-tight border-0 border-gray-300 lg:text-xl md:text-2xl"> Télécharger ou rédiger  un document juridique </h3>
+							</div>
 					</div>
-
-					<!-- Item #4 -->
-					<div class="flex group">
-						<a href="#" class="p-3 text-gray-400 hover:text-yellow-500">
-							<span class="flex flex-col items-center">
-								<!-- Icon -->
-								<i class="mdi mdi-basket-plus-outline mdi-24px mx-1 text-gray-500 group-hover:text-gray-700
-									transition-color duration-200"></i>
-
-								<!-- Text -->
-								<span class="text-xs mb-2 transition-all duration-200">
-									Cart
-								</span>
-
-								<!-- Focus Dot -->
-								<span class="h-2 w-2 rounded-full group-hover:bg-yellow-500
-									transition-all duration-150 delay-100"></span>
-							</span>
-						</a>
-					</div>
-
-					<!-- Item #5 -->
-					<div class="flex group">
-						<a href="#" class="p-3 text-gray-400 hover:text-yellow-500">
-							<span class="flex flex-col items-center">
-								<!-- Icon -->
-								<i class="mdi mdi-account-circle-outline mdi-24px mx-1 text-gray-500 group-hover:text-gray-700
-									transition-color duration-200"></i>
-
-								<!-- Text -->
-								<span class="text-xs mb-2 transition-all duration-200">
-									Account
-								</span>
-
-								<!-- Focus Dot -->
-								<span class="h-2 w-2 rounded-full group-hover:bg-yellow-500
-									transition-all duration-150 delay-100"></span>
-							</span>
-						</a>
-					</div>
-				</div>
-	</div>
+					
                     <!-- End of Experience and education grid -->
                 </div>
                 <!-- End of profile tab -->
@@ -205,7 +127,7 @@
 </template>
 <script>
 export default {
-    name: "avocatProfile"
+	name: "avocatProfile"
 }
 </script>
 <style lang="">
