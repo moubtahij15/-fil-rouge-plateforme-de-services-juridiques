@@ -30,7 +30,7 @@ class AvocatController
       {
 
 
-            if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                   $avocat = new Avocat();
                   //get client data
@@ -38,7 +38,7 @@ class AvocatController
                   // create client
                   echo $avocat->readSearch($data);
             } else  echo json_encode(
-                  array('message' => 'change method to GET')
+                  array('message' => 'change method to POST')
             );
       }
 
