@@ -16,12 +16,8 @@
                             src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
                             alt="">
                     </div>
-                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">Jane Doe</h1>
-                    <h3 class="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3>
-                    <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit.
-                        Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non deserunt</p>
-                   
+                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{avocat.nom}} {{avocat.nom}}</h1>
+                  
                 </div>
                 <!-- End of profile card -->
                 <div class="my-4"></div>
@@ -47,32 +43,32 @@
                         <div class="grid md:grid-cols-2 text-sm">
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Prenom</div>
-                                <div class="px-4 py-2">Jane</div>
+                                <div class="px-4 py-2">{{avocat.nom}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Nom</div>
-                                <div class="px-4 py-2">Doe</div>
+                                <div class="px-4 py-2">{{avocat.prenom}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">sexe</div>
-                                <div class="px-4 py-2">Female</div>
+                                <div class="px-4 py-2">{{avocat.sexe}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Contact </div>
-                                <div class="px-4 py-2">+11 998001001</div>
+                                <div class="px-4 py-2">{{avocat.tel}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold"> Address</div>
-                                <div class="px-4 py-2">Beech Creek, PA, Pennsylvania</div>
+                                <div class="px-4 py-2">{{avocat.adresse}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Email</div>
-                                <div class="px-4 py-2">Arlington Heights, IL, Illinois</div>
+                                <div class="px-4 py-2">{{avocat.email}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Avocat au Barreau</div>
                                 <div class="px-4 py-2">
-                                    <a class="text-blue-800" href="mailto:jane@example.com">jane@example.com</a>
+                                    <a class="text-blue-800" > {{avocat.ville}}</a>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2">
@@ -90,8 +86,8 @@
                 <!-- Experience and education -->
 
                    
-			<!-- Navigation Bar -->
-			<div class="flex flex-wrap   mt-8 bg-white pb-3 rounded-2xl border-primary border-solid">
+					<!-- Navigation Bar -->
+				<div class="flex flex-wrap   mt-8 bg-white pb-3 rounded-2xl border-primary border-solid">
 					<div   class="w-full cursor-pointer md:w-1/2 lg:w-1/3   border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
 							<div class="px-6">
                     <img src="../../assets/Calendarsvg.svg" class=" w-12 h-12  mx-auto text-deep-purple-accent-400 sm:w-20 sm:h-20">
@@ -120,14 +116,32 @@
                     <!-- End of Experience and education grid -->
                 </div>
                 <!-- End of profile tab -->
+						<Rendez_vous/>
+
             </div>
+			
         </div>
     </div>
 </div>
 </template>
 <script>
+import store from "@/store";
+import Rendez_vous from '@/components/rendez_vous.vue'
 export default {
-	name: "avocatProfile"
+	name: "avocatProfile",
+	data() {
+		return {
+			avocat:""
+		}
+	},
+	components:{
+			Rendez_vous
+	},
+	mounted() {
+		this.avocat=JSON.parse(sessionStorage.getItem('avocatProfile'));
+;
+	},
+
 }
 </script>
 <style lang="">

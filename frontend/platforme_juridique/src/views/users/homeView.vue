@@ -80,7 +80,7 @@ text-5xl font-extrabold text-primary leading-tight sm:text-6xl md:text-6xl ">Tro
                 </div>
 
                 <!-- Content -->
-                <div
+                <div  @click="redirectTo({ val: 'avocats' })"
                     class="  pt-5 cursor-pointer   shadow-md rounded-md hover:shadow-2xl   hover:mb-10 order-first w-full text-black border-solid md:w-1/2 md:pl-10 md:order-none">
                     <h2
                         class="m-0 text-xl font-semibold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl   ">

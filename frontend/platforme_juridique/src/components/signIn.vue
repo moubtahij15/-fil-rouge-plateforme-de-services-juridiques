@@ -80,18 +80,6 @@ export default {
 
             ev.preventDefault();
 
-
-            // store
-            //     .dispatch('login', this.user)
-            //     .then((response) => {
-
-
-            //         console.log(response);
-            //         if (response.data.message != "success") {
-            //             this.error = true
-            //         }
-            //         this.redirectTo({ val: "HomePage" });
-            //     })
             // console.log(this.$parent.$options.name)
 
             if (this.$parent.$options.name == 'signIn') {

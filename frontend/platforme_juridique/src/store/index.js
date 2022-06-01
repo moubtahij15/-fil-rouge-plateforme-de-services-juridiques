@@ -17,7 +17,8 @@ const store = createStore({
     },
     avocatsSearch: {
 
-    }
+    },
+    avocatProfile: sessionStorage.getItem("avocatProfile"),
 
 
   },
@@ -118,12 +119,20 @@ const store = createStore({
 
           if (response.status == 200) {
             commit('setAvocatsSearch', response.data.Avocat);
-            
+
             return response.data.Avocat;
 
           }
 
         })
+
+    },
+    //send data to avocat
+    setDatatoAvocat({ commit }, data) {
+
+      commit('SetAvocatProfile', data);
+
+
 
     }
     //  end user actions
@@ -168,6 +177,12 @@ const store = createStore({
       state.avocatsSearch = avocats;
 
     },
+    // set avocats Profile
+    SetAvocatProfile: (state, avocats) => {
+      sessionStorage.setItem('idUser', avocats);
+
+    },
+
     //  end user mutations
 
   },

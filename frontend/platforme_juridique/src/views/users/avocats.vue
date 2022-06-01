@@ -51,7 +51,7 @@
 							<div class="flex pt-2  justify-end text-sm text-gray-500">
 								
 							
-								<button  class="flex-no-shrink bg-green-400 hover:bg-green-500 px-5  py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 border-green-300 hover:bg-primary hover:text-white   text-primary rounded-full transition ease-in duration-300">Voir Profile</button>
+								<button  @click="profile(elem)" class="flex-no-shrink bg-green-400 hover:bg-green-500 px-5  py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 border-green-300 hover:bg-primary hover:text-white   text-primary rounded-full transition ease-in duration-300">Voir Profile</button>
 									
 							
 							</div>
@@ -91,8 +91,15 @@ export default {
 		Search
 	},
 	methods: {
-		...mapActions(["getAvocats", "getVilles", "getCategorie", "registerUser", "isLogin", "getAvocatsBySearch"]),
+		...mapActions(["getAvocats", "getVilles", "getCategorie", "registerUser", "isLogin", "getAvocatsBySearch", "setDatatoAvocat", "redirectTo"]),
+		profile(elem) {
+			// this.setDatatoAvocat(elem);
+			sessionStorage.setItem('avocatProfile', JSON.stringify(elem));
 
+
+			this.redirectTo({ val: "avocatProfile" });
+
+		}
 	},
 	mounted() {
 		// this.getAvocats()
