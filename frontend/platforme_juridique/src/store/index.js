@@ -18,6 +18,8 @@ const store = createStore({
     avocatsSearch: {
 
     },
+    creneaux: {},
+
     avocatProfile: sessionStorage.getItem("avocatProfile"),
 
 
@@ -132,9 +134,26 @@ const store = createStore({
 
       commit('SetAvocatProfile', data);
 
+    },
+    // get Creneaux
+    getCreneaux({ commit }, date) {
 
+      return axiosClient.post('creneau/read', {
+        date : date
+      })
+        .then(response => {
+          // console.log(response.data);
 
+          if (response.status == 200) {
+            commit('setCreneaux', response.data);
+            console.log(response.data);
+            return response.data;
+
+          }
+
+        })
     }
+
     //  end user actions
 
 
@@ -182,6 +201,12 @@ const store = createStore({
       sessionStorage.setItem('idUser', avocats);
 
     },
+    // set creneaux
+    setCreneaux: (state, creneaux) => {
+
+      state.creneaux = creneaux;
+      // console.log(state.creneaux);
+    }
 
     //  end user mutations
 
