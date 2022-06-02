@@ -34,14 +34,14 @@
                     </div> 
 
                 <!-- profile Section -->
-                <div v-if="($store.state.choix==1) && (this.$parent.$options.name='avocatProfile')">
+                <div v-if="($store.state.choix==1) && (this.$options.name=='avocatProfile')">
                           <ProfileAvocat/>
 
                 </div>
                  <!-- End of about section -->
 
                     <!-- rdv section -->
-					<div v-if="($store.state.choix==2) && (this.$parent.$options.name='avocatProfile')">
+					<div v-if="($store.state.choix==2) && (this.$options.name=='avocatProfile')">
 											<Rendez_vous />
 
 					</div>
@@ -90,6 +90,7 @@ export default {
         
     },
     mounted() {
+        console.log(this.$parent.$options.name);
         this.avocat = JSON.parse(sessionStorage.getItem('avocatProfile'));
         ;
     },

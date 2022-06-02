@@ -42,46 +42,10 @@
 					<!-- <div class="grid gap-8 row-gap-8 ">
             class="grid gap-8 row-gap-8 lg:grid-cols-4"
           </div> -->
-          <div class="grid lg:grid-cols-4 bg-white pb-3 rounded-2xl border-primary border-solid">
-
-   
-                    
-                 	<div @click="choix('profile')" class="  py-3 w-full cursor-pointer md:w-1/2 lg:w-full   border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
-							<div class="px-6">
-               
-                    <img src="../../assets/Profile.svg"  class=" w-12 h-12  mx-auto text-deep-purple-accent-400 sm:w-20 sm:h-20">
-						</div>
-						<div class="px-6">
-						<h3 class="m-0 text-xl font-medium leading-tight border-0 border-gray-300 lg:text-xl md:text-2xl"> Profile</h3>
-							</div>
-					</div>   
-          <div @click="choix('rdv')" class="  py-3 w-full cursor-pointer md:w-1/2 lg:w-full   border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
-							<div class="px-6">
-                    <img src="../../assets/Calendarsvg.svg"  class=" w-12 h-12  mx-auto text-deep-purple-accent-400 sm:w-20 sm:h-20">
-						</div>
-						<div class="px-6">
-						<h3 class="m-0 text-xl font-medium leading-tight border-0 border-gray-300 lg:text-xl md:text-2xl">Rendez-vous</h3>
-							</div>
-					</div>   
-                    
-					<div @click="choix('consultation')" class=" py-3 w-full cursor-pointer md:w-1/2 lg:w-full  border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
-							<div class="px-6">
-                    <img src="../../assets/adistance.svg"  class=" w-12 h-12  mx-auto text-deep-purple-accent-400 sm:w-20 sm:h-20">
-						</div>
-						<div class="px-6">
-						<h3 class="m-0 text-xl font-medium leading-tight border-0 border-gray-300 lg:text-xl md:text-2xl"> Consultation Juridique</h3>
-							</div>
-					</div>
-					<div  @click="choix('document')" class=" py-3 w-full cursor-pointer md:w-1/2 lg:w-full     border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
-							<div class="px-6">
-                    <img src="../../assets/document.svg"  class=" w-12 h-12  mx-auto text-deep-purple-accent-400 sm:w-20 sm:h-20">
-						</div>
-						<div class="px-6">
-						<h3 class="m-0 text-xl font-medium leading-tight border-0 border-gray-300 lg:text-xl md:text-2xl">mes document</h3>
-							</div>
-					</div>
-            
-          </div>
+             <div >
+                     <ChoixProfile/>
+                        
+                    </div> 
          
 					
                     <!-- End of Experience and education grid -->
@@ -89,10 +53,11 @@
                 <!-- End of profile tab -->
                     <!-- rdv -->
                     
-					<div v-if="this.profile">
+					<div v-if="($store.state.choix==1) && (this.$options.name=='profileUser')">
 											<ProfilFormUser />
 
 					</div>
+            
                     <!-- <div c>
 											<Rendez_vous />
 
@@ -111,6 +76,7 @@
 <script>
 import store from "@/store";
 import { mapActions } from "vuex";
+import ChoixProfile from '@/components/profileComponents/choixProfile.vue';
 
 import ProfilFormUser from '@/components/profileFormUser.vue'
 export default {
@@ -126,47 +92,19 @@ export default {
     }
   },
   components: {
-    ProfilFormUser
+    ProfilFormUser,
+    ChoixProfile
   },
 
   methods: {
     ...mapActions(["redirectTo", "getVilles", "getCategorie", "registerUser", "isLogin", "getAvocats", "getAvocatsBySearch"]),
 
-    choix(choix) {
-      this.isLogin()
-        .then((response) => {
-          if (!response) {
-
-            this.redirectTo({ val: "signIn" });
-          }
-
-        })
-      if (choix == "rdv") {
-        this.rdv = true
-        this.consultation = false
-        this.document = false
-
-      } else if (choix == "consultation") {
-        this.rdv = false
-        this.consultation = true
-        this.document = false
-
-      } else if (choix == "document") {
-        this.rdv = false
-        this.consultation = false
-        this.document = true
-
-      }
-    }
+    
   },
   mounted() {
-    console.log(this.users);
+    console.log();
 
-    this.user.email = this.users.email
-    this.user.nom = this.users.nom
-    this.user.prenom = this.users.prenom
-    this.user.tel = this.users.tel
-    this.user.ville_id = this.users.ville_id
+   
 
     this.avocat = JSON.parse(sessionStorage.getItem('avocatProfile'));
     ;
