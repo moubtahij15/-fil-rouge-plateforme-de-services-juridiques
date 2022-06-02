@@ -62,7 +62,10 @@
     </div>
 </template>
 <script>
+import store from "../store";
+import { mapActions } from "vuex";
 export default {
+
     name: "profileInfoForm",
     data() {
         return {
@@ -74,7 +77,7 @@ export default {
                 tel: "",
                 password: "",
                 email: ""
-            },
+            },  
         }
     },
 }

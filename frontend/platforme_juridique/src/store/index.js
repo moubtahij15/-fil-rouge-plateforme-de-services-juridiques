@@ -22,7 +22,7 @@ const store = createStore({
 
     avocatProfile: sessionStorage.getItem("avocatProfile"),
 
-
+    choix: "1"
   },
   getters: {},
 
@@ -137,12 +137,16 @@ const store = createStore({
     },
     // get Creneaux
     getCreneaux({ commit }, date) {
+      // console.log(date);
+      // console.log(JSON.parse(sessionStorage.getItem('avocatProfile')).id);
 
       return axiosClient.post('creneau/read', {
-        date: date
+        date: date,
+        id_avocat: JSON.parse(sessionStorage.getItem('avocatProfile')).id
       })
         .then(response => {
           // console.log(response.data);
+          console.log(response);
 
           if (response.status == 200) {
             commit('setCreneaux', response.data);
@@ -166,7 +170,13 @@ const store = createStore({
           }
 
         })
-    }
+    },
+    // get choix profile
+    getChoixProfile({ commit }, choix) {
+
+      commit('setChoixProfile', choix);
+
+    },
 
     //  end user actions
 
@@ -221,7 +231,13 @@ const store = createStore({
 
       state.creneaux = creneaux;
       // console.log(state.creneaux);
-    }
+    },
+    // set choix profile
+    setChoixProfile: (state, choix) => {
+
+      state.choix = choix;
+      // console.log(state.creneaux);
+    },
 
     //  end user mutations
 

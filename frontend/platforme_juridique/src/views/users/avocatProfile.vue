@@ -25,99 +25,23 @@
                 <!-- End of friends card -->
             </div>
             <!-- Right Side -->
-            <div class="w-full md:w-9/12 mx-2 h-64">
+            <div class="w-full mt-10 md:w-9/12 mx-2 h-64">
                 <!-- Profile tab -->
-                <!-- About Section -->
-                <div class="bg-white p-3 shadow-sm rounded-sm">
-                    <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
-                        <span clas="text-green-500">
-                            <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </span>
-                        <span class="tracking-wide">About</span>
-                    </div>
-                    <div class="text-gray-700">
-                        <div class="grid md:grid-cols-2 text-sm">
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Prenom</div>
-                                <div class="px-4 py-2">{{avocat.nom}}</div>
-                            </div>
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Nom</div>
-                                <div class="px-4 py-2">{{avocat.prenom}}</div>
-                            </div>
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">sexe</div>
-                                <div class="px-4 py-2">{{avocat.sexe}}</div>
-                            </div>
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Contact </div>
-                                <div class="px-4 py-2">{{avocat.tel}}</div>
-                            </div>
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold"> Address</div>
-                                <div class="px-4 py-2">{{avocat.adresse}}</div>
-                            </div>
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Email</div>
-                                <div class="px-4 py-2">{{avocat.email}}</div>
-                            </div>
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Avocat au Barreau</div>
-                                <div class="px-4 py-2">
-                                    <a class="text-blue-800" > {{avocat.ville}}</a>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Age</div>
-                                <div class="px-4 py-2">Feb 06, 1998</div>
-                            </div>
-                        </div>
-                    </div>
-                
+                    <!-- services and profile avocat -->
+                    <div >
+                     <ChoixProfile/>
+                        
+                    </div> 
+
+                <!-- profile Section -->
+                <div v-if="($store.state.choix==1) && (this.$parent.$options.name='avocatProfile')">
+                          <ProfileAvocat/>
+
                 </div>
-                <!-- End of about section -->
+                 <!-- End of about section -->
 
-                <div class="my-4"></div>
-
-                <!-- Experience and education -->
-
-                   
-					<!-- Navigation Bar -->
-				<div class="flex flex-wrap   mt-8 bg-white pb-3 rounded-2xl border-primary border-solid">
-					<div   class="w-full cursor-pointer md:w-1/2 lg:w-1/3   border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
-							<div class="px-6" @click="choix('rdv')">
-                    <img src="../../assets/Calendarsvg.svg" class=" w-12 h-12  mx-auto text-deep-purple-accent-400 sm:w-20 sm:h-20">
-						</div>
-						<div class="px-6">
-						<h3 class="m-0 text-xl font-medium leading-tight border-0 border-gray-300 lg:text-xl md:text-2xl"> Rendez-vous</h3>
-							</div>
-					</div>
-					<div @click="choix('consultation')" class=" w-full cursor-pointer md:w-1/2 lg:w-1/3   border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
-							<div class="px-6">
-                    <img src="../../assets/adistance.svg"  class=" w-12 h-12  mx-auto text-deep-purple-accent-400 sm:w-20 sm:h-20">
-						</div>
-						<div class="px-6">
-						<h3 class="m-0 text-xl font-medium leading-tight border-0 border-gray-300 lg:text-xl md:text-2xl"> Consultation Juridique</h3>
-							</div>
-					</div>
-					<div  @click="choix('document')" class="w-full cursor-pointer md:w-1/2 lg:w-1/3   border-solid lg:mb-0    px-12  bg-white1 border-b hover:bg-white hover:shadow-xl border-primary transform transition duration-300  hover:-translate-y-2">
-							<div class="px-6">
-                    <img src="../../assets/Calendarsvg.svg"  class=" w-12 h-12  mx-auto text-deep-purple-accent-400 sm:w-20 sm:h-20">
-						</div>
-						<div class="px-6">
-						<h3 class="m-0 text-xl font-medium leading-tight border-0 border-gray-300 lg:text-xl md:text-2xl"> Télécharger ou rédiger  un document juridique </h3>
-							</div>
-					</div>
-					
-                    <!-- End of Experience and education grid -->
-                </div>
-                <!-- End of profile tab -->
-                    <!-- rdv -->
-					<div v-if="rdv">
+                    <!-- rdv section -->
+					<div v-if="($store.state.choix==2) && (this.$parent.$options.name='avocatProfile')">
 											<Rendez_vous />
 
 					</div>
@@ -139,6 +63,8 @@
 <script>
 import store from "@/store";
 import { mapActions } from "vuex";
+import ChoixProfile from '@/components/profileComponents/choixProfile.vue';
+import ProfileAvocat from '@/components/profileComponents/avocat/profile.vue';
 
 import Rendez_vous from '@/components/rendez_vous.vue'
 export default {
@@ -148,42 +74,20 @@ export default {
             avocat: "",
             rdv: false,
             consultation: false,
-            document: false
+            document: false,
+            choix: 1,
         }
     },
     components: {
-        Rendez_vous
+        Rendez_vous,
+        ChoixProfile,
+        ProfileAvocat,
     },
 
     methods: {
         ...mapActions(["redirectTo", "getVilles", "getCategorie", "registerUser", "isLogin", "getAvocats", "getAvocatsBySearch"]),
 
-        choix(choix) {
-            this.isLogin()
-                .then((response) => {
-                    if (!response) {
-
-                        this.redirectTo({ val: "signIn" });
-                    }
-
-                })
-            if (choix == "rdv") {
-                this.rdv = true
-                this.consultation = false
-                this.document = false
-
-            } else if (choix == "consultation") {
-                this.rdv = false
-                this.consultation = true
-                this.document = false
-
-            } else if (choix == "document") {
-                this.rdv = false
-                this.consultation = false
-                this.document = true
-
-            }
-        }
+        
     },
     mounted() {
         this.avocat = JSON.parse(sessionStorage.getItem('avocatProfile'));

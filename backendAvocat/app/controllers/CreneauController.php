@@ -25,9 +25,9 @@ class CreneauController
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $creneau = new Creneau();
-            $data= json_decode(file_get_contents("php://input"));
+            $data = json_decode(file_get_contents("php://input"));
 
-            $result = $creneau->read($data->date);
+            $result = $creneau->read($data);
 
             if ($result) {
                 echo json_encode($result);
@@ -35,6 +35,7 @@ class CreneauController
                 echo json_decode(
                     array('message' => 'aucun crenel dipso pour le moment')
                 );
+                
             }
         } else  echo json_encode(
             array('message' => 'change method to GET')
