@@ -177,7 +177,28 @@ const store = createStore({
       commit('setChoixProfile', choix);
 
     },
+    // update info user
+    updateInfoUser({ commit }, user) {
 
+      return axiosClient.post('client/updateInfo', user)
+        .then(response => {
+          if (response.data.message == "bien modifié") {
+            commit('setUser', response.data.client);
+          }
+          return response.data
+        });
+    },
+    // update info user
+    updatePassUser({ commit }, pass) {
+
+      return axiosClient.post('client/updatePass', pass)
+        .then(response => {
+          if (response.data.result == "success") {
+            commit('setUser', response.data.client);
+          }
+          return response.data
+        });
+    },
     //  end user actions
 
 
