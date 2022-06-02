@@ -3,7 +3,22 @@
           <!-- form for update info -->
          <form v-if="!showPass" @submit="updateUser">
          
+          <!-- alert success update -->
+    <div  class="w-full text-white bg-primary">
+        <div class="container flex items-center justify-between px-6 py-4 mx-auto">
+            <div class="flex">
+                 <FIcons id="delete" :icon="['fas', 'check']" class="h-6 w-6 cursor-pointer"></FIcons>
+                <p class="mx-3">Bien modifié</p>
+            </div>
 
+            <button class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 18L18 6M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+      <!--  end alert success update -->
             <div class="bg-white p-3 mt-6 shadow-sm rounded-sm">
               <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                 <span clas="text-green-500">
@@ -49,9 +64,9 @@
                   </div>
                   <div class="grid grid-cols-2 mt-4">
                     <div class="px-4 py-2 font-semibold"> telephone</div>
-                    <input placeholder="old password" v-model="user.tel"
+                    <input placeholder="tel" v-model="user.tel"
                       class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-3  py-2"
-                      type="password" name="integration[shop_name]" id="integration_shop_name">
+                      type="number" name="integration[shop_name]" id="integration_shop_name">
                   </div>
                   
 
@@ -70,7 +85,7 @@
   <form v-if="!showPass" @submit="updateUser">
            <div class=" flex  mt-4">  
 
-                        <FIcons id="delete" :icon="['fas', 'lock']" class="h-6 w-6 cursor-pointer"></FIcons>
+                        <FIcons  :icon="['fas', 'lock']" class="h-6 w-6 cursor-pointer"></FIcons>
 
                     <p class="px-4 text-primary  hover:border-b-2 font-medium cursor-pointer">changez le mot de Passe </p>
 
@@ -133,6 +148,8 @@ export default {
   data() {
     return {
       showPass: false,
+      users: JSON.parse(sessionStorage.getItem('User')),
+
       user: {
         nom: "",
         prenom: "",
@@ -141,7 +158,7 @@ export default {
         password: "",
         email: ""
       },
-      ide:2,
+      ide: 2,
 
       userPass: {
         new: "",
@@ -158,6 +175,11 @@ export default {
 
   },
   mounted() {
+    this.user.email = this.users.email
+    this.user.nom = this.users.nom
+    this.user.prenom = this.users.prenom
+    this.user.tel = this.users.tel
+    this.user.ville_id = this.users.ville_id
     this.getVilles()
       .then((response) => {
         console.log(response);
