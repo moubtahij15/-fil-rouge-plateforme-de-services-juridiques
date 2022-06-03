@@ -168,7 +168,7 @@ export default {
   data() {
     return {
       showSucess: false,
-      users: JSON.parse(sessionStorage.getItem('User')),
+      users: "",
       msgError: "",
       user: {
         id: "",
@@ -184,7 +184,7 @@ export default {
         newPass: "",
         oldPass: "",
         confirm: "",
-        id: JSON.parse(sessionStorage.getItem('User')).id,
+        id: ""
 
       },
 
@@ -237,12 +237,25 @@ export default {
     }
   },
   mounted() {
-    this.user.id = this.users.id
-    this.user.email = this.users.email
-    this.user.nom = this.users.nom
-    this.user.prenom = this.users.prenom
-    this.user.tel = this.users.tel
-    this.user.ville_id = this.users.ville_id
+    this.isLogin()
+      .then((response) => {
+        if (!response) {
+          this.redirectTo({ val: "signIn" });
+        } else {
+          this.users = JSON.parse(sessionStorage.getItem('User'))
+          this.userPass.id = this.users.id
+          this.user.id = this.users.id
+          this.user.email = this.users.email
+          this.user.nom = this.users.nom
+          this.user.prenom = this.users.prenom
+          this.user.tel = this.users.tel
+          this.user.ville_id = this.users.ville_id
+        }
+
+
+      })
+
+
     this.getVilles()
       .then((response) => {
         console.log(response);

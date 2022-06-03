@@ -51,10 +51,15 @@
                     <!-- End of Experience and education grid -->
                 </div>
                 <!-- End of profile tab -->
-                    <!-- rdv -->
                     
 					<div v-if="($store.state.choix==1) && (this.$options.name=='profileUser')">
 											<ProfilFormUser />
+
+					</div>
+                              <!-- rdv -->
+
+          	<div v-if="($store.state.choix==2) && (this.$options.name=='profileUser')">
+											<rdvUser />
 
 					</div>
             
@@ -77,7 +82,7 @@
 import store from "@/store";
 import { mapActions } from "vuex";
 import ChoixProfile from '@/components/profileComponents/choixProfile.vue';
-
+import rdvUser from '@/components/profileComponents/user/rendezVous.vue'
 import ProfilFormUser from '@/components/profileFormUser.vue'
 export default {
   name: "profileUser",
@@ -87,27 +92,27 @@ export default {
       profile: true,
       consultation: false,
       document: false,
-      users: JSON.parse(sessionStorage.getItem('User')),
+      // users: JSON.parse(sessionStorage.getItem('User')),
 
     }
   },
   components: {
     ProfilFormUser,
-    ChoixProfile
+    ChoixProfile,
+    rdvUser
   },
 
   methods: {
     ...mapActions(["redirectTo", "getVilles", "getCategorie", "registerUser", "isLogin", "getAvocats", "getAvocatsBySearch"]),
 
-    
+
   },
   mounted() {
     console.log();
 
    
-
-    this.avocat = JSON.parse(sessionStorage.getItem('avocatProfile'));
-    ;
+      // this.avocat = JSON.parse(sessionStorage.getItem('avocatProfile'));
+      ;
   },
 
 }

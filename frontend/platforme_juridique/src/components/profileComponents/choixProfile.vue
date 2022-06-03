@@ -56,14 +56,14 @@ export default {
         ...mapActions(["redirectTo", "getVilles", "getCategorie", "registerUser", "isLogin", "getAvocats", "getAvocatsBySearch", "getCreneaux", "vaidateRdv", "getChoixProfile"]),
 
         choix(choix) {
-            this.isLogin()
-                .then((response) => {
-                    if (!response) {
+				this.isLogin()
+					.then((response) => {
+						if (!response) {
 
-                        this.redirectTo({ val: "signIn" });
-                    }
+							this.redirectTo({ val: "signIn" });
+						}
 
-                })
+					})
             this.getChoixProfile(choix)
         }
     },
