@@ -21,103 +21,87 @@
         </div>
     </div>
         <!-- table rdv -->
-      <table class="items-center bg-transparent w-full border-collapse  mt-6">
+     <!-- component -->
+<section class="container mx-auto p-6 font-mono">
+  <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+    <div class="w-full overflow-x-auto">
+      <table class="w-full border-white">
         <thead>
-          <tr>
-            <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          Page name
-                        </th>
-          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          Visitors
-                        </th>
-           <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          Unique users
-                        </th>
-          <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          Bounce rate
-                        </th>
+          <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-white border-b uppercase ">
+            <th class="px-4 py-3">Name</th>
+            <th class="px-4 py-3">Age</th>
+            <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">Date</th>
           </tr>
         </thead>
+        <tbody class="bg-white1">
+         
+          
+          <tr class="text-gray-700 border-white border-b-2">
+            <td class="px-4 py-3 ">
+              <div class="flex items-center text-sm">
+                <div class="relative w-8 h-8 mr-3 rounded-full">
+                  <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
+                  <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                </div>
+                <div>
+                  <p class="font-semibold">Mohammed</p>
+                  <p class="text-xs text-gray-600">Web Designer</p>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3  text-md font-semibold">38</td>
+            <td class="px-4 py-3  text-xs">
+              <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span>
+            </td>
+            <td class="px-4 py-3  text-sm">6/10/2020</td>
+          </tr>
+          <tr class="text-gray-700 border-white border-b-2">
+            <td class="px-4 py-3 ">
+              <div class="flex items-center text-sm">
+                <div class="relative w-8 h-8 mr-3 rounded-full">
+                  <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
+                  <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                </div>
+                <div>
+                  <p class="font-semibold">Mohammed</p>
+                  <p class="text-xs text-gray-600">Web Designer</p>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3  text-md font-semibold">38</td>
+            <td class="px-4 py-3  text-xs">
+              <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span>
+            </td>
+            <td class="px-4 py-3  text-sm">6/10/2020</td>
+          </tr>
+          <tr class="text-gray-700 border-white border-b-2">
+            <td class="px-4 py-3 ">
+              <div class="flex items-center text-sm">
+                <div class="relative w-8 h-8 mr-3 rounded-full">
+                  <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
+                  <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                </div>
+                <div>
+                  <p class="font-semibold">Mohammed</p>
+                  <p class="text-xs text-gray-600">Web Designer</p>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3  text-md font-semibold">38</td>
+            <td class="px-4 py-3  text-xs">
+              <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span>
+            </td>
+            <td class="px-4 py-3  text-sm">
+                      <button   class="flex-no-shrink   px-5  py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 border-red hover:bg-red hover:text-white   text-primary rounded-full transition ease-in duration-300">annuler</button>           
 
-        <tbody>
-          <tr>
-            <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
-              /argon/
-            </th>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-              4,569
-            </td>
-            <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              340
-            </td>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
-              46,53%
-            </td>
-          </tr>
-          <tr>
-            <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-              /argon/index.html
-            </th>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              3,985
-            </td>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              319
-            </td>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              <i class="fas fa-arrow-down text-orange-500 mr-4"></i>
-              46,53%
-            </td>
-          </tr>
-          <tr>
-            <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-              /argon/charts.html
-            </th>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              3,513
-            </td>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              294
-            </td>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              <i class="fas fa-arrow-down text-orange-500 mr-4"></i>
-              36,49%
-            </td>
-          </tr>
-          <tr>
-            <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-              /argon/tables.html
-            </th>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              2,050
-            </td>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              147
-            </td>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
-              50,87%
-            </td>
-          </tr>
-          <tr>
-            <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-              /argon/profile.html
-            </th>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              1,795
-            </td>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              190
-            </td>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              <i class="fas fa-arrow-down text-red-500 mr-4"></i>
-              46,53%
             </td>
           </tr>
         </tbody>
-
       </table>
+    </div>
+  </div>
+</section>
     </div>
 
 
