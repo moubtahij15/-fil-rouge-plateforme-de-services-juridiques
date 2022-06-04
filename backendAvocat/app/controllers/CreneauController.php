@@ -31,12 +31,12 @@ class CreneauController
 
             if ($result) {
                 echo json_encode($result);
-            } else {
-                echo json_decode(
-                    array('message' => 'aucun crenel dipso pour le moment')
-                );
-                
-            }
+            } 
+            // else {
+            //     echo json_encode(
+            //         array('message' => 'error')
+            //     );
+            // }
         } else  echo json_encode(
             array('message' => 'change method to GET')
         );

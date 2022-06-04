@@ -13,10 +13,10 @@
                 <div class="bg-white p-3 border-t-4 border-green-400">
                     <div class="image overflow-hidden">
                         <img class="h-auto w-full mx-auto"
-                            src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
+                            src="https://www.le-tout-lyon.fr/content/articles/18190/main_justiceavocatlyon.jpg"
                             alt="">
                     </div>
-                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{avocat.nom}} {{avocat.nom}}</h1>
+                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{avocat.nom}} {{avocat.prenom}}</h1>
                   
                 </div>
                 <!-- End of profile card -->

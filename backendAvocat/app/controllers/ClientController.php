@@ -62,4 +62,41 @@ class ClientController
                   array('message' => 'change method to Get')
             );
       }
+
+      //update user info
+      public function updateInfo()
+      {
+
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                  $client = new Client();
+                  //get client data
+                  $data = json_decode(file_get_contents("php://input"));
+                  // create client
+                  echo json_encode(
+                        array(
+                              'message' => 'bien modifié', 'client' => $client->updateInfo($data)
+                        )
+                  );
+            } else  echo json_encode(
+                  array('message' => 'change method to PUT')
+            );
+      }
+      //update user info
+      public function updatePass()
+      {
+
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                  $client = new Client();
+                  //get client data
+                  $data = json_decode(file_get_contents("php://input"));
+                  // create client
+                  return $client->updatePass($data);
+            } else  echo json_encode(
+                  array('message' => 'change method to PUT')
+            );
+      }
 }

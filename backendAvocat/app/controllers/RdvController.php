@@ -67,7 +67,7 @@ class RdvController {
                     if($RDV->create($data)){
 
                     echo json_encode(
-                            array('message' => 'RDV Created')
+                            array('message' => 'Created')
                             );
                 }else { 
                         echo json_encode(

@@ -12,7 +12,7 @@
                     <rect x="14" y="11" width="7" height="12"></rect>
                 </svg> -->
                 <img src="../../assets/logo1.”.png" class="w-12 h-12" alt="">
-                <span class="ml-2 text-xXl font-bold tracking-wide text-gray-800 uppercase">Avocat Sahbi</span>
+                <span class="ml-2 text-xXl font-bold tracking-wide text-gray-800 uppercase">Avocatice</span>
             </a>
             <ul class="flex items-center hidden space-x-8 lg:flex">
                 <li>

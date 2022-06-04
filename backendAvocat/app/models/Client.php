@@ -20,6 +20,15 @@ class Client extends DataBase
       return $result->fetch(PDO::FETCH_ASSOC);
     } else return false;
   }
+  public function read_singleById($id)
+  {
+    $sql = "select * from client where id = ?";
+    $result = $this->conn->prepare($sql);
+
+    if ($result->execute([$id])) {
+      return $result->fetch(PDO::FETCH_ASSOC);
+    } else return false;
+  }
 
   // get ville 
 
@@ -34,7 +43,7 @@ class Client extends DataBase
         array(
           'villes' => $result->fetchAll(PDO::FETCH_ASSOC)
         )
-        );
+      );
     } else return false;
   }
   // $data->sjt_RDV = htmlspecialchars(strip_tags( $data->sjt_RDV));
@@ -143,8 +152,96 @@ class Client extends DataBase
   }
 
 
+  //update profile client 
+  public function updateInfo($data)
+  {
+    // clean data
+    $data->id = htmlspecialchars(strip_tags($data->id));
+    $data->nom = htmlspecialchars(strip_tags($data->nom));
+    $data->prenom = htmlspecialchars(strip_tags($data->prenom));
+    $data->email = htmlspecialchars(strip_tags($data->email));
+    $data->ville_id = htmlspecialchars(strip_tags($data->ville_id));
+    $data->tel = htmlspecialchars(strip_tags($data->tel));
+    // $data->password = htmlspecialchars(strip_tags($data->password));
+    // get random string && hash idClient(ref)
+    // $data->password = password_hash($data->password, PASSWORD_DEFAULT);
+
+    $sql = "UPDATE client SET  email=:email , nom=:nom ,prenom =:prenom,  ville_id=:ville_id ,tel=:tel   WHERE id = :id ";
+    $result = $this->conn->prepare($sql);
+    $result->execute([
+      ':email' => $data->email,
+      ':nom' => $data->nom,
+      ':prenom' => $data->prenom,
+      ':ville_id' => $data->ville_id,
+      ':tel' => $data->tel,
+      ':id' => $data->id
 
 
+    ]);
+    if ($result) {
+      return  $this->read_singleById($data->id);
+    }
+    return false;
+  }
+
+
+
+  //update password client 
+  public function updatePass($data)
+  {
+    // clean data
+    $data->id = htmlspecialchars(strip_tags($data->id));
+    // test old password
+    if (password_verify($data->oldPass, $this->read_singleById($data->id)["password"])) {
+      $data->newPass = htmlspecialchars(strip_tags($data->newPass));
+      $data->newPass = password_hash($data->newPass, PASSWORD_DEFAULT);
+      $sql = "UPDATE client SET  password=:password WHERE id = :id ";
+
+      $result = $this->conn->prepare($sql);
+      $result->execute([
+        ':password' => $data->newPass,
+        ':id' => $data->id,
+      ]);
+      if ($result) {
+        echo json_encode(
+          array(
+            'result' => 'success', 'message' => " le mot de passe  est Bien Modifier" ,'client'=> $this->read_singleById($data->id)
+          )
+        );
+      }
+      // return false;
+    } else {
+      echo json_encode(
+        array(
+          'result' => 'erreur', 'message' => " le mot de passe actuel est incorrect"
+        )
+      );
+    }
+
+
+    // // $data->nom = htmlspecialchars(strip_tags($data->nom));
+
+    // // $data->password = htmlspecialchars(strip_tags($data->password));
+    // // get random string && hash idClient(ref)
+    // // $data->password = password_hash($data->password, PASSWORD_DEFAULT);
+
+    // $sql = "UPDATE client SET  email=:email , nom=:nom ,prenom =:prenom,  ville_id=:ville_id ,tel=:tel   WHERE id = :id ";
+    // $result = $this->conn->prepare($sql);
+    // $result->execute([
+    //   ':email' => $data->email,
+    //   ':nom' => $data->nom,
+    //   ':prenom' => $data->prenom,
+    //   ':ville_id' => $data->ville_id,
+    //   ':tel' => $data->tel,
+    //   ':id' => $data->id
+
+
+    // ]);
+    // if ($result) {
+    //   return  $this->read_singleById($data->id);
+    // }
+    // return false;
+  }
 
   // function getAge 
   public function  getAge($date_naissance)

@@ -65,18 +65,23 @@ class RDV extends DataBase{
           $client=new Client();
           $creneau=new Creneau();
           // check existance foreign key
-            if( ($client->read_single( $data->id_client)) &&( $creneau->read_single( $data->id_creneau)))
+            if( ($client->read_singleById($data->id_client)) &&( $creneau->read_single( $data->id_creneau)))
                   {
                        //  clean data
                       $data->sjt_RDV = htmlspecialchars(strip_tags( $data->sjt_RDV));
                       $data->date_creneau = htmlspecialchars(strip_tags( $data->date_creneau));
-                      $sql=" INSERT INTO `rdv` (`sjt_RDV`, `date_creneau`, `id_client`, `id_creneau`) VALUES ( :sjt_RDV,:date_creneau,:id_client,:id_creneau)";
+                      $sql=" INSERT INTO `rdv` (`sjt_RDV`, `date_creneau`, `id_client`, `id_creneau`, `id_avocat`) VALUES ( :sjt_RDV,:date_creneau,:id_client,:id_creneau,:id_avocat)";
                       $result=$this->conn->prepare($sql);
                        // Bind data
                       return  $result->execute([':sjt_RDV'=>$data->sjt_RDV,
                       ':date_creneau'=>$data->date_creneau,
                       ':id_client'=>$data->id_client,
-                      ':id_creneau'=>$data->id_creneau]);
+                      ':id_creneau'=>$data->id_creneau,
+                      ':id_avocat'=>$data->id_avocat
+                    ]);
+                  }
+                  else{
+                    echo"echec";
                   }
         }
 
