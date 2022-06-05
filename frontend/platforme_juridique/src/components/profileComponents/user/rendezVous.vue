@@ -27,79 +27,53 @@
     <div class="w-full overflow-x-auto">
       <table class="w-full border-white">
         <thead>
-          <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-white border-b uppercase ">
-            <th class="px-4 py-3">Name</th>
-            <th class="px-4 py-3">Age</th>
-            <th class="px-4 py-3">Status</th>
-            <th class="px-4 py-3">Date</th>
+          <tr class="text-md font-semibold tracking-wide text-centre text-gray-900 bg-white border-b uppercase ">
+            <th class="px-4 py-3">avocat </th>
+            <th class="px-4 py-3 ">specialté</th>
+            <th class="px-4 py-3">sujet</th>
+            <th class="px-4 py-3">annuler</th>
           </tr>
         </thead>
         <tbody class="bg-white1">
          
           
-          <tr class="text-gray-700 border-white border-b-2">
-            <td class="px-4 py-3 ">
-              <div class="flex items-center text-sm">
-                <div class="relative w-8 h-8 mr-3 rounded-full">
-                  <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                  <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                </div>
-                <div>
+         
+         
+             <tr class="text-gray-700 border-white border-b-2">
+            <td class="px-4 py-3  text-center ">
+             
                   <p class="font-semibold">Mohammed</p>
-                  <p class="text-xs text-gray-600">Web Designer</p>
-                </div>
-              </div>
+               
             </td>
-            <td class="px-4 py-3  text-md font-semibold">38</td>
-            <td class="px-4 py-3  text-xs">
-              <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span>
-            </td>
-            <td class="px-4 py-3  text-sm">6/10/2020</td>
-          </tr>
-          <tr class="text-gray-700 border-white border-b-2">
-            <td class="px-4 py-3 ">
-              <div class="flex items-center text-sm">
-                <div class="relative w-8 h-8 mr-3 rounded-full">
-                  <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                  <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                </div>
-                <div>
-                  <p class="font-semibold">Mohammed</p>
-                  <p class="text-xs text-gray-600">Web Designer</p>
-                </div>
-              </div>
-            </td>
-            <td class="px-4 py-3  text-md font-semibold">38</td>
-            <td class="px-4 py-3  text-xs">
-              <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span>
-            </td>
-            <td class="px-4 py-3  text-sm">6/10/2020</td>
-          </tr>
-          <tr class="text-gray-700 border-white border-b-2">
-            <td class="px-4 py-3 ">
-              <div class="flex items-center text-sm">
-                <div class="relative w-8 h-8 mr-3 rounded-full">
-                  <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                  <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                </div>
-                <div>
-                  <p class="font-semibold">Mohammed</p>
-                  <p class="text-xs text-gray-600">Web Designer</p>
-                </div>
-              </div>
-            </td>
-            <td class="px-4 py-3  text-md font-semibold">38</td>
+            <td class="px-4 py-3 text-left text-md font-semibold text-center">38</td>
             <td class="px-4 py-3  text-xs">
               <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span>
             </td>
             <td class="px-4 py-3  text-sm">
-                      <button   class="flex-no-shrink   px-5  py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 border-red hover:bg-red hover:text-white   text-primary rounded-full transition ease-in duration-300">annuler</button>           
+                      <button   class="flex-no-shrink   px-5  py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2  hover:bg-red hover:text-white   text-primary rounded-full transition ease-in duration-300">annuler</button>           
 
             </td>
           </tr>
+            <tr class="text-gray-700 border-white border-b-2">
+            <td class="px-4 py-3  text-center ">
+             
+                  <p class="font-semibold">Mohammed</p>
+               
+            </td>
+            <td class="px-4 py-3 text-left text-md font-semibold text-center">38</td>
+            <td class="px-4 py-3  text-xs">
+              <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm text-center"> Acceptable </span>
+            </td>
+            <td class="px-4 py-3  text-sm text-center">
+                      <button   class="flex-no-shrink   px-5  py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2  hover:bg-red hover:text-white   text-primary rounded-full transition ease-in duration-300">annuler</button>           
+
+            </td>
+          </tr>
+        
         </tbody>
       </table>
     </div>
+    
   </div>
 </section>
     </div>
