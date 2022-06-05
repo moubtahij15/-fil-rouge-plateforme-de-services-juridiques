@@ -188,7 +188,7 @@ const store = createStore({
           return response.data
         });
     },
-    // update info user
+    // update pass user
     updatePassUser({ commit }, pass) {
 
       return axiosClient.post('client/updatePass', pass)
@@ -196,6 +196,17 @@ const store = createStore({
           if (response.data.result == "success") {
             commit('setUser', response.data.client);
           }
+          return response.data
+        });
+    },
+    // update info user
+    getRdvUser({ commit }, id) {
+
+      return axiosClient.post('Rdv/read', {
+        reff:id
+      })
+        .then(response => {
+        
           return response.data
         });
     },
