@@ -38,6 +38,45 @@
         </button>
       </div>
     </div>
+    <!-- alert update sucess -->
+    <div v-if="this.msg" class="w-full text-white bg-primary">
+      <div
+        class="container flex items-center justify-between px-6 py-4 mx-auto"
+      >
+        <div class="flex">
+          <FIcons
+            id="delete"
+            :icon="['fas', 'check']"
+            class="h-6 w-6 cursor-pointer"
+          ></FIcons>
+
+          <p class="mx-3">
+            {{ this.msg }}
+          </p>
+        </div>
+
+        <button
+          class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none"
+          @click="this.msg = ''"
+        >
+          <svg
+            class="w-5 h-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 18L18 6M6 6L18 18"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+
     <!-- modal suject -->
     <div
       v-if="showModal"
@@ -82,7 +121,7 @@
             <button
               class="text-green-500 bg-transparent border border-solid border-green-500 hover:bg-green-500 hover:text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
-              v-on:click="toggleModal()"
+              v-on:click="this.showModal = !this.showModal"
             >
               Close
             </button>
@@ -144,7 +183,7 @@
                   </span>
                 </td>
                 <td class="px-4 py-3 text-sm">
-                  <button
+                  <button @click="annulerRdv(elem)"
                     class="flex-no-shrink px-5 py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 hover:bg-red hover:text-white text-primary rounded-full transition ease-in duration-300"
                   >
                     annuler
@@ -167,13 +206,16 @@ export default {
     return {
       rdv: {},
       showModal: false,
-      sjt_post:""
+      sjt_post: "",
+      rdvUpdate: {},
+      msg: "",
     };
   },
   methods: {
     ...mapActions([
       "redirectTo",
       "getVilles",
+      "deleteRdv",
       "getCategorie",
       "registerUser",
       "isLogin",
@@ -182,22 +224,46 @@ export default {
       "getCreneaux",
       "vaidateRdv",
       "getRdvUser",
+      "updateSjtRdv",
     ]),
 
-     toggleModal(elm) {
-            this.showModal = !this.showModal;
+    toggleModal(elm) {
+      this.showModal = !this.showModal;
 
-            this.sjt_post=elm.sjt_RDV
-          
-        },
+      this.sjt_post = elm.sjt_RDV;
+      this.rdvUpdate = elm;
+    },
+    getAllRdv() {
+      this.getRdvUser(JSON.parse(sessionStorage.getItem("User")).id).then(
+        (response) => {
+          this.rdv = response;
+          console.log(this.rdv);
+        }
+      );
+    },
+    updatePost() {
+      this.rdvUpdate.sjt_RDV = this.sjt_post;
+
+      this.updateSjtRdv(this.rdvUpdate).then((response) => {
+        this.getAllRdv();
+
+        this.showModal = !this.showModal;
+        this.msg = "Bien modifié";
+      });
+      console.log(this.rdvUpdate);
+    },
+    annulerRdv(elem){
+
+        this.deleteRdv(elem).then((response)=>
+        {
+        this.getAllRdv();
+
+          console.log(response)
+        })
+    }
   },
   mounted() {
-    this.getRdvUser(JSON.parse(sessionStorage.getItem("User")).id).then(
-      (response) => {
-        this.rdv = response;
-        console.log(this.rdv);
-      }
-    );
+    this.getAllRdv();
   },
 };
 </script>

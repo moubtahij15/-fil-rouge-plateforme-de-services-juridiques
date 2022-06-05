@@ -199,14 +199,46 @@ const store = createStore({
           return response.data
         });
     },
-    // update info user
+    // get all rdv  user
     getRdvUser({ commit }, id) {
 
       return axiosClient.post('Rdv/read', {
-        reff:id
+        reff: id
       })
         .then(response => {
+
+          return response.data
+        });
+    },
+    // update sujet rdv
+    updateSjtRdv({ commit }, rdv) {
+
+      return axiosClient.post('Rdv/update', {
+        id_RDV: rdv.id,
+        date_creneau: rdv.date_creneau,
+        id_client: sessionStorage.getItem('idUser'),
+        id_creneau: rdv.id_creneau,
+        sjt_RDV: rdv.sjt_RDV,
+        id_avocat: rdv.id_avocat
+      })
+        .then(response => {
+
+          return response.data
+        });
+    },
+
+    // delete rdv
+    deleteRdv({ commit }, rdv) {
+
+      
+      return axiosClient.post('Rdv/delete', {
+        id_rdv: rdv.id,
+        heure_debut: rdv.heure_debut,
+        date_creneau: rdv.date_creneau,
         
+      })
+        .then(response => {
+
           return response.data
         });
     },
