@@ -73,17 +73,18 @@
             </div>
             <div class="flex pt-2 text-sm justify-between text-gray-500">
               <div class="flex " >
-                <FIcons
+			 <!-- serviceConsultation , a.serviceDocument , a.serviceRdv -->
+                <FIcons v-if="elem.serviceRdv"
                   id="delete"
                   :icon="['fas', 'calendar']"
                   class="h-5 w-5  cursor-pointer mr-3"
                 ></FIcons>
-                <FIcons
+                <FIcons v-if="elem.serviceConsultation"
                   id="delete"
                   :icon="['fas', 'comments']"
                   class="h-5 w-5 cursor-pointer mr-3"
                 ></FIcons>
-                <FIcons
+                <FIcons v-if="elem.serviceDocument"
                   id="delete"
                   :icon="['fas', 'file']"
                   class="h-5 w-5 cursor-pointer"
