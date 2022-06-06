@@ -299,7 +299,7 @@ export default {
         this.getAllRdv();
         if (response.status == "success") {
           this.msg = "Bien Annuler";
-        } else if(response.status="echec") this.msg1 =response.message;
+        } else if ((response.status = "echec")) this.msg1 = response.message;
 
         console.log(response);
       });
