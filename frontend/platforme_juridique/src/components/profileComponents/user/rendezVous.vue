@@ -1,7 +1,7 @@
 <template lang="">
   <!-- alert 1h before -->
   <div class="block w-full overflow-x-auto">
-    <div class="w-full text-white bg-tahiti">
+    <div class="w-full text-primary shadow bg-white">
       <div
         class="container flex items-center justify-between px-6 py-4 mx-auto"
       >
@@ -12,7 +12,7 @@
             ></path>
           </svg>
 
-          <p class="mx-3">
+          <p class="mx-3 font-bold">
             vous pouvez annuler votre rendez-vous (d'une limite 1 h avant le
             rendez-vous).​
           </p>
@@ -52,6 +52,46 @@
 
           <p class="mx-3">
             {{ this.msg }}
+          </p>
+        </div>
+
+        <button
+          class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none"
+          @click="this.msg = ''"
+        >
+          <svg
+            class="w-5 h-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 18L18 6M6 6L18 18"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!--  alert erro canceling  -->
+
+    <div v-if="this.msg1" class="w-full text-white bg-red">
+      <div
+        class="container flex items-center justify-between px-6 py-4 mx-auto"
+      >
+        <div class="flex">
+          <FIcons
+            id="delete"
+            :icon="['fas', 'check']"
+            class="h-6 w-6 cursor-pointer"
+          ></FIcons>
+
+          <p class="mx-3">
+            {{ this.msg1 }}
           </p>
         </div>
 
@@ -210,6 +250,7 @@ export default {
       sjt_post: "",
       rdvUpdate: {},
       msg: "",
+      msg1: "",
     };
   },
   methods: {
@@ -256,6 +297,9 @@ export default {
     annulerRdv(elem) {
       this.deleteRdv(elem).then((response) => {
         this.getAllRdv();
+        if (response.status == "success") {
+          this.msg = "Bien Annuler";
+        } else if(response.status="echec") this.msg1 =response.message;
 
         console.log(response);
       });
