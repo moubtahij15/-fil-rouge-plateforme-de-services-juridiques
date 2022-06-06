@@ -183,7 +183,8 @@
                   </span>
                 </td>
                 <td class="px-4 py-3 text-sm">
-                  <button @click="annulerRdv(elem)"
+                  <button
+                    @click="annulerRdv(elem)"
                     class="flex-no-shrink px-5 py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 hover:bg-red hover:text-white text-primary rounded-full transition ease-in duration-300"
                   >
                     annuler
@@ -252,15 +253,13 @@ export default {
       });
       console.log(this.rdvUpdate);
     },
-    annulerRdv(elem){
-
-        this.deleteRdv(elem).then((response)=>
-        {
+    annulerRdv(elem) {
+      this.deleteRdv(elem).then((response) => {
         this.getAllRdv();
 
-          console.log(response)
-        })
-    }
+        console.log(response);
+      });
+    },
   },
   mounted() {
     this.getAllRdv();
