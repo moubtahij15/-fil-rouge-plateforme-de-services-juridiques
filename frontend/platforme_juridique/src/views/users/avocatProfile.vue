@@ -50,14 +50,14 @@
           >
             <Rendez_vous />
           </div>
-          <!-- <div c>
-											<Rendez_vous />
-
-					</div>
-                    <div c>
-											<Rendez_vous />
-
-					</div> -->
+          <div
+            v-if="
+              $store.state.choix == 3 && this.$options.name == 'avocatProfile'
+            "
+          >
+            <consultation/>
+          </div>
+          
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@ import store from "@/store";
 import { mapActions } from "vuex";
 import ChoixProfile from "@/components/profileComponents/choixProfile.vue";
 import ProfileAvocat from "@/components/profileComponents/avocat/profile.vue";
-
+import Consultation from '@/components/profileComponents/avocat/consultation.vue'
 import Rendez_vous from "@/components/rendez_vous.vue";
 export default {
   name: "avocatProfile",
@@ -85,6 +85,7 @@ export default {
     Rendez_vous,
     ChoixProfile,
     ProfileAvocat,
+    Consultation
   },
 
   methods: {
