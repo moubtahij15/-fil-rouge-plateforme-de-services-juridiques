@@ -63,9 +63,32 @@
       <h2
         class="max-w-lg mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto"
       >
+        Détaillez vos questions :
+      </h2>
+      <div class="w-full mt-4">
+        <textarea
+          v-model="this.rdv.sjt_RDV"
+          class="block w-full h-40 px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+        ></textarea>
+      </div>
+      <button
+        class="mt-3 px-5 py-2 border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none"
+        @click="validationRdv"
+      >
+        Valider
+      </button>
+    </div>
+    <div
+      v-if="step2"
+      class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
+    >
+      <h2
+        class="max-w-lg mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto"
+      >
         Vos préférences horaires :
       </h2>
 
+      <!-- step2 -->
       <div
         class="-my-2 py-2 overflow-x-auto mx-auto max-w-xl mb-10 sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8"
       >
@@ -141,29 +164,6 @@
           </table>
         </div>
       </div>
-    </div>
-    <!-- step2 -->
-    <div
-      v-if="step2"
-      class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
-    >
-      <h2
-        class="max-w-lg mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto"
-      >
-        Entrer votre Sujet :
-      </h2>
-      <div class="w-full mt-4">
-        <textarea
-          v-model="this.rdv.sjt_RDV"
-          class="block w-full h-40 px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-        ></textarea>
-      </div>
-      <button
-        class="mt-3 px-5 py-2 border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none"
-        @click="validationRdv"
-      >
-        Valider
-      </button>
     </div>
     <!-- step3 -->
     <div
