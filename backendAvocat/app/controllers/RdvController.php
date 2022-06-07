@@ -40,7 +40,7 @@ class RdvController {
                     ); }
             
         }  else  echo json_encode(
-          array('message' => 'change method to GET')
+          array('message' => 'change method to POST')
                 );
 
        
@@ -111,21 +111,13 @@ class RdvController {
 
               // delete RDV
               
-              public function delete($id_RDV){
+              public function delete(){
                 if($_SERVER["REQUEST_METHOD"] == "POST"){
                   $RDV = new RDV();
 
-                  
-                      if($RDV->delete($id_RDV)){
-
-                      echo json_encode(
-                        array('message' => 'deleted')
-                      );
-                      }else { 
-                      echo json_encode(
-                      array('message' => 'deleted')
-                      );
-                      }
+                  $data= json_decode(file_get_contents("php://input"));
+                    return $RDV->delete($data);
+                    
                     
                       }else echo json_encode(
                         array('message' => 'change method to DELETE')

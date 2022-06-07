@@ -90,7 +90,7 @@ class Avocat extends DataBase
     // $data->idVille = htmlspecialchars(strip_tags($data->idVille));
     // $data->idCategorie = htmlspecialchars(strip_tags($data->idCategorie));
 
-    $sql = "select a.id,a.nom,a.email,a.prenom,a.age,a.adresse,a.date_naissance,a.imgUrl,v.nom as ville from avocat a join ville v on a.ville =v.id " . $sqlav;
+    $sql = "select  a.serviceConsultation , a.serviceDocument , a.serviceRdv , a.id,a.nom,a.email,a.prenom,a.age,a.adresse,a.date_naissance,a.imgUrl,v.nom as ville from avocat a join ville v on a.ville =v.id " . $sqlav;
     $result = $this->conn->prepare($sql);
     if (!$data->idAvocat && !$data->idVille) {
       $result->execute();
