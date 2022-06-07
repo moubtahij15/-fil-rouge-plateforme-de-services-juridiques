@@ -55,21 +55,38 @@
       <div class="flex-1"></div>
     </div>
 
-    <!-- step1 horaires -->
-    <div
-      v-if="step1"
-      class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
-    >
+    <!-- step1 choix de type de consultation -->
+
+    <div v-if="step1" class="w-full mt-5 md:mx-auto sm:text-center lg:max-w-xl">
       <h2
-        class="max-w-lg mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto"
+        class="w-full mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto"
       >
         Détaillez vos questions :
       </h2>
-      <div class="w-full mt-4">
-        <textarea
-          v-model="this.rdv.sjt_RDV"
-          class="block w-full h-40 px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-        ></textarea>
+      <div class="flex w-full  text-primary mt-4">
+        <div
+          class="mr-4  flex p-3 cursor-pointer shadow-md rounded-md hover:shadow-2xl box-border text-center order-first w-full text-black border-solid md:w-1/2 md:order-none"
+        >
+          <FIcons
+            id="delete"
+            :icon="['fas', 'file']"
+            class="h-5 w-5 cursor-pointer mr-3"
+          ></FIcons>
+          <h6
+            class="text-center justify-items-center leading-tight border-0 border-gray-300 lg:text-2xl"
+          >
+            Ecrite
+          </h6>
+        </div>
+        <div
+          class="cursor-pointer p-3 shadow-md rounded-md hover:shadow-2xl box-border text-center order-first w-full text-black border-solid md:w-1/2 md:order-none"
+        >
+          <h2
+            class="m-0 text-center leading-tight border-0 border-gray-300 lg:text-2xl"
+          >
+            Téléphonique
+          </h2>
+        </div>
       </div>
       <button
         class="mt-3 px-5 py-2 border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none"
@@ -108,6 +125,7 @@
             required
           />
         </div>
+        <!-- step1 horaires -->
         <div
           class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg"
         >
