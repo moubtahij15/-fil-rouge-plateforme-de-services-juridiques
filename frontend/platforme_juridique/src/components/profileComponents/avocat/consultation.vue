@@ -52,7 +52,25 @@
         </div>
       </div>
 
-      <div class="flex-1"></div>
+      <div
+        class="w-1/6 align-center items-center align-middle content-center flex"
+      >
+        <div
+          class="w-full bg-primary rounded items-center align-middle align-center flex-1"
+        >
+          <div
+            class="bg-primary text-xs leading-none py-1 text-center text-primary rounded"
+          ></div>
+        </div>
+      </div>
+      <div class="flex-1">
+        <div
+          :class="step4 ? 'bg-primary text-white ' : 'bg-white'"
+          class="w-10 h-10 border-grey-light mx-auto rounded-full text-lg flex items-center"
+        >
+          <span class="text-center w-full">4</span>
+        </div>
+      </div>
     </div>
 
     <!-- step1 choix de type de consultation -->
@@ -65,7 +83,7 @@
       </h2>
       <div class="flex w-full text-primary mt-4">
         <div
-          @click="choix('ecrit')"
+          @click="choix('ecrite')"
           class="mr-4 flex p-3 cursor-pointer justify-center shadow-md rounded-md hover:shadow-2xl box-border text-center order-first w-full text-black border-solid md:w-1/2 md:order-none"
         >
           <FIcons
@@ -97,7 +115,7 @@
       </div>
     </div>
     <div
-      v-if="step2 == 'ecrite'"
+      v-if="step2 == 'tele'"
       class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
     >
       <h2
@@ -107,6 +125,9 @@
       </h2>
 
       <!-- step2 -->
+      <!-- step2 - telephonique - -->
+      <!--  horaires -->
+
       <div
         class="-my-2 py-2 overflow-x-auto mx-auto max-w-xl mb-10 sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8"
       >
@@ -126,7 +147,6 @@
             required
           />
         </div>
-        <!-- step1 horaires -->
         <div
           class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg"
         >
@@ -184,9 +204,35 @@
         </div>
       </div>
     </div>
-    <!-- step3 -->
+    <!-- step3 -telephonique- -->
+    <!--  sujet -->
+
     <div
-      v-if="step3"
+      v-if="step3 == 'tele'"
+      class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
+    >
+      <h2
+        class="max-w-lg mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto"
+      >
+        Détaillez votre  question : 
+      </h2>
+      <div class="w-full mt-4">
+        <textarea
+          v-model="this.consultationTel.sjt_consultation"
+          class="block w-full h-40 px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+        ></textarea>
+      </div>
+      <button
+        class="mt-3 px-5 py-2 border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none"
+        @click="validationConsultationTel"
+      >
+        Valider
+      </button>
+    </div>
+    <!-- step4 - -->
+
+    <div
+      v-if="step4"
       class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
     >
       <div class="bg-gray-100 h-screen">
@@ -201,11 +247,11 @@
             <h3
               class="md:text-2xl text-base text-gray-900 font-semibold text-center"
             >
-              votre rendez-vous est bien passé
+              votre consultation est bien passé
             </h3>
 
             <p class="text-primary y-2">
-              vous pouvez voir ton rendez-vous dans votre profile
+              vous pouvez voir ton consultation dans votre profile
             </p>
             <p>Passez une bonne journée !</p>
           </div>
@@ -235,10 +281,10 @@ export default {
   name: "Rendez_vous",
   data() {
     return {
-      rdv: {
+      consultationTel: {
         id_creneau: "",
         date_creneau: "",
-        sjt_RDV: "",
+        sjt_consultation: "",
         id_client: sessionStorage.getItem("idUser"),
         id_avocat: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
       },
@@ -247,6 +293,7 @@ export default {
       step1: true,
       step2: false,
       step3: false,
+      step4: false,
       min: "",
     };
   },
@@ -260,29 +307,30 @@ export default {
       "getAvocats",
       "getAvocatsBySearch",
       "getCreneaux",
-      "vaidateRdv",
+      "valideConsultationTel",
     ]),
     choix(choi) {
-      if (choi == "ecrit") {
-        this.step2 = "ecrite";
+      if (choi == "tele") {
+        this.step2 = "tele";
         this.step1 = false;
       }
     },
     dateValidate(elem) {
-      (this.step1 = false), (this.step2 = true);
-      this.rdv.date_creneau = this.date_creneau;
-      this.rdv.id_creneau = elem.id;
-      console.log(this.rdv);
+      (this.step1 = false), (this.step2 = false);
+      this.step3 = "tele";
+      this.consultationTel.date_creneau = this.date_creneau;
+      this.consultationTel.id_creneau = elem.id;
+      console.log(this.consultationTel);
     },
-    validationRdv() {
-      console.log(this.rdv);
+    validationConsultationTel() {
+      console.log(this.consultationTel);
 
-      this.vaidateRdv(this.rdv).then((response) => {
+      this.valideConsultationTel(this.consultationTel).then((response) => {
         console.log(response);
         if (response.message == "Created") {
-          this.step3 = true;
+          this.step3 = false;
           this.step2 = false;
-          // this.step1 = false;
+          this.step4 = true;
         }
       });
     },
@@ -295,9 +343,9 @@ export default {
   mounted() {
     this.min = new Date().toISOString().slice(0, 10);
 
-    this.getCreneaux(this.rdv.date_creneau).then((response) => {
+    this.getCreneaux(this.consultationTel.date_creneau).then((response) => {
       console.log(response);
-      console.log(store.state.creneaux);
+      //   console.log(store.state.creneaux);
     });
     // console.log(store.state.creneaux)
   },

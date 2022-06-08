@@ -230,18 +230,33 @@ const store = createStore({
     // delete rdv
     deleteRdv({ commit }, rdv) {
 
-      
+
       return axiosClient.post('Rdv/delete', {
         id_rdv: rdv.id,
         heure_debut: rdv.heure_debut,
         date_creneau: rdv.date_creneau,
-        
+
       })
         .then(response => {
 
           return response.data
         });
     },
+
+    valideConsultationTel({ }, data) {
+      return axiosClient.post('ConsultationTel/create', data)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+            return response.data;
+
+          }
+
+        })
+
+    }
     //  end user actions
 
 
