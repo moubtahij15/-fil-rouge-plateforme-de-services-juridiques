@@ -256,6 +256,20 @@ const store = createStore({
 
         })
 
+    },
+
+    stripe({ }) {
+      return axiosClient.post('Stripe/getSession')
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+            return response;
+
+          }
+
+        })
     }
     //  end user actions
 

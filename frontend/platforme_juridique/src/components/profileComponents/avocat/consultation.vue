@@ -264,7 +264,7 @@
     <div v-if="step3 == 'ecrit'">
       azertyui
 
-      <stripe-checkout ref="checkoutRef" :pk="publishableKey" />
+      <stripe-checkout ref="checkoutRef" :pk="publishableKey" :sessionId="this.sessionId" />
       <button @click="submit">Pay now!</button>
     </div>
 
@@ -290,6 +290,7 @@ export default {
   name: "Rendez_vous",
   data() {
     return {
+      sessionId: null,
       consultationTel: {
         id_creneau: "",
         date_creneau: "",
@@ -304,7 +305,8 @@ export default {
       step3: false,
       step4: false,
       min: "",
-      publishableKey: "pk_test_51L31WgJpb3Br7exnkJTm0E3Kb1qn8HZpjxZ7WRUS54kYwpIJDbIBbhYaHQbZtWognSJ4GAbFFuHewkuoCRqMV65I00XKNgiwtA",
+      publishableKey:
+        "pk_test_51L31WgJpb3Br7exnkJTm0E3Kb1qn8HZpjxZ7WRUS54kYwpIJDbIBbhYaHQbZtWognSJ4GAbFFuHewkuoCRqMV65I00XKNgiwtA",
     };
   },
   components: {
@@ -321,6 +323,7 @@ export default {
       "getAvocatsBySearch",
       "getCreneaux",
       "valideConsultationTel",
+      "stripe",
     ]),
     submit() {
       // You will be redirected to Stripe's secure checkout page
@@ -360,6 +363,12 @@ export default {
         this.step3 = "ecrit";
       }
     },
+    getSession() {
+      this.stripe().then((response) => {
+        console.log(response.data.id);
+        this.sessionId=response.data.id;
+      });
+    },
   },
   watch: {
     date_creneau(value) {
@@ -367,6 +376,7 @@ export default {
     },
   },
   mounted() {
+    this.getSession();
     this.min = new Date().toISOString().slice(0, 10);
 
     this.getCreneaux(this.consultationTel.date_creneau).then((response) => {
