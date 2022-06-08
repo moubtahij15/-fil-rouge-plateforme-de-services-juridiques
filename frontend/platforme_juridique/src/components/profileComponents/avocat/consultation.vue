@@ -261,9 +261,13 @@
 
     <!-- payement -->
 
-    <div v-if="step3=='ecrit'">
-        azertyui
+    <div v-if="step3 == 'ecrit'">
+      azertyui
+
+      <stripe-checkout ref="checkoutRef" :pk="publishableKey" />
+      <button @click="submit">Pay now!</button>
     </div>
+
     <!-- <div   class="max-w-xl mt-5  md:mx-auto sm:text-center lg:max-w-xl ">
                 <h2
                     class="max-w-lg mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto">
@@ -280,6 +284,7 @@
 <script>
 // import store fro m "../store";
 import { mapActions } from "vuex";
+import { StripeCheckout } from "@vue-stripe/vue-stripe";
 
 export default {
   name: "Rendez_vous",
@@ -299,7 +304,11 @@ export default {
       step3: false,
       step4: false,
       min: "",
+      publishableKey: "pk_test_51L31WgJpb3Br7exnkJTm0E3Kb1qn8HZpjxZ7WRUS54kYwpIJDbIBbhYaHQbZtWognSJ4GAbFFuHewkuoCRqMV65I00XKNgiwtA",
     };
+  },
+  components: {
+    StripeCheckout,
   },
   methods: {
     ...mapActions([
@@ -313,6 +322,10 @@ export default {
       "getCreneaux",
       "valideConsultationTel",
     ]),
+    submit() {
+      // You will be redirected to Stripe's secure checkout page
+      this.$refs.checkoutRef.redirectToCheckout();
+    },
     choix(choi) {
       if (choi == "tele") {
         this.step2 = "tele";
@@ -342,11 +355,9 @@ export default {
             this.step4 = true;
           }
         });
-      }else
-      if (this.step2 == "ecrit") {
-            this.step2 = false;
-            this.step3 = "ecrit";
-          
+      } else if (this.step2 == "ecrit") {
+        this.step2 = false;
+        this.step3 = "ecrit";
       }
     },
   },
