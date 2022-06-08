@@ -95,15 +95,9 @@
           </h2>
         </div>
       </div>
-      <button
-        class="mt-6 px-5 py-2 border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none"
-        @click="validationRdv"
-      >
-        Valider
-      </button>
     </div>
     <div
-      v-if="step2"
+      v-if="step2 == 'ecrite'"
       class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
     >
       <h2
@@ -269,7 +263,9 @@ export default {
       "vaidateRdv",
     ]),
     choix(choi) {
-      if (choi == "tele") {
+      if (choi == "ecrit") {
+        this.step2 = "ecrite";
+        this.step1 = false;
       }
     },
     dateValidate(elem) {
