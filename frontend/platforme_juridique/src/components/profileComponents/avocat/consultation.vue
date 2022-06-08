@@ -204,17 +204,17 @@
         </div>
       </div>
     </div>
-    <!-- step3 -telephonique- -->
+    <!-- step3 -telephonique- / step2 -ecrite -->
     <!--  sujet -->
 
     <div
-      v-if="step3 == 'tele'"
+      v-if="step3 == 'tele' || step2 == 'ecrit'"
       class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
     >
       <h2
         class="max-w-lg mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto"
       >
-        Détaillez votre  question : 
+        Détaillez votre question :
       </h2>
       <div class="w-full mt-4">
         <textarea
@@ -259,7 +259,11 @@
       </div>
     </div>
 
-    <!-- component -->
+    <!-- payement -->
+
+    <div v-if="step3=='ecrit'">
+        azertyui
+    </div>
     <!-- <div   class="max-w-xl mt-5  md:mx-auto sm:text-center lg:max-w-xl ">
                 <h2
                     class="max-w-lg mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto">
@@ -313,6 +317,11 @@ export default {
       if (choi == "tele") {
         this.step2 = "tele";
         this.step1 = false;
+      } else if (choi) {
+        this.step2 = "ecrit";
+        this.step1 = false;
+
+        // this.step2 = "ecrit";
       }
     },
     dateValidate(elem) {
@@ -324,15 +333,21 @@ export default {
     },
     validationConsultationTel() {
       console.log(this.consultationTel);
-
-      this.valideConsultationTel(this.consultationTel).then((response) => {
-        console.log(response);
-        if (response.message == "Created") {
-          this.step3 = false;
-          this.step2 = false;
-          this.step4 = true;
-        }
-      });
+      if (this.step3 == "tele") {
+        this.valideConsultationTel(this.consultationTel).then((response) => {
+          console.log(response);
+          if (response.message == "Created") {
+            this.step3 = false;
+            this.step2 = false;
+            this.step4 = true;
+          }
+        });
+      }else
+      if (this.step2 == "ecrit") {
+            this.step2 = false;
+            this.step3 = "ecrit";
+          
+      }
     },
   },
   watch: {

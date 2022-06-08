@@ -13,6 +13,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "@headlessui/vue": "^1.6.2",
     "@heroicons/vue": "^1.0.6",
+    "@vue-stripe/vue-stripe": "^4.4.2",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "pattern.css": "^1.0.0",
