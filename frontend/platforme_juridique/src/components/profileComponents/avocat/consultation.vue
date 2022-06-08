@@ -59,29 +59,35 @@
 
     <div v-if="step1" class="w-full mt-5 md:mx-auto sm:text-center lg:max-w-xl">
       <h2
-        class="w-full mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto"
+        class="w-full mb-10 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto"
       >
-        Détaillez vos questions :
+        Type de Consultation souhaité ?
       </h2>
-      <div class="flex w-full  text-primary mt-4">
+      <div class="flex w-full text-primary mt-4">
         <div
-          class="mr-4  flex p-3 cursor-pointer shadow-md rounded-md hover:shadow-2xl box-border text-center order-first w-full text-black border-solid md:w-1/2 md:order-none"
+          @click="choix('ecrit')"
+          class="mr-4 flex p-3 cursor-pointer justify-center shadow-md rounded-md hover:shadow-2xl box-border text-center order-first w-full text-black border-solid md:w-1/2 md:order-none"
         >
           <FIcons
             id="delete"
-            :icon="['fas', 'file']"
-            class="h-5 w-5 cursor-pointer mr-3"
+            :icon="['fas', 'message']"
+            class="h-6 py-1 w-6 py-auto cursor-pointer mr-3"
           ></FIcons>
           <h6
-            class="text-center justify-items-center leading-tight border-0 border-gray-300 lg:text-2xl"
+            class="text-center justify-center leading-tight border-0 border-gray-300 lg:text-2xl"
           >
             Ecrite
           </h6>
-          
         </div>
         <div
-          class="cursor-pointer p-3 shadow-md rounded-md hover:shadow-2xl box-border text-center order-first w-full text-black border-solid md:w-1/2 md:order-none"
+          @click="choix('tele')"
+          class="cursor-pointer flex justify-center justify-a p-3 shadow-md rounded-md hover:shadow-2xl box-border text-center order-first w-full text-black border-solid md:w-1/2 md:order-none"
         >
+          <FIcons
+            id="delete"
+            :icon="['fas', 'phone']"
+            class="h-6 py-1 w-6 py-auto cursor-pointer mr-3"
+          ></FIcons>
           <h2
             class="m-0 text-center leading-tight border-0 border-gray-300 lg:text-2xl"
           >
@@ -90,7 +96,7 @@
         </div>
       </div>
       <button
-        class="mt-3 px-5 py-2 border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none"
+        class="mt-6 px-5 py-2 border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none"
         @click="validationRdv"
       >
         Valider
@@ -262,7 +268,10 @@ export default {
       "getCreneaux",
       "vaidateRdv",
     ]),
-
+    choix(choi) {
+      if (choi == "tele") {
+      }
+    },
     dateValidate(elem) {
       (this.step1 = false), (this.step2 = true);
       this.rdv.date_creneau = this.date_creneau;
