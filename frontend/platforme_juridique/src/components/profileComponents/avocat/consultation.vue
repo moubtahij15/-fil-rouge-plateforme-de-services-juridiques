@@ -77,6 +77,7 @@
           >
             Ecrite
           </h6>
+          
         </div>
         <div
           class="cursor-pointer p-3 shadow-md rounded-md hover:shadow-2xl box-border text-center order-first w-full text-black border-solid md:w-1/2 md:order-none"
