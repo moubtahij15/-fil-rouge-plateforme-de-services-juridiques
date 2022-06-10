@@ -264,12 +264,7 @@
     <div v-if="step3 == 'ecrit'">
       azertyui
 
-      <stripe-checkout
-        ref="checkoutRef"
-        :pk="publishableKey"
-        :sessionId="this.sessionId"
-        :success-url="this.f()"
-      />
+      <stripe-checkout ref="checkoutRef" :pk="publishableKey" :sessionId="this.sessionId" />
       <button @click="submit">Pay now!</button>
     </div>
 
@@ -332,9 +327,6 @@ export default {
     ]),
     submit() {
       // You will be redirected to Stripe's secure checkout page
-      console.log("sdqdssdq");
-
-      console.log(this.$refs.checkoutRef);
       this.$refs.checkoutRef.redirectToCheckout();
     },
     choix(choi) {
@@ -374,12 +366,9 @@ export default {
     getSession() {
       this.stripe().then((response) => {
         console.log(response.data.id);
-        this.sessionId = response.data.id;
+        this.sessionId=response.data.id;
       });
     },
-    f(){
-      console.log("edfssfd")
-    }
   },
   watch: {
     date_creneau(value) {
