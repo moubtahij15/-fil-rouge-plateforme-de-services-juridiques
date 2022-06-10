@@ -268,6 +268,7 @@
         ref="checkoutRef"
         :pk="publishableKey"
         :sessionId="this.sessionId"
+        :success-url="this.f()"
       />
       <button @click="submit">Pay now!</button>
     </div>
@@ -331,8 +332,8 @@ export default {
     ]),
     submit() {
       // You will be redirected to Stripe's secure checkout page
-      console.log("sdqdssdq")
-      
+      console.log("sdqdssdq");
+
       console.log(this.$refs.checkoutRef);
       this.$refs.checkoutRef.redirectToCheckout();
     },
@@ -376,6 +377,9 @@ export default {
         this.sessionId = response.data.id;
       });
     },
+    f(){
+      console.log("edfssfd")
+    }
   },
   watch: {
     date_creneau(value) {
