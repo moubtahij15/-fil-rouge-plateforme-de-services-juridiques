@@ -62,6 +62,9 @@ class StripeController
 
         $checkout = $stripe->checkout->sessions->retrieve($id);
         // $checkout = $stripe->checkout->sessions->retrieve("cs_test_a1YpyuRq3lWzDjJWvzRmgvHSPmgKoXqCvKhvsZD79v0WJeJRNEpvxoidHW");
-        echo json_encode($checkout->payment_status);
+        
+        if($checkout->payment_status=="paid"){
+            return true;
+        }return false;
     }
 }
