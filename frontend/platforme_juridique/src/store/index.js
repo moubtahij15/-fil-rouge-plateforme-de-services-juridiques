@@ -257,9 +257,25 @@ const store = createStore({
         })
 
     },
-
+    // create sessionStripe
     stripe({ }) {
       return axiosClient.post('Stripe/getSession')
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+            return response;
+
+          }
+
+        })
+    },
+
+    // create consultation
+    valideConsultation({ }, data) {
+
+      return axiosClient.post('ConsultationEcrite/create',data)
         .then(response => {
           // console.log(response.data);
 
