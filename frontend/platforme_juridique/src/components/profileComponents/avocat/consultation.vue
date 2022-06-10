@@ -321,12 +321,14 @@ export default {
       "isLogin",
       "getAvocats",
       "getAvocatsBySearch",
-      "getCreneaux",
+      "getCreneaux",  
       "valideConsultationTel",
       "stripe",
     ]),
     submit() {
       // You will be redirected to Stripe's secure checkout page
+
+      sessionStorage.setItem("dsdssd",this.sessionId);
       this.$refs.checkoutRef.redirectToCheckout();
     },
     choix(choi) {
