@@ -31,7 +31,7 @@ class Creneau extends DataBase
     // print_r($data);
     if (!empty($data->date)) {
 
-      $sql = "SELECT * FROM `creneau` WHERE creneau.id not in( SELECT id_creneau FROM `rdv` WHERE date_creneau= :date AND id_avocat= :id_avocat) ";
+      $sql = "SELECT * FROM `creneau` WHERE creneau.id not in( SELECT id_creneau FROM `rdv` WHERE date_creneau= :date AND id_avocat= :id_avocat) and creneau.id not in( SELECT id_creneau FROM `consultation_tele` WHERE date_creneau= :date AND id_avocat= :id_avocat) ";
 
 
       $result = $this->conn->prepare($sql);
