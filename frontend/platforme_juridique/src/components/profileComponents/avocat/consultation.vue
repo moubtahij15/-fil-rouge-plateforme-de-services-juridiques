@@ -264,7 +264,11 @@
     <div v-if="step3 == 'ecrit'">
       azertyui
 
-      <stripe-checkout ref="checkoutRef" :pk="publishableKey" :sessionId="this.sessionId" />
+      <stripe-checkout
+        ref="checkoutRef"
+        :pk="publishableKey"
+        :sessionId="this.sessionId"
+      />
       <button @click="submit">Pay now!</button>
     </div>
 
@@ -290,13 +294,22 @@ export default {
   name: "Rendez_vous",
   data() {
     return {
+      // idSession typeConsultation prix id_client id_avocat sujet
+
       sessionId: null,
       consultationTel: {
         id_creneau: "",
         date_creneau: "",
         sjt_consultation: "",
+        id_avocat: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
+      },
+
+      consultationEcrit: {
+        idSession: "",
+        typeConsultation: "",
         id_client: sessionStorage.getItem("idUser"),
         id_avocat: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
+        sujet: "",
       },
       date_creneau: "",
 
@@ -321,15 +334,16 @@ export default {
       "isLogin",
       "getAvocats",
       "getAvocatsBySearch",
-      "getCreneaux",  
+      "getCreneaux",
       "valideConsultationTel",
       "stripe",
-      
+      "valideConsultation",
     ]),
+
     submit() {
       // You will be redirected to Stripe's secure checkout page
 
-      sessionStorage.setItem("dsdssd",this.sessionId);
+      sessionStorage.setItem("dsdssd", this.sessionId);
       this.$refs.checkoutRef.redirectToCheckout();
     },
     choix(choi) {
@@ -369,7 +383,7 @@ export default {
     getSession() {
       this.stripe().then((response) => {
         console.log(response.data.id);
-        this.sessionId=response.data.id;
+        this.sessionId = response.data.id;
       });
     },
   },
