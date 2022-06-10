@@ -324,6 +324,7 @@ export default {
       "getCreneaux",  
       "valideConsultationTel",
       "stripe",
+      
     ]),
     submit() {
       // You will be redirected to Stripe's secure checkout page
