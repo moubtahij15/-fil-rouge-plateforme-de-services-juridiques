@@ -301,6 +301,7 @@ export default {
         id_creneau: "",
         date_creneau: "",
         sjt_consultation: "",
+        
         id_avocat: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
       },
 
