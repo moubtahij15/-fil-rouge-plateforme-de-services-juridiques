@@ -266,7 +266,7 @@
       v-if="step3 == 'ecrit'"
     >
       <h3 class="md:text-2xl text-base text-gray-900 font-semibold text-center">
-        Le Prix de cette consultation est 123DH
+        Le Prix de cette consultation est {{ this.consultationEcrit.prix }} DH
       </h3>
       <stripe-checkout
         ref="checkoutRef"
@@ -320,7 +320,7 @@ export default {
         id_client: sessionStorage.getItem("idUser"),
         id_avocat: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
         sujet: "",
-        prix: "",
+        prix: "121",
         id_consultation: "",
       },
       date_creneau: "",
@@ -392,12 +392,15 @@ export default {
         });
         // if choice consultation ecrite
       } else if (this.step2 == "ecrit") {
-        this.step2 = false;
-        this.step3 = "ecrit";
         var infoConsultation = this.getconsultationInfo({
           id: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
           type: "ecrite",
         });
+    
+        this.consultationEcrit.prix = this.infoConsultation.prix;
+        this.consultationEcrit.id_consultation = this.infoConsultation.id;
+        this.step2 = false;
+        this.step3 = "ecrit";
         console.log(this.infoConsultation);
       }
     },
