@@ -271,11 +271,26 @@ const store = createStore({
 
         })
     },
+    // get price of consultation
+    // create consultation
+    getconsultationInfo({ }, data) {
 
+      return axiosClient.post('ConsultationEcrite/readPrixConsultaion', data)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+            return response;
+
+          }
+
+        })
+    },
     // create consultation
     valideConsultationEcrite({ }, data) {
 
-      return axiosClient.post('ConsultationEcrite/create',data)
+      return axiosClient.post('ConsultationEcrite/create', data)
         .then(response => {
           // console.log(response.data);
 
