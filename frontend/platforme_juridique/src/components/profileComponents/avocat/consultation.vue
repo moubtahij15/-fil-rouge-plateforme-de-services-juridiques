@@ -339,6 +339,7 @@ export default {
       "valideConsultationTel",
       "stripe",
       "valideConsultationEcrite",
+      "getconsultationInfo",
     ]),
     // validation consultation ecrite
 
@@ -364,6 +365,7 @@ export default {
       this.step3 = "tele";
       this.consultationTel.date_creneau = this.date_creneau;
       this.consultationTel.id_creneau = elem.id;
+
       console.log(this.consultationTel);
     },
     validationConsultationTel() {
@@ -377,9 +379,15 @@ export default {
             this.step4 = true;
           }
         });
+        // if choice consultation ecrite
       } else if (this.step2 == "ecrit") {
         this.step2 = false;
         this.step3 = "ecrit";
+        var infoConsultation = this.getconsultationInfo({
+          id: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
+          type:"ecrite"
+        });
+        console.log(this.infoConsultation)
       }
     },
     getSession() {
@@ -396,7 +404,6 @@ export default {
   },
   mounted() {
     if (sessionStorage.getItem("idSession")) {
-      
     }
     this.getSession();
     this.min = new Date().toISOString().slice(0, 10);
