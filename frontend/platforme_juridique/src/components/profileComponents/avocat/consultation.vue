@@ -71,6 +71,27 @@
           <span class="text-center w-full">4</span>
         </div>
       </div>
+      <div
+        class="w-1/6 align-center items-center align-middle content-center flex"
+      >
+        <div
+          v-if="step5"
+          class="w-full bg-primary rounded items-center align-middle align-center flex-1"
+        >
+          <div
+            class="bg-primary text-xs leading-none py-1 text-center text-primary rounded"
+          ></div>
+        </div>
+      </div>
+      <div class="flex-1">
+        <div
+          v-if="step5"
+          :class="step5 == 'tele' ? 'bg-primary text-white ' : 'bg-white'"
+          class="w-10 h-10 border-grey-light mx-auto rounded-full text-lg flex items-center"
+        >
+          <span class="text-center w-full">5</span>
+        </div>
+      </div>
     </div>
 
     <!-- step1 choix de type de consultation -->
@@ -232,7 +253,7 @@
     <!-- step4 - -->
 
     <div
-      v-if="step4"
+      v-if="step4 == 'ecrit' || step5 == 'tele'"
       class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
     >
       <div class="bg-gray-100 h-screen">
@@ -263,7 +284,7 @@
 
     <div
       class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
-      v-if="step3 == 'ecrit'"
+      v-if="step3 == 'ecrit' || step4 == 'tele'"
     >
       <h3 class="md:text-2xl text-base text-gray-900 font-semibold text-center">
         Le Prix de cette consultation est {{ this.consultationEcrit.prix }} DH
@@ -331,6 +352,7 @@ export default {
       step2: false,
       step3: false,
       step4: false,
+      step5: false,
       min: "",
       publishableKey:
         "pk_test_51L31WgJpb3Br7exnkJTm0E3Kb1qn8HZpjxZ7WRUS54kYwpIJDbIBbhYaHQbZtWognSJ4GAbFFuHewkuoCRqMV65I00XKNgiwtA",
@@ -365,8 +387,12 @@ export default {
     choix(choi) {
       if (choi == "tele") {
         this.step2 = "tele";
+        this.step5 = "true";
         this.step1 = false;
-      } else if (choi) {
+        this.consultationEcrit.typeConsultation = "telephonique";
+      } else if (choi == "ecrite") {
+        this.consultationEcrit.typeConsultation = "ecrite";
+
         this.step2 = "ecrit";
         this.step1 = false;
 
@@ -385,31 +411,34 @@ export default {
     },
     validationConsultationTel() {
       console.log(this.consultationTel);
+      var infoConsultation = this.getconsultationInfo({
+        id: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
+        type: this.consultationEcrit.typeConsultation,
+      }).then((response) => {
+        console.log(response);
+
+        this.consultationEcrit.prix = response.prix;
+        this.consultationEcrit.id_consultation = response.id;
+        this.getSession(response.id);
+        // console.log(this.sessionId)
+
+        console.log(this.consultationEcrit);
+      });
       if (this.step3 == "tele") {
-        this.valideConsultationTel(this.consultationTel).then((response) => {
-          console.log(response);
-          if (response.message == "Created") {
-            this.step3 = false;
-            this.step2 = false;
-            this.step4 = true;
-          }
-        });
+        // this.valideConsultationTel(this.consultationTel).then((response) => {
+        // console.log(response);
+        // if (response.message == "Created") {
+        this.step3 = false;
+        this.step2 = false;
+        this.step4 = "tele";
+        this.getSession(response.id);
+
+        // }
+        // });
         // if choice consultation ecrite
       } else if (this.step2 == "ecrit") {
-        var infoConsultation = this.getconsultationInfo({
-          id: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
-          type: "ecrite",
-        }).then((response) => {
-          console.log(response);
-          this.step2 = false;
-          this.step3 = "ecrit";
-          this.consultationEcrit.prix = response.prix;
-          this.consultationEcrit.id_consultation = response.id;
-          this.getSession(response.id);
-          // console.log(this.sessionId)
-
-          console.log(this.consultationEcrit);
-        });
+        this.step2 = false;
+        this.step3 = "ecrit";
       }
     },
     getSession(id) {
@@ -432,7 +461,7 @@ export default {
   },
   mounted() {
     if (sessionStorage.getItem("consultationInfo")) {
-      console.log("dds");
+      
       this.valideConsultationEcrite(
         JSON.parse(sessionStorage.getItem("consultationInfo"))
       ).then((response) => {
@@ -443,7 +472,7 @@ export default {
 
           this.step1 = false;
           this.step3 = false;
-          this.step4 = true;
+          this.step4 = "ecrit";
         }
 
         sessionStorage.removeItem("consultationInfo");
