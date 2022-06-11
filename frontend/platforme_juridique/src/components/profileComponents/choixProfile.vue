@@ -124,6 +124,11 @@ export default {
       });
       this.getChoixProfile(choix);
     },
+    mounted() {
+      if (sessionStorage.getItem("consultationInfo")) {
+        this.choix(3)
+      }
+    },
   },
 };
 </script>
