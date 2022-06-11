@@ -356,10 +356,7 @@ export default {
 
     submit() {
       // You will be redirected to Stripe's secure checkout page
-      sessionStorage.setItem(
-        "consultationInfo",
-        JSON.stringify(this.consultationEcrit)
-      );
+
       // sessionStorage.setItem("idSession", this.sessionId);
       this.$refs.checkoutRef.redirectToCheckout();
     },
@@ -404,11 +401,10 @@ export default {
           this.step3 = "ecrit";
           this.consultationEcrit.prix = response.prix;
           this.consultationEcrit.id_consultation = response.id;
-          this.consultationEcrit.idSession = this.sessionId;
           this.getSession(response.id);
           // console.log(this.sessionId)
 
-          // console.log(this.consultationEcrit);
+          console.log(this.consultationEcrit);
         });
       }
     },
@@ -417,6 +413,11 @@ export default {
       this.stripe(id).then((response) => {
         console.log(response.data.id);
         this.sessionId = response.data.id;
+        this.consultationEcrit.idSession = this.sessionId;
+        sessionStorage.setItem(
+          "consultationInfo",
+          JSON.stringify(this.consultationEcrit)
+        );
       });
     },
   },
@@ -431,7 +432,9 @@ export default {
       this.valideConsultationEcrite(
         JSON.parse(sessionStorage.getItem("consultationInfo"))
       ).then((response) => {
-        console.log(response);
+        
+        console.log(response.message1);
+
         if (response.message1 == "Consultation Created") {
           console.log("dsdsdssdds");
 
