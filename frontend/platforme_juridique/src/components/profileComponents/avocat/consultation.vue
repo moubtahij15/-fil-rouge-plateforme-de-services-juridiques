@@ -218,7 +218,7 @@
       </h2>
       <div class="w-full mt-4">
         <textarea
-          v-model="this.consultationTel.sjt_consultation"
+          v-model="this.consultationEcrit.sujet"
           class="block w-full h-40 px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
         ></textarea>
       </div>
@@ -320,7 +320,7 @@ export default {
         id_client: sessionStorage.getItem("idUser"),
         id_avocat: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
         sujet: "",
-        prix: "121",
+        prix: "",
         id_consultation: "",
       },
       date_creneau: "",
@@ -395,13 +395,14 @@ export default {
         var infoConsultation = this.getconsultationInfo({
           id: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
           type: "ecrite",
+        }).then((response) => {
+          console.log(response);
+          this.step2 = false;
+          this.step3 = "ecrit";
+          console.log(this.infoConsultation);
+          this.consultationEcrit.prix = response.prix;
+          this.consultationEcrit.id_consultation = response.id;
         });
-    
-        this.consultationEcrit.prix = this.infoConsultation.prix;
-        this.consultationEcrit.id_consultation = this.infoConsultation.id;
-        this.step2 = false;
-        this.step3 = "ecrit";
-        console.log(this.infoConsultation);
       }
     },
     getSession() {
