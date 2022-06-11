@@ -258,8 +258,8 @@ const store = createStore({
 
     },
     // create sessionStripe
-    stripe({ }) {
-      return axiosClient.post('Stripe/getSession')
+    stripe({ },id) {
+      return axiosClient.post('Stripe/getSession/'+id)
         .then(response => {
           // console.log(response.data);
 
@@ -296,7 +296,7 @@ const store = createStore({
 
           if (response.status == 200) {
             console.log(response.data);
-            return response;
+            return response.data;
 
           }
 
