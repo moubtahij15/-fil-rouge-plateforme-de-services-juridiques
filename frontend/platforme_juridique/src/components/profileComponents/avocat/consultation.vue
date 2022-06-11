@@ -356,8 +356,11 @@ export default {
 
     submit() {
       // You will be redirected to Stripe's secure checkout page
-
-      sessionStorage.setItem("idSession", this.sessionId);
+      sessionStorage.setItem(
+        "consultationInfo",
+        JSON.stringify(this.consultationEcrit)
+      );
+      // sessionStorage.setItem("idSession", this.sessionId);
       this.$refs.checkoutRef.redirectToCheckout();
     },
     choix(choi) {
@@ -402,17 +405,16 @@ export default {
           this.consultationEcrit.prix = response.prix;
           this.consultationEcrit.id_consultation = response.id;
           this.consultationEcrit.idSession = this.sessionId;
-          sessionStorage.setItem(
-            "consultationInfo",
-            JSON.stringify(this.consultationEcrit)
-          );
+          this.getSession(response.id);
+          // console.log(this.sessionId)
 
           // console.log(this.consultationEcrit);
         });
       }
     },
-    getSession() {
-      this.stripe().then((response) => {
+    getSession(id) {
+      console.log(id);
+      this.stripe(id).then((response) => {
         console.log(response.data.id);
         this.sessionId = response.data.id;
       });
@@ -430,15 +432,17 @@ export default {
         JSON.parse(sessionStorage.getItem("consultationInfo"))
       ).then((response) => {
         console.log(response);
-        
-        this.step1 = false;
-        this.step3=false
-        this.step4 = true;
+        if (response.message1 == "Consultation Created") {
+          console.log("dsdsdssdds");
+
+          this.step1 = false;
+          this.step3 = false;
+          this.step4 = true;
+        }
 
         sessionStorage.removeItem("consultationInfo");
       });
     }
-    this.getSession();
     this.min = new Date().toISOString().slice(0, 10);
 
     this.getCreneaux(this.consultationTel.date_creneau).then((response) => {
