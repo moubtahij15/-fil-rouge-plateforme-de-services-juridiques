@@ -245,7 +245,7 @@
       </div>
       <button
         class="mt-3 px-5 py-2 border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none"
-        @click="validationConsultationTel"
+        @click="validationConsultation"
       >
         Valider
       </button>
@@ -327,14 +327,8 @@ export default {
       // idSession typeConsultation prix id_client id_avocat sujet
 
       sessionId: null,
-      // consultationTel: {
-      //   id_creneau: "",
-      //   date_creneau: "",
-      //   sjt_consultation: "",
 
-      //   id_avocat: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
-      // },
-
+      // consultationEcrit for ecrit and tele
       consultationEcrit: {
         idSession: "",
         typeConsultation: "",
@@ -409,7 +403,7 @@ export default {
 
       // console.log(this.consultationTel);
     },
-    validationConsultationTel() {
+    validationConsultation() {
       console.log(this.consultationTel);
       var infoConsultation = this.getconsultationInfo({
         id: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
@@ -431,7 +425,7 @@ export default {
         this.step3 = false;
         this.step2 = false;
         this.step4 = "tele";
-        this.getSession(response.id);
+        // this.getSession(response.id);
 
         // }
         // });
@@ -461,26 +455,46 @@ export default {
   },
   mounted() {
     if (sessionStorage.getItem("consultationInfo")) {
-      
-      this.valideConsultationEcrite(
-        JSON.parse(sessionStorage.getItem("consultationInfo"))
-      ).then((response) => {
-        console.log(response.message1);
+      let consultationType = JSON.parse(
+        sessionStorage.getItem("consultationInfo")
+      ).typeConsultation;
+      console.log(consultationType);
 
-        if (response.message1 == "Consultation Created") {
-          console.log("dsdsdssdds");
+      // console.log(sessionStorage.getItem("consultationInfo").typeConsultation);
+      if (consultationType == "ecrite") {
+        this.valideConsultationEcrite(
+          JSON.parse(sessionStorage.getItem("consultationInfo"))
+        ).then((response) => {
+          console.log(response.message1);
 
-          this.step1 = false;
-          this.step3 = false;
-          this.step4 = "ecrit";
-        }
+          if (response.message1 == "Consultation Created") {
+            console.log("dsdsdssdds");
 
-        sessionStorage.removeItem("consultationInfo");
-      });
+            this.step1 = false;
+            this.step3 = false;
+            this.step4 = "ecrit";
+          }
+
+          sessionStorage.removeItem("consultationInfo");
+        });
+      } else if (consultationType == "telephonique") {
+        this.valideConsultationTel(
+          JSON.parse(sessionStorage.getItem("consultationInfo"))
+        ).then((response) => {
+          console.log(response);
+          if (response.message == "Created") {
+            this.step1 = false;
+            this.step3 = false;
+            this.step4 = false;
+            this.step5 = "tele";
+          }
+          sessionStorage.removeItem("consultationInfo");
+        });
+      }
     }
     this.min = new Date().toISOString().slice(0, 10);
 
-    this.getCreneaux(this.consultationTel.date_creneau).then((response) => {
+    this.getCreneaux(this.consultationEcrit.date_creneau).then((response) => {
       console.log(response);
       //   console.log(store.state.creneaux);
     });
