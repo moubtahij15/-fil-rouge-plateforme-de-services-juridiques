@@ -261,15 +261,24 @@
 
     <!-- payement -->
 
-    <div v-if="step3 == 'ecrit'">
-      azertyui
-
+    <div
+      class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
+      v-if="step3 == 'ecrit'"
+    >
+      <h3 class="md:text-2xl text-base text-gray-900 font-semibold text-center">
+        Le Prix de cette consultation est 123DH
+      </h3>
       <stripe-checkout
         ref="checkoutRef"
         :pk="publishableKey"
         :sessionId="this.sessionId"
       />
-      <button @click="submit">Pay now!</button>
+      <button
+        class="mt-3 px-5 py-2 border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none"
+        @click="submit"
+      >
+        Pay now!
+      </button>
     </div>
 
     <!-- <div   class="max-w-xl mt-5  md:mx-auto sm:text-center lg:max-w-xl ">
@@ -311,6 +320,8 @@ export default {
         id_client: sessionStorage.getItem("idUser"),
         id_avocat: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
         sujet: "",
+        prix: "",
+        id_consultation: "",
       },
       date_creneau: "",
 
@@ -385,9 +396,9 @@ export default {
         this.step3 = "ecrit";
         var infoConsultation = this.getconsultationInfo({
           id: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
-          type:"ecrite"
+          type: "ecrite",
         });
-        console.log(this.infoConsultation)
+        console.log(this.infoConsultation);
       }
     },
     getSession() {
