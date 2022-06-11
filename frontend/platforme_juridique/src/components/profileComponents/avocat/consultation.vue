@@ -301,7 +301,7 @@ export default {
         id_creneau: "",
         date_creneau: "",
         sjt_consultation: "",
-        
+
         id_avocat: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
       },
 
@@ -338,13 +338,14 @@ export default {
       "getCreneaux",
       "valideConsultationTel",
       "stripe",
-      "valideConsultation",
+      "valideConsultationEcrite",
     ]),
+    // validation consultation ecrite
 
     submit() {
       // You will be redirected to Stripe's secure checkout page
 
-      sessionStorage.setItem("dsdssd", this.sessionId);
+      sessionStorage.setItem("idSession", this.sessionId);
       this.$refs.checkoutRef.redirectToCheckout();
     },
     choix(choi) {
@@ -394,6 +395,9 @@ export default {
     },
   },
   mounted() {
+    if (sessionStorage.getItem("idSession")) {
+      
+    }
     this.getSession();
     this.min = new Date().toISOString().slice(0, 10);
 
