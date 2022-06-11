@@ -327,13 +327,13 @@ export default {
       // idSession typeConsultation prix id_client id_avocat sujet
 
       sessionId: null,
-      consultationTel: {
-        id_creneau: "",
-        date_creneau: "",
-        sjt_consultation: "",
+      // consultationTel: {
+      //   id_creneau: "",
+      //   date_creneau: "",
+      //   sjt_consultation: "",
 
-        id_avocat: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
-      },
+      //   id_avocat: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
+      // },
 
       consultationEcrit: {
         idSession: "",
@@ -402,12 +402,12 @@ export default {
     dateValidate(elem) {
       (this.step1 = false), (this.step2 = false);
       this.step3 = "tele";
-      this.consultationTel.date_creneau = this.date_creneau;
+      // this.consultationTel.date_creneau = this.date_creneau;
       this.consultationEcrit.date_creneau = this.date_creneau;
-      this.consultationTel.id_creneau = elem.id;
+      // this.consultationTel.id_creneau = elem.id;
       this.consultationEcrit.id_creneau = elem.id;
 
-      console.log(this.consultationTel);
+      // console.log(this.consultationTel);
     },
     validationConsultationTel() {
       console.log(this.consultationTel);
