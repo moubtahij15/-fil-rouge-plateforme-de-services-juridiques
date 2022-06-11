@@ -426,11 +426,17 @@ export default {
   mounted() {
     if (sessionStorage.getItem("consultationInfo")) {
       console.log("dds");
-      this.valideConsultationEcrite(JSON.parse(sessionStorage.getItem("consultationInfo"))).then((response)=>{
-
+      this.valideConsultationEcrite(
+        JSON.parse(sessionStorage.getItem("consultationInfo"))
+      ).then((response) => {
         console.log(response);
-        console.log("lllll");
-      })
+        
+        this.step1 = false;
+        this.step3=false
+        this.step4 = true;
+
+        sessionStorage.removeItem("consultationInfo");
+      });
     }
     this.getSession();
     this.min = new Date().toISOString().slice(0, 10);
