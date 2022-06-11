@@ -399,9 +399,15 @@ export default {
           console.log(response);
           this.step2 = false;
           this.step3 = "ecrit";
-          console.log(this.infoConsultation);
           this.consultationEcrit.prix = response.prix;
           this.consultationEcrit.id_consultation = response.id;
+          this.consultationEcrit.idSession = this.sessionId;
+          sessionStorage.setItem(
+            "consultationInfo",
+            JSON.stringify(this.consultationEcrit)
+          );
+
+          // console.log(this.consultationEcrit);
         });
       }
     },
@@ -418,7 +424,13 @@ export default {
     },
   },
   mounted() {
-    if (sessionStorage.getItem("idSession")) {
+    if (sessionStorage.getItem("consultationInfo")) {
+      console.log("dds");
+      this.valideConsultationEcrite(JSON.parse(sessionStorage.getItem("consultationInfo"))).then((response)=>{
+
+        console.log(response);
+        console.log("lllll");
+      })
     }
     this.getSession();
     this.min = new Date().toISOString().slice(0, 10);
