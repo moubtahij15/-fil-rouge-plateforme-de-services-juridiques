@@ -273,7 +273,7 @@ const store = createStore({
     },
 
     // create consultation
-    valideConsultation({ }, data) {
+    valideConsultationEcrite({ }, data) {
 
       return axiosClient.post('ConsultationEcrite/create',data)
         .then(response => {
