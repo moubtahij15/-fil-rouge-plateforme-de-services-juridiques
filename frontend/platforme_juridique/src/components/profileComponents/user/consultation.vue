@@ -193,7 +193,7 @@
                 <th class="px-4 py-3">heure</th>
                 <th class="px-4 py-3">type</th>
                 <th class="px-4 py-3">etat</th>
-                <th class="px-4 py-3">annuler</th>
+                <th class="px-4 py-3">Voir</th>
               </tr>
             </thead>
             <tbody class="bg-white1">
@@ -207,7 +207,6 @@
 
                 <td
                   class="px-4 py-3 text-left text-md font-semibold text-center cursor-pointer"
-                    
                 >
                   {{ elem.sjt_RDV.substring(0, 20) }}
                 </td>
@@ -224,27 +223,27 @@
                     {{ elem.heure_debut }}
                   </span>
                 </td>
-                  <td class="px-4 py-3 text-xs">
+                <td class="px-4 py-3 text-xs">
                   <span
                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
-                    {{ elem.heure_debut }}
+                  Ecrite
                   </span>
                 </td>
-                  <td class="px-4 py-3 text-xs">
+                <td class="px-4 py-3 text-xs">
                   <span
                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
-                    {{ elem.heure_debut }}
+                  repondu
                   </span>
                 </td>
-                
+
                 <td class="px-4 py-3 text-sm">
                   <button
                     @click="annulerRdv(elem)"
-                    class="flex-no-shrink px-5 py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 hover:bg-red hover:text-white text-primary rounded-full transition ease-in duration-300"
+                    class="flex-no-shrink px-5 py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 hover:bg-primary hover:text-white text-primary rounded-full transition ease-in duration-300"
                   >
-                    annuler
+                    VOIR
                   </button>
                 </td>
               </tr>
