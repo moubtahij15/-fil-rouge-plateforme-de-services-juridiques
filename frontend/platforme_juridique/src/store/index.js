@@ -22,7 +22,8 @@ const store = createStore({
 
     avocatProfile: sessionStorage.getItem("avocatProfile"),
 
-    choix: "1"
+    choix: "1",
+    consultations: []
   },
   getters: {},
 
@@ -258,8 +259,8 @@ const store = createStore({
 
     },
     // create sessionStripe
-    stripe({ },id) {
-      return axiosClient.post('Stripe/getSession/'+id)
+    stripe({ }, id) {
+      return axiosClient.post('Stripe/getSession/' + id)
         .then(response => {
           // console.log(response.data);
 
@@ -301,9 +302,27 @@ const store = createStore({
           }
 
         })
-    }
-    //  end user actions
+    },
 
+    //  end user actions
+    // get all cosultations ecrit
+    getConsultationsEcrite({ commit }, id) {
+
+      return axiosClient.post('ConsultationEcrite/readAllconultationsEcrite/' + id)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+            commit('setConsultations', response.data.client);
+
+            return response.data;
+
+
+          }
+
+        })
+    }
 
   },
   mutations: {
@@ -330,6 +349,7 @@ const store = createStore({
     // set villes
     setVilles: (state, villes) => {
       state.villes = villes;
+
 
 
 
@@ -362,6 +382,10 @@ const store = createStore({
       state.choix = choix;
       // console.log(state.creneaux);
     },
+    // set  all Consultation user
+    setConsultations: (state, data) => {
+      state.consultations.concat(data);
+    }
 
     //  end user mutations
 
