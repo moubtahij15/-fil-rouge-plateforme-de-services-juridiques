@@ -325,7 +325,7 @@ const store = createStore({
     // get all cosultations ecrit
     getConsultationsTel({ commit }, id) {
 
-      return axiosClient.post('ConsultationEcrite/readAllconultationsEcrite/' + id)
+      return axiosClient.post('/ConsultationTel/readAllconultationsTel/' + id)
         .then(response => {
           // console.log(response.data);
 
