@@ -333,7 +333,7 @@ export default {
     getConsultations(id) {
       this.getConsultationsTel(id),
         this.getConsultationsEcrite(id),
-        console.log();
+        console.log($store.state.consultations);
     },
   },
   mounted() {
