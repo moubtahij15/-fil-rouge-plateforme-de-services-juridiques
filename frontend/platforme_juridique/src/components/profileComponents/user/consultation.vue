@@ -1,6 +1,6 @@
 <template lang="">
   <!-- alert 1h before -->
- / <div class="block w-full overflow-x-auto">
+  <div class="block w-full overflow-x-auto">
     <div class="w-full text-primary shadow bg-white">
       <div
         class="container flex items-center justify-between px-6 py-4 mx-auto"
