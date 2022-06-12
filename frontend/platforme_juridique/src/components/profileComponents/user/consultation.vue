@@ -1,6 +1,6 @@
 <template lang="">
   <!-- alert 1h before -->
-  <div class="block w-full overflow-x-auto">
+ / <div class="block w-full overflow-x-auto">
     <div class="w-full text-primary shadow bg-white">
       <div
         class="container flex items-center justify-between px-6 py-4 mx-auto"
@@ -234,9 +234,9 @@
                     {{ elem.type }}
                   </span>
                 </td>
-                <td class="px-4 py-3 text-xs bg-green">
+                <td class=" text-xs   ">
                   <span
-                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green rounded-sm"
+                    class="bg-primary w-1/2 px-4 py-3  text-white rounded-md px-2"
                   >
                                           {{ elem[0].etat }}
 
@@ -246,7 +246,7 @@
                   <span
                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
-                      {{ elem.prix }}
+                      {{ elem.prix }}DH
                   </span>
                 </td>
 
