@@ -17,9 +17,11 @@ require_once('vendor/autoload.php');
 class StripeController
 
 {
-    public function  getSession()
+    public function  getSession($id)
     {
-
+            // get consultation info
+            $consultation=new ConsultationEcrite();
+            $consultation=$consultation->readConsultaion($id);
         $stripe = new \Stripe\StripeClient(
             'sk_test_51L31WgJpb3Br7exniKGWe9BNIUUYADkBzM1JHpUGdmpMU3ttTFPRSAWJqdox8CZrRJ5InGRpFnt3IhqxmpVyALVA00y7ZSPryE'
         );
@@ -28,14 +30,14 @@ class StripeController
 
         $checkout = $stripe->checkout->sessions->create([
             'success_url' => 'http://localhost:8080/avocatProfile/',
-            'cancel_url' => 'https://example.com/cancel',
+            'cancel_url' => 'http://localhost:8080/avocatProfile/',
             'line_items' => [
                 [
                     'price_data' => [
-                        'currency' => 'usd',
-                        'unit_amount' => '1000',
+                        'currency' => 'mad',
+                        'unit_amount' => $consultation["prix"]*100,
                         'product_data' => [
-                            'name' => "consultation 2"
+                            'name' => "consultation ".$consultation["type"]
                         ]
                     ],
 
@@ -62,9 +64,10 @@ class StripeController
 
         $checkout = $stripe->checkout->sessions->retrieve($id);
         // $checkout = $stripe->checkout->sessions->retrieve("cs_test_a1YpyuRq3lWzDjJWvzRmgvHSPmgKoXqCvKhvsZD79v0WJeJRNEpvxoidHW");
-        
-        if($checkout->payment_status=="paid"){
+
+        if ($checkout->payment_status == "paid") {
             return true;
-        }return false;
+        }
+        return false;
     }
 }
