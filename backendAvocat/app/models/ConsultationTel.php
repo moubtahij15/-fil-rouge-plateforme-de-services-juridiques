@@ -14,33 +14,61 @@ class ConsultationTel extends DataBase
 
 
 
-    // get sing RDV
 
-    public function read_single($id_RDV)
-    {
-        $sql = "select * from rdv where id_RDV = ?";
-        $result = $this->conn->prepare($sql);
-
-        if ($result->execute([$id_RDV])) {
-            return $result->fetch(PDO::FETCH_ASSOC);
-        } else return false;
-    }
-
-
-
-    // reads rdv for single client
-    public function  read($id_client)
+    // read last consultation Ecrite
+    public function  readLastConsulation()
     {
 
 
-        $sql = 'SELECT  r.id, r.sjt_RDV ,r.date_creneau,  c.heure_debut , a.nom , a.prenom , a.id as id_avocat ,c.id as id_creneau FROM rdv r join creneau c on r.id_creneau =c.id  join avocat a on  a.id=r.id_avocat 
-        where  id_client = ? ';
+        $sql = 'SELECT * FROM `consultation_tele` ORDER BY `consultation_tele`.`id` DESC';
 
         $result = $this->conn->prepare($sql);
         // $id_client=md5($id_client);
-        if ($result->execute([$id_client])) {
+        if ($result->execute()) {
 
-            return $result->fetchAll(PDO::FETCH_ASSOC);
+            return $result->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+
+    public function  readAllconultationsTele($id)
+    {
+        date_default_timezone_set('Africa/casablanca');
+
+
+        $dateToday = date("Y-m-d");
+        $heureNow = date("H:i:s");
+        $result3 = [];
+        $sql = 'SELECT ct.id,ct.sujet,ct.date_creneau,c.heure_debut ,a.nom ,a.prenom  , co.prix , co.type FROM `consultation_tele` ct join creneau c on c.id=ct.id_creneau join avocat a on a.id=ct.id_avocat JOIN consultation co on co.id=ct.id_consultation WHERE ct.id_client=?';
+        $result = $this->conn->prepare($sql);
+        // $id_client=md5($id_client);
+        if ($result->execute([$id])) {
+
+            $result = $result->fetchALL(PDO::FETCH_ASSOC);
+
+
+
+            foreach ($result as $response) {
+
+                $categorie = "";
+                if ($response['date_creneau'] > $dateToday) {
+                    array_push($response, ["etat" => "en attente"]);
+                } elseif ($response['date_creneau'] < $dateToday) {
+
+                    array_push($response, ["etat" => "terminé"]);
+                } elseif ($response['date_creneau'] == $dateToday) {
+                    if ($response['heure_debut'] > $heureNow) {
+                        array_push($response, ["etat" => "en attente"]);
+                    } else {
+                        array_push($response, ["etat" => "terminé"]);
+                    }
+                }
+
+                array_push($result3, $response);
+            }
+            return ($result3);
         } else {
             return false;
         }
@@ -69,17 +97,20 @@ class ConsultationTel extends DataBase
         if (($client->read_singleById($data->id_client)) && ($creneau->read_single($data->id_creneau))) {
             //  clean data
 
-            $data->sjt_consultation = htmlspecialchars(strip_tags($data->sjt_consultation));
+            $data->sujet = htmlspecialchars(strip_tags($data->sujet));
             $data->date_creneau = htmlspecialchars(strip_tags($data->date_creneau));
-            $sql = " INSERT INTO `consultation_tele` (`sjt_consultation`, `date_creneau`, `id_client`, `id_creneau`, `id_avocat`) VALUES ( :sjt_consultation,:date_creneau,:id_client,:id_creneau,:id_avocat)";
+            $data->id_consultation = htmlspecialchars(strip_tags($data->id_consultation));
+
+            $sql = " INSERT INTO `consultation_tele` (`sujet`, `date_creneau`, `id_client`, `id_creneau`, `id_avocat`, `id_consultation`) VALUES ( :sujet,:date_creneau,:id_client,:id_creneau,:id_avocat,:id_consultation)";
             $result = $this->conn->prepare($sql);
             // Bind data
             return  $result->execute([
-                ':sjt_consultation' => $data->sjt_consultation,
+                ':sujet' => $data->sujet,
                 ':date_creneau' => $data->date_creneau,
                 ':id_client' => $data->id_client,
                 ':id_creneau' => $data->id_creneau,
-                ':id_avocat' => $data->id_avocat
+                ':id_avocat' => $data->id_avocat,
+                ':id_consultation' => $data->id_consultation
             ]);
         } else {
             echo "echec";
