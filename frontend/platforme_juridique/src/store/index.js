@@ -23,6 +23,7 @@ const store = createStore({
     avocatProfile: sessionStorage.getItem("avocatProfile"),
 
     choix: "1",
+    
     consultations: []
   },
   getters: {},
@@ -314,7 +315,7 @@ const store = createStore({
 
           if (response.status == 200) {
             console.log(response.data);
-            commit('setConsultations', response.data.client);
+            commit('setConsultations', response.data);
 
             return response.data;
 
@@ -331,7 +332,7 @@ const store = createStore({
 
           if (response.status == 200) {
             console.log(response.data);
-            commit('setConsultations', response.data.client);
+            commit('setConsultations', response.data);
 
             return response.data;
 
@@ -400,7 +401,9 @@ const store = createStore({
     },
     // set  all Consultation user
     setConsultations: (state, data) => {
-      state.consultations.concat(data);
+      state.consultations.push(data);
+      // console.log(state.consultations)
+
     }
 
     //  end user mutations
