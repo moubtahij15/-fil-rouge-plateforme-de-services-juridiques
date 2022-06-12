@@ -291,6 +291,8 @@ export default {
       "vaidateRdv",
       "getRdvUser",
       "updateSjtRdv",
+      "getConsultationsEcrite",
+      "getConsultationsTel",
     ]),
 
     toggleModal(elm) {
@@ -327,6 +329,11 @@ export default {
 
         console.log(response);
       });
+    },
+    getConsultations(id) {
+      this.getConsultationsTel(id),
+        this.getConsultationsEcrite(id),
+        console.log();
     },
   },
   mounted() {
