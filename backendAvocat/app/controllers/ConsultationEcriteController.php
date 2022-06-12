@@ -19,7 +19,7 @@ class ConsultationEcriteController
   }
 
   // reads rdv for single client
-  public function read()
+  public function readPrixConsultaion()
   {
 
     $data = json_decode(file_get_contents("php://input"));
@@ -29,10 +29,10 @@ class ConsultationEcriteController
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-      $RDV = new RDV();
+      $Consultation = new ConsultationEcrite();
 
       // Blog post query
-      $result = $RDV->read($data->reff);
+      $result = $Consultation->readPrixConsultaion($data);
 
       // Turn to JSON & output
       if ($result) {
@@ -69,49 +69,53 @@ class ConsultationEcriteController
         if ($consultationEcrite->create($data)) {
 
           echo json_encode(
-            array('message' => 'Consultation Created')
+            array('message1' => 'Consultation Created')
           );
 
           // get id consultation
-          $consultation = $consultationEcrite->readLastConsulation()['id'];
+          $consultation = $consultationEcrite->readLastConsulation()['id_consultation'];
 
-          echo json_encode(
-            array('message' => $consultation)
-          );
+          // echo json_encode(
+          //   array('message' => $consultation)
+          // );
           // add facture
           $facture = new Facture();
-          if ($facture->create($data,$consultation)) {
+          if ($facture->create($data, $consultation)) {
 
-            echo json_encode(
-              array('message' => 'facture Created')
-            );
+            // echo json_encode(
+            //   array('message' => 'facture Created')
+            // );
           }
-        } else        echo (json_encode("cette consultation n'est pas payé"));
-
-
-
-
-        // $consultationEcrite = new ConsultationEcrite();
-        //get posted data
-
-
-        //  print_r(json_encode($data)) ;
-        // create rdv
-        //   if ($consultationEcrite->create($data)) {
-
-        //     echo json_encode(
-        //       array('message' => 'Created')
-        //     );
-        //   } else {
-        //     echo json_encode(
-        //       array('message' => 'RDV Not Created')
-        //     );
-      }
+        }
+      } else
+        echo (json_encode("cette consultation n'est pas payé"));
     } else  echo json_encode(
       array('message' => 'change method to Post')
     );
   }
+  // readAllconultationsEcrite
 
+  public function readAllconultationsEcrite($id)
+  {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+      $Consultation = new ConsultationEcrite();
+
+      // Blog post query
+      $result = $Consultation->readAllconultationsEcrite($id);
+
+      // Turn to JSON & output
+      if ($result) {
+        echo json_encode($result);
+      } else {
+        echo json_encode(
+          array('message' => ' aucun Rdv pour ce client')
+        );
+      }
+    } else  echo json_encode(
+      array('message' => 'change method to POST')
+    );
+  }
 
   public function update()
   {
