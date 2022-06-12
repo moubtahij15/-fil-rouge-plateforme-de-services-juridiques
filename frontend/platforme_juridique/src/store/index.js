@@ -401,7 +401,10 @@ const store = createStore({
     },
     // set  all Consultation user
     setConsultations: (state, data) => {
-      state.consultations.push(data);
+      // const array3 = array1.concat(array2);
+      Array.prototype.push.apply(state.consultations,data); 
+
+      // state.consultations.push(data);
       // console.log(state.consultations)
 
     }
