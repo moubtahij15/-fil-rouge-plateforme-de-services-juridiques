@@ -193,6 +193,7 @@
                 <th class="px-4 py-3">heure</th>
                 <th class="px-4 py-3">type</th>
                 <th class="px-4 py-3">etat</th>
+                <th class="px-4 py-3">mentant</th>
                 <th class="px-4 py-3">Voir</th>
               </tr>
             </thead>
