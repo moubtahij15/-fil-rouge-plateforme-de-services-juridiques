@@ -200,63 +200,64 @@
             <tbody class="bg-white1">
               <tr
                 class="text-gray-700 border-white border-b-2"
-                v-for="elems in this.consultations"
+                v-for="elem in this.consultations"
               >
-                <div v-for="elem in elems">
-                  <td class="px-4 py-3 text-center">
-                    <p class="font-semibold">
-                      {{ elem.nom }} {{ elem.prenom }}
-                    </p>
-                  </td>
+                <td class="px-4 py-3 text-center">
+                  <p class="font-semibold">{{ elem.nom }} {{ elem.prenom }}</p>
+                </td>
 
-                  <td
-                    class="px-4 py-3 text-left text-md font-semibold text-center cursor-pointer"
+                <td
+                  class="px-4 py-3 text-left text-md font-semibold text-center cursor-pointer"
+                >
+                                  {{ elem.sujet }}
+
+                </td>
+                <td
+                  class="px-4 py-3 text-left text-md font-semibold text-center"
+                >
+                  {{ elem.date_creneau }}
+                  {{ elem.date }}
+                </td>
+
+                <td class="px-4 py-3 text-xs">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
-                  </td>
-                  <td
-                    class="px-4 py-3 text-left text-md font-semibold text-center"
+                    {{ elem.heure_debut }}
+                    {{ elem.heure }}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-xs">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
-                    {{ elem.date_creneau }}
-                  </td>
+                    {{ elem.type }}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-xs bg-green">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green rounded-sm"
+                  >
+                                          {{ elem[0].etat }}
 
-                  <td class="px-4 py-3 text-xs">
-                    <span
-                      class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
-                    >
-                      {{ elem.heure_debut }}
-                    </span>
-                  </td>
-                  <td class="px-4 py-3 text-xs">
-                    <span
-                      class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
-                    >
-                      Ecrite
-                    </span>
-                  </td>
-                  <td class="px-4 py-3 text-xs">
-                    <span
-                      class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
-                    >
-                      repondu
-                    </span>
-                  </td>
-                  <td class="px-4 py-3 text-xs">
-                    <span
-                      class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
-                    >
-                      120DH
-                    </span>
-                  </td>
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-xs">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
+                  >
+                      {{ elem.prix }}
+                  </span>
+                </td>
 
-                  <td class="px-4 py-3 text-sm">
-                    <button
-                      @click="annulerRdv(elem)"
-                      class="flex-no-shrink px-5 py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 hover:bg-primary hover:text-white text-primary rounded-full transition ease-in duration-300"
-                    >
-                      VOIR
-                    </button>
-                  </td>
-                </div>
+                <td class="px-4 py-3 text-sm">
+                  <button
+                    @click="annulerRdv(elem)"
+                    class="flex-no-shrink px-5 py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 hover:bg-primary hover:text-white text-primary rounded-full transition ease-in duration-300"
+                  >
+                    VOIR
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
