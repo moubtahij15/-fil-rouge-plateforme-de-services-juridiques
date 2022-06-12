@@ -193,7 +193,7 @@
                 <th class="px-4 py-3">heure</th>
                 <th class="px-4 py-3">type</th>
                 <th class="px-4 py-3">etat</th>
-                <th class="px-4 py-3">mentant</th>
+                <th class="px-4 py-3">montant</th>
                 <th class="px-4 py-3">Voir</th>
               </tr>
             </thead>
@@ -228,14 +228,21 @@
                   <span
                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
-                  Ecrite
+                    Ecrite
                   </span>
                 </td>
                 <td class="px-4 py-3 text-xs">
                   <span
                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
-                  repondu
+                    repondu
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-xs">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
+                  >
+                    120DH
                   </span>
                 </td>
 
