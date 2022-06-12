@@ -60,16 +60,19 @@ class Facture extends DataBase
 
     // }
     // create RDV
-    public function create($data,$id_consultation)
+    public function create($data, $id_consultation)
     {
+        date_default_timezone_set('Africa/casablanca');
+
+        $dateToday = date("Y-m-d");
+        $heureNow = date("H:i:s");
 
         //  clean data
 
         $id_consultation = htmlspecialchars(strip_tags($id_consultation));
         $data->id_avocat = htmlspecialchars(strip_tags($data->id_avocat));
         $data->id_client = htmlspecialchars(strip_tags($data->id_client));
-        $data->date = htmlspecialchars(strip_tags($data->date));
-        $data->heure = htmlspecialchars(strip_tags($data->heure));
+
         $sql = "INSERT INTO `facture` (`id_consultation`, `id_avocat`, `id_client`, `date`, `heure`) VALUES ( :id_consultation, :id_avocat, :id_client,:date,:heure) ";
         $result = $this->conn->prepare($sql);
         // Bind data
@@ -77,8 +80,8 @@ class Facture extends DataBase
             ':id_consultation' => $id_consultation,
             ':id_avocat' => $data->id_avocat,
             ':id_client' => $data->id_client,
-            ':date' => $data->date,
-            ':heure' => $data->heure
+            ':date' => $dateToday,
+            ':heure' => $heureNow
         ]);
     }
 
