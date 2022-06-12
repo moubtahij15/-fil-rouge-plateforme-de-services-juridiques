@@ -264,7 +264,7 @@
 </template>
 <script>
 import { mapActions } from "vuex";
-
+import store from "../../../store";
 export default {
   name: "rdvUser",
   data() {
@@ -275,6 +275,7 @@ export default {
       rdvUpdate: {},
       msg: "",
       msg1: "",
+      consultations: [],
     };
   },
   methods: {
@@ -331,13 +332,17 @@ export default {
       });
     },
     getConsultations(id) {
-      this.getConsultationsTel(id),
-        this.getConsultationsEcrite(id),
-        console.log($store.state.consultations);
+      this.getConsultationsTel(id).then((response) => {
+        this.getConsultationsEcrite(id).then((response) => {
+          this.consultations = store.state.consultations;
+          console.log(this.consultations);
+        });
+      });
     },
   },
   mounted() {
-    this.getAllRdv();
+    // this.getAllRdv();
+    this.getConsultations(10);
   },
 };
 </script>
