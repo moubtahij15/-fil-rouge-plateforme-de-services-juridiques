@@ -318,6 +318,22 @@ const store = createStore({
 
             return response.data;
 
+          }
+
+        })
+    },
+    // get all cosultations ecrit
+    getConsultationsTel({ commit }, id) {
+
+      return axiosClient.post('ConsultationEcrite/readAllconultationsEcrite/' + id)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+            commit('setConsultations', response.data.client);
+
+            return response.data;
 
           }
 
