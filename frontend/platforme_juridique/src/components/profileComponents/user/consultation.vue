@@ -191,6 +191,8 @@
                 <th class="px-4 py-3">date</th>
 
                 <th class="px-4 py-3">heure</th>
+                <th class="px-4 py-3">type</th>
+                <th class="px-4 py-3">etat</th>
                 <th class="px-4 py-3">annuler</th>
               </tr>
             </thead>
@@ -222,6 +224,21 @@
                     {{ elem.heure_debut }}
                   </span>
                 </td>
+                  <td class="px-4 py-3 text-xs">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
+                  >
+                    {{ elem.heure_debut }}
+                  </span>
+                </td>
+                  <td class="px-4 py-3 text-xs">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
+                  >
+                    {{ elem.heure_debut }}
+                  </span>
+                </td>
+                
                 <td class="px-4 py-3 text-sm">
                   <button
                     @click="annulerRdv(elem)"
