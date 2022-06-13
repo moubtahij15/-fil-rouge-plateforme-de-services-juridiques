@@ -287,12 +287,11 @@
           </div>
         </div>
         <div class="flex items-center py-5">
-          <div 
+          <div
             class="border border-gray-300 dark:border-gray-700 rounded-full px-3 py-1 dark:text-gray-400 text-gray-600 text-xs flex items-center"
             aria-label="due on"
             role="contentinfo"
           >
-           
             <p class="ml-2 dark:text-gray-400">
               {{ this.consultation.date }}, {{ this.consultation.heure }}
             </p>
@@ -390,8 +389,17 @@ export default {
     getConsultations(id) {
       this.getConsultationsTel(id).then((response) => {
         this.getConsultationsEcrite(id).then((response) => {
-          this.consultations = store.state.consultations;
-          console.log(this.consultations);
+          Array.prototype.push.apply(
+            this.consultations,
+            store.state.consultationEcrite
+          );
+          Array.prototype.push.apply(
+            this.consultations,
+            store.state.consultationTele
+          );
+
+          // this.consultations = ;
+          console.log(store.state.consultationTele);
         });
       });
     },
@@ -420,7 +428,7 @@ export default {
   },
   mounted() {
     // this.getAllRdv();
-    this.getConsultations(10);
+    this.getConsultations(JSON.parse(sessionStorage.getItem("User")).id);
   },
 };
 </script>
