@@ -209,8 +209,7 @@
                 <td
                   class="px-4 py-3 text-left text-md font-semibold text-center cursor-pointer"
                 >
-                                  {{ elem.sujet }}
-
+                  {{ elem.sujet }}
                 </td>
                 <td
                   class="px-4 py-3 text-left text-md font-semibold text-center"
@@ -234,19 +233,18 @@
                     {{ elem.type }}
                   </span>
                 </td>
-                <td class=" text-xs   ">
+                <td class="text-xs">
                   <span
-                    class="bg-primary w-1/2 px-4 py-3  text-white rounded-md px-2"
+                    class="bg-primary w-1/2 px-4 py-3 text-white rounded-md px-2"
                   >
-                                          {{ elem[0].etat }}
-
+                    {{ elem[0].etat }}
                   </span>
                 </td>
                 <td class="px-4 py-3 text-xs">
                   <span
                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
-                      {{ elem.prix }}DH
+                    {{ elem.prix }}DH
                   </span>
                 </td>
 
@@ -265,69 +263,48 @@
       </div>
     </section>
 
-    
-    <div class="w-full px-5 flex flex-col  mb-8 overflow-hidden rounded-lg shadow-lg justify-between">
-        <div class="flex flex-col mt-5">
-          <div class="flex justify-end mb-4">
-            <div
-              class="mr-2 py-3 px-4 bg-white rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-primary"
-            >
-               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-              at praesentium, aut ullam delectus odio error sit rem. Architecto
-              nulla doloribus laborum illo rem enim dolor odio saepe,
-              consequatur quas?
-              Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-              at praesentium, aut ullam delectus odio error sit rem. Architecto
-              nulla doloribus laborum illo rem enim dolor odio saepe,
-              consequatur quas?
-              Lorem
-            </div>
-            <img
-              src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
-              class="object-cover h-8 w-8 rounded-full"
-              alt=""
-            />
+    <div
+      v-if="this.ConsultationEcrite"
+      class="w-full px-5 flex flex-col mb-8 overflow-hidden rounded-lg shadow-lg justify-between"
+    >
+      <div class="flex flex-col mt-5">
+        <div class="flex justify-end mb-4">
+          <div
+            class="mr-2 py-3 px-4 bg-white rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-primary"
+          >
+           {{this.ConsultationEcrite.sujet}}
           </div>
-          <div class="flex justify-start mb-4">
-            <img
-              src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
-              class="object-cover h-8 w-8 rounded-full"
-              alt=""
-            />
-            <div
-              class="ml-2 py-3 px-4 bg-primary   rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white"
-            >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-              at praesentium, aut ullam delectus odio error sit rem. Architecto
-              nulla doloribus laborum illo rem enim dolor odio saepe,
-              consequatur quas?
-              Lorem
-               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-              at praesentium, aut ullam delectus odio error sit rem. Architecto
-              nulla doloribus laborum illo rem enim dolor odio saepe,
-              consequatur quas?
-              Lorem
-               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-              at praesentium, aut ullam delectus odio error sit rem. Architecto
-              nulla doloribus laborum illo rem enim dolor odio saepe,
-              consequatur quas?
-              Lorem
-            </div>
-          </div>
-         
+
+          <img
+            src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+            class="object-cover h-8 w-8 rounded-full"
+            alt=""
+          />
         </div>
-        <!--<div class="py-5">
+        <div class="flex justify-start mb-4">
+          <img
+            src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+            class="object-cover h-8 w-8 rounded-full"
+            alt=""
+          />
+          <div
+            class="ml-2 py-3 px-4 bg-primary rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white"
+          >
+                      {{this.ConsultationEcrite.reponse}}
+
+          </div>
+        </div>
+      </div>
+      <!--<div class="py-5">
           <input
             class="w-full bg-gray-300 py-5 px-3 rounded-xl"
             type="text"
             placeholder="type your message here..."
           />
         </div>-->
-      </div> 
-      <!-- end message -->
-      <div class="w-2/5 border-l-2 px-5">
-        
-        </div>
+    </div>
+    <!-- end message -->
+    <div class="w-2/5 border-l-2 px-5"></div>
   </div>
 </template>
 <script>
@@ -344,6 +321,10 @@ export default {
       msg: "",
       msg1: "",
       consultations: [],
+      consultationsEcrite: {
+        sujet: "",
+        reponse: "",
+      },
     };
   },
   methods: {
@@ -406,6 +387,11 @@ export default {
           console.log(this.consultations);
         });
       });
+    },
+
+    voirConsultationEcrite(elem) {
+      this.consultationsEcrite.sujet = elem.sujet;
+      this.consultationsEcrite.reponse = elem[1].reponse;
     },
   },
   mounted() {
