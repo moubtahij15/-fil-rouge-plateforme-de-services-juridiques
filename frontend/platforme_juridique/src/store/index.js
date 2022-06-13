@@ -23,8 +23,14 @@ const store = createStore({
     avocatProfile: sessionStorage.getItem("avocatProfile"),
 
     choix: "1",
-    
-    consultations: []
+
+    consultations: [
+
+    ],
+    consultationEcrite: {},
+    consultationTele: {}
+
+
   },
   getters: {},
 
@@ -315,7 +321,7 @@ const store = createStore({
 
           if (response.status == 200) {
             console.log(response.data);
-            commit('setConsultations', response.data);
+            commit('setConsultationsEcrite', response.data);
 
             return response.data;
 
@@ -332,7 +338,7 @@ const store = createStore({
 
           if (response.status == 200) {
             console.log(response.data);
-            commit('setConsultations', response.data);
+            commit('setConsultationsTel', response.data);
 
             return response.data;
 
@@ -402,7 +408,27 @@ const store = createStore({
     // set  all Consultation user
     setConsultations: (state, data) => {
       // const array3 = array1.concat(array2);
-      Array.prototype.push.apply(state.consultations,data); 
+
+      Array.prototype.push.apply(state.consultations, data);
+
+      // state.consultations.push(data);
+      // console.log(state.consultations)
+
+    },
+    setConsultationsEcrite: (state, data) => {
+      // const array3 = array1.concat(array2);
+
+      // Array.prototype.push.apply(state.consultations, data);
+
+      state.consultationEcrite = data;
+      // console.log(state.consultations)
+
+    },
+    setConsultationsTel: (state, data) => {
+      // const array3 = array1.concat(array2);
+      state.consultationTele = data;
+
+      // Array.prototype.push.apply(state.consultations, data);
 
       // state.consultations.push(data);
       // console.log(state.consultations)
