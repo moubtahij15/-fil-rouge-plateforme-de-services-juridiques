@@ -117,69 +117,10 @@
       </div>
     </div>
 
-    <!-- modal suject -->
-    <div
-      v-if="showModal"
-      class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
-    >
-      <div class="relative w-auto my-6 mx-auto w-full max-w-3xl">
-        <!--content-->
-        <div
-          class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
-        >
-          <!--header-->
-          <div
-            class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t"
-          >
-            <h3 class="text-3xl font-semibold">modifier post</h3>
-            <button
-              class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-            >
-              <span
-                class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
-              >
-                ×
-              </span>
-            </button>
-          </div>
-          <!--body-->
-          <div class="relative p-6 flex-auto w-full">
-            <div class="whitespace-pre-wrap mt-7">
-              <textarea
-                v-model="this.sjt_post"
-                placeholder="Sujet"
-                class="bg-purple-white shadow rounded border-0 p-3 w-full"
-                required="required"
-              ></textarea>
-            </div>
-          </div>
-          <div class="flex-1 px-2 pt-2 mx-10 m-2"></div>
-          <!--footer-->
-          <div
-            class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
-          >
-            <button
-              class="text-green-500 bg-transparent border border-solid border-green-500 hover:bg-green-500 hover:text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button"
-              v-on:click="this.showModal = !this.showModal"
-            >
-              Close
-            </button>
-            <button
-              class="text-green-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button"
-              @click="updatePost()"
-            >
-              Save Changes
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- table rdv -->
     <!-- component -->
     <section
-      v-if="!this.consultationsEcrite.sujet"
+      v-if="!this.consultation.sujet"
       class="container mx-auto p-6 font-mono"
     >
       <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
@@ -265,9 +206,56 @@
         </div>
       </div>
     </section>
-
     <div
-      v-if="this.consultationsEcrite.sujet"
+      v-if="this.consultation.type == 'telephonique'"
+      class="w-full h-64 flex flex-col justify-between dark:bg-gray-800 bg-white dark:border-gray-700 rounded-lg border border-gray-400 mb-6 py-5 px-4"
+    >
+      <div>
+        <h3
+          class="text-gray-800 dark:text-gray-100 leading-7 font-semibold w-11/12"
+        >
+          Votre Sujet :
+        </h3>
+
+        <p
+          class="text-start flex-start mt-10 text-gray-800 dark:text-gray-100 leading-2"
+        >
+          lllllllllllllllllllllllllll sdqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq qds
+          dqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+        </p>
+      </div>
+      <div>
+        <div class="flex items-center">
+          <div
+            class="border border-gray-300 dark:border-gray-700 rounded-full px-3 py-1 dark:text-gray-400 text-gray-600 text-xs flex items-center"
+            aria-label="due on"
+            role="contentinfo"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-alarm"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z"></path>
+              <circle cx="12" cy="13" r="7"></circle>
+              <polyline points="12 10 12 13 14 13"></polyline>
+              <line x1="7" y1="4" x2="4.25" y2="6"></line>
+              <line x1="17" y1="4" x2="19.75" y2="6"></line>
+            </svg>
+            <p class="ml-2 dark:text-gray-400">7 Sept, 23:00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      v-if="this.consultation.type == 'ecrite'"
       class="w-full px-5 flex flex-col mb-8 overflow-hidden rounded-lg shadow-lg justify-between"
     >
       <div class="flex flex-col mt-5">
@@ -275,7 +263,7 @@
           <div
             class="mr-2 py-3 px-4 bg-white rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-primary"
           >
-            {{ this.consultationsEcrite.sujet }}
+            {{ this.consultation.sujet }}
           </div>
 
           <img
@@ -293,7 +281,7 @@
           <div
             class="ml-2 py-3 px-4 bg-primary rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white"
           >
-            {{ this.consultationsEcrite.reponse }}
+            {{ this.consultation.reponse }}
           </div>
         </div>
       </div>
@@ -323,9 +311,12 @@ export default {
       msg: "",
       msg1: "",
       consultations: [],
-      consultationsEcrite: {
+      consultation: {
+        type: "",
         sujet: "",
         reponse: "",
+        date: "",
+        heure: "",
       },
     };
   },
@@ -393,16 +384,19 @@ export default {
 
     voirConsultationEcrite(elem) {
       if (elem.type == "ecrite") {
-        this.consultationsEcrite.sujet = elem.sujet;
+        this.consultation.type = "ecrite";
+        this.consultation.sujet = elem.sujet;
         // console.log(elem[0].etat);
         var etat = elem[0].etat;
 
         if (etat != "non repondu") {
           console.log(elem[0].etat);
 
-          this.consultationsEcrite.reponse = elem[1][0].reponse;
+          this.consultation.reponse = elem[1][0].reponse;
         }
       } else if (elem.type == "telephonique") {
+        this.consultation.type = "telephonique";
+        // this.consultation.sujet = elem.sjt_RDV;
       }
     },
   },
