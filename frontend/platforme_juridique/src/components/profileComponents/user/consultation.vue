@@ -286,6 +286,18 @@
             {{ this.consultation.reponse }}
           </div>
         </div>
+        <div class="flex items-center py-5">
+          <div 
+            class="border border-gray-300 dark:border-gray-700 rounded-full px-3 py-1 dark:text-gray-400 text-gray-600 text-xs flex items-center"
+            aria-label="due on"
+            role="contentinfo"
+          >
+           
+            <p class="ml-2 dark:text-gray-400">
+              {{ this.consultation.date }}, {{ this.consultation.heure }}
+            </p>
+          </div>
+        </div>
       </div>
       <!--<div class="py-5">
           <input
