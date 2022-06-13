@@ -219,9 +219,7 @@
 
         <p
           class="text-start flex-start mt-10 text-gray-800 dark:text-gray-100 leading-2"
-        >
-          lllllllllllllllllllllllllll sdqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq qds
-          dqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+        >{{this.consultation.sujet}}
         </p>
       </div>
       <div>
@@ -396,7 +394,7 @@ export default {
         }
       } else if (elem.type == "telephonique") {
         this.consultation.type = "telephonique";
-        // this.consultation.sujet = elem.sjt_RDV;
+        this.consultation.sujet = elem.sujet;
       }
     },
   },
