@@ -178,7 +178,10 @@
     </div>
     <!-- table rdv -->
     <!-- component -->
-    <section class="container mx-auto p-6 font-mono">
+    <section
+      v-if="!this.consultationsEcrite.sujet"
+      class="container mx-auto p-6 font-mono"
+    >
       <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
         <div class="w-full overflow-x-auto">
           <table class="w-full border-white">
@@ -250,7 +253,7 @@
 
                 <td class="px-4 py-3 text-sm">
                   <button
-                    @click="annulerRdv(elem)"
+                    @click="voirConsultationEcrite(elem)"
                     class="flex-no-shrink px-5 py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 hover:bg-primary hover:text-white text-primary rounded-full transition ease-in duration-300"
                   >
                     VOIR
@@ -264,7 +267,7 @@
     </section>
 
     <div
-      v-if="this.ConsultationEcrite"
+      v-if="this.consultationsEcrite.sujet"
       class="w-full px-5 flex flex-col mb-8 overflow-hidden rounded-lg shadow-lg justify-between"
     >
       <div class="flex flex-col mt-5">
@@ -272,7 +275,7 @@
           <div
             class="mr-2 py-3 px-4 bg-white rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-primary"
           >
-           {{this.ConsultationEcrite.sujet}}
+            {{ this.consultationsEcrite.sujet }}
           </div>
 
           <img
@@ -290,8 +293,7 @@
           <div
             class="ml-2 py-3 px-4 bg-primary rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white"
           >
-                      {{this.ConsultationEcrite.reponse}}
-
+            {{ this.consultationsEcrite.reponse }}
           </div>
         </div>
       </div>
@@ -390,8 +392,18 @@ export default {
     },
 
     voirConsultationEcrite(elem) {
-      this.consultationsEcrite.sujet = elem.sujet;
-      this.consultationsEcrite.reponse = elem[1].reponse;
+      if (elem.type == "ecrite") {
+        this.consultationsEcrite.sujet = elem.sujet;
+        // console.log(elem[0].etat);
+        var etat = elem[0].etat;
+
+        if (etat != "non repondu") {
+          console.log(elem[0].etat);
+
+          this.consultationsEcrite.reponse = elem[1][0].reponse;
+        }
+      } else if (elem.type == "telephonique") {
+      }
     },
   },
   mounted() {
