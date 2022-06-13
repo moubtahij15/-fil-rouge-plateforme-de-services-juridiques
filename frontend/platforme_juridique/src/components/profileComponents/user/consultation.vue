@@ -19,6 +19,7 @@
         </div>
 
         <button
+          @click="(this.consultation.sujet = ''), (this.consultation.type = '')"
           class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none"
         >
           <svg
@@ -218,8 +219,9 @@
         </h3>
 
         <p
-          class="text-start flex-start mt-10 text-gray-800 dark:text-gray-100 leading-2"
-        >{{this.consultation.sujet}}
+          class="text-start flex-start mt-10 text-gray-800 dark:text-gray-100 w-full leading-2"
+        >
+          {{ this.consultation.sujet }}
         </p>
       </div>
       <div>
@@ -247,7 +249,9 @@
               <line x1="7" y1="4" x2="4.25" y2="6"></line>
               <line x1="17" y1="4" x2="19.75" y2="6"></line>
             </svg>
-            <p class="ml-2 dark:text-gray-400">7 Sept, 23:00</p>
+            <p class="ml-2 dark:text-gray-400">
+              {{ this.consultation.date }}, {{ this.consultation.heure }}
+            </p>
           </div>
         </div>
       </div>
@@ -384,6 +388,8 @@ export default {
       if (elem.type == "ecrite") {
         this.consultation.type = "ecrite";
         this.consultation.sujet = elem.sujet;
+        this.consultation.date = elem.date;
+        this.consultation.heure = elem.heure;
         // console.log(elem[0].etat);
         var etat = elem[0].etat;
 
@@ -395,6 +401,8 @@ export default {
       } else if (elem.type == "telephonique") {
         this.consultation.type = "telephonique";
         this.consultation.sujet = elem.sujet;
+        this.consultation.date = elem.date_creneau;
+        this.consultation.heure = elem.heure_debut;
       }
     },
   },
