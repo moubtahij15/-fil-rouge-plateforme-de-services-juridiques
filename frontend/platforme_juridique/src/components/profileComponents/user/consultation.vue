@@ -261,7 +261,7 @@
       class="w-full px-5 flex flex-col mb-8 overflow-hidden rounded-lg shadow-lg justify-between"
     >
       <div class="flex flex-col mt-5">
-        <div class="flex justify-end mb-4">
+        <div class="flex justify-end">
           <div
             class="mr-2 py-3 px-4 bg-white rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-primary"
           >
@@ -274,7 +274,15 @@
             alt=""
           />
         </div>
-        <div class="flex justify-start mb-4">
+        <div
+          class="justify-end dark:border-gray-700 rounded-full px-3 py-1 dark:text-gray-400 text-gray-600 text-xs flex items-center"
+        >
+          <p class="ml-2 dark:text-gray-400">
+            {{ this.consultation.date }}, {{ this.consultation.heure }}
+          </p>
+        </div>
+
+        <div class="flex justify-start">
           <img
             src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
             class="object-cover h-8 w-8 rounded-full"
@@ -286,17 +294,15 @@
             {{ this.consultation.reponse }}
           </div>
         </div>
-        <div class="flex items-center py-5">
-          <div
-            class="border border-gray-300 dark:border-gray-700 rounded-full px-3 py-1 dark:text-gray-400 text-gray-600 text-xs flex items-center"
-            aria-label="due on"
-            role="contentinfo"
-          >
-            <p class="ml-2 dark:text-gray-400">
-              {{ this.consultation.date }}, {{ this.consultation.heure }}
-            </p>
-          </div>
+        <div
+          class="justify-start dark:border-gray-700 rounded-full px-3 py-1 dark:text-gray-400 text-gray-600 text-xs flex items-center"
+        >
+          <p class="ml-2 dark:text-gray-400">
+            {{ this.consultation.dateReponse }},
+            {{ this.consultation.heureReponse }}
+          </p>
         </div>
+        <div class="flex items-center py-5"></div>
       </div>
       <!--<div class="py-5">
           <input
@@ -353,12 +359,6 @@ export default {
       "getConsultationsTel",
     ]),
 
-    toggleModal(elm) {
-      this.showModal = !this.showModal;
-
-      this.sjt_post = elm.sjt_RDV;
-      this.rdvUpdate = elm;
-    },
     getAllRdv() {
       this.getRdvUser(JSON.parse(sessionStorage.getItem("User")).id).then(
         (response) => {
@@ -367,27 +367,7 @@ export default {
         }
       );
     },
-    updatePost() {
-      this.rdvUpdate.sjt_RDV = this.sjt_post;
 
-      this.updateSjtRdv(this.rdvUpdate).then((response) => {
-        this.getAllRdv();
-
-        this.showModal = !this.showModal;
-        this.msg = "Bien modifié";
-      });
-      console.log(this.rdvUpdate);
-    },
-    annulerRdv(elem) {
-      this.deleteRdv(elem).then((response) => {
-        this.getAllRdv();
-        if (response.status == "success") {
-          this.msg = "Bien Annuler";
-        } else if ((response.status = "echec")) this.msg1 = response.message;
-
-        console.log(response);
-      });
-    },
     getConsultations(id) {
       this.getConsultationsTel(id).then((response) => {
         this.getConsultationsEcrite(id).then((response) => {
@@ -412,13 +392,16 @@ export default {
         this.consultation.sujet = elem.sujet;
         this.consultation.date = elem.date;
         this.consultation.heure = elem.heure;
+
         // console.log(elem[0].etat);
         var etat = elem[0].etat;
 
         if (etat != "non repondu") {
-          console.log(elem[0].etat);
+          console.log(elem[1][0].date_reponse);
 
           this.consultation.reponse = elem[1][0].reponse;
+          this.consultation.dateReponse = elem[1][0].date_reponse;
+          this.consultation.heureReponse = elem[1][0].heure_reponse;
         }
       } else if (elem.type == "telephonique") {
         this.consultation.type = "telephonique";
