@@ -205,6 +205,7 @@
 
                 <td
                   class="px-4 py-3 text-left text-md font-semibold text-center cursor-pointer"
+                  @click="toggleModal(elem)"
                     
                 >
                   {{ elem.sjt_RDV.substring(0, 20) }}
