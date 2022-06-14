@@ -213,13 +213,13 @@
     >
       <div>
         <h3
-          class="text-gray-800 dark:text-gray-100 leading-7 font-semibold w-11/12"
+          class="text-gray-800 t dark:text-gray-100 leading-7 font-semibold w-11/12"
         >
           Votre Sujet :
         </h3>
 
         <p
-          class="text-start flex-start mt-10 text-gray-800 dark:text-gray-100 w-full leading-2"
+          class="w-11/12 mt-10 text-gray-800 dark:text-gray-100 w-full leading-2"
         >
           {{ this.consultation.sujet }}
         </p>
@@ -330,6 +330,8 @@ export default {
         reponse: "",
         date: "",
         heure: "",
+        dateReponse: "",
+        heureReponse: "",
       },
     };
   },
