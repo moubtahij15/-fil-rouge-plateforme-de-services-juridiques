@@ -13,8 +13,7 @@
           </svg>
 
           <p class="mx-3 font-bold">
-            vous pouvez annuler votre rendez-vous (d'une limite 1 h avant le
-            rendez-vous).​
+           
           </p>
         </div>
 
