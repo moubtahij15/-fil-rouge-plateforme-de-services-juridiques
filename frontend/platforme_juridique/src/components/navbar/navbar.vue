@@ -2,7 +2,7 @@
   <div
     class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8"
   >
-    <div class="relative flex cursor-pointer items-center justify-between">
+    <div class="relative flex items-center justify-between">
       <a
         @click="redirectTo({ val: 'homeView' })"
         aria-label="Company"
@@ -65,8 +65,8 @@
           />
           <FIcons
             id="delete"
-            :icon="['fas', 'user']"
-            class="h-6 w-6 cursor-pointer"
+            :icon="['fas', 'arrow-right-from-bracket']"
+            class=" ml-6 h-6 w-6 cursor-pointer"
             @click="redirectTo({ val: 'signIn' })"
           />
           <!-- <FIcons id="delete" :icon="['fas', 'arrow-right-from-bracket']" class=" pl-5 h-5 w-5 cursor-pointer"
