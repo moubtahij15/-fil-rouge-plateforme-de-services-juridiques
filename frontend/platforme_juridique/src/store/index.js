@@ -294,6 +294,10 @@ const store = createStore({
 
         })
     },
+
+
+
+
     // get price of consultation
     // create consultation
     getconsultationInfo({ }, data) {
@@ -377,7 +381,22 @@ const store = createStore({
           }
 
         })
-    }
+    },
+    // save document
+    validerDocument({ }, data) {
+      return axiosClient.post('Document/create', data)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+            return response.data;
+
+          }
+
+        })
+
+    },
 
   },
   mutations: {
