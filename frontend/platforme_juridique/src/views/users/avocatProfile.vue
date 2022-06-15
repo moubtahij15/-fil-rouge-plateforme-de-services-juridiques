@@ -57,6 +57,13 @@
           >
             <consultation />
           </div>
+          <div
+            v-if="
+              $store.state.choix == 4 && this.$options.name == 'avocatProfile'
+            "
+          >
+            <Document />
+          </div>
         </div>
       </div>
     </div>
@@ -68,6 +75,8 @@ import { mapActions } from "vuex";
 import ChoixProfile from "@/components/profileComponents/choixProfile.vue";
 import ProfileAvocat from "@/components/profileComponents/avocat/profile.vue";
 import Consultation from "@/components/profileComponents/avocat/consultation.vue";
+import Document from "@/components/profileComponents/avocat/document.vue";
+
 import Rendez_vous from "@/components/rendez_vous.vue";
 export default {
   name: "avocatProfile",
@@ -85,6 +94,7 @@ export default {
     ChoixProfile,
     ProfileAvocat,
     Consultation,
+    Document,
   },
 
   methods: {
@@ -96,7 +106,7 @@ export default {
       "isLogin",
       "getAvocats",
       "getAvocatsBySearch",
-      "getChoixProfile"
+      "getChoixProfile",
     ]),
   },
   mounted() {
