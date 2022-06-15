@@ -114,6 +114,10 @@ export default {
       this.getChoixProfile(3);
       console.log("fdf");
     }
+    if (sessionStorage.getItem("DocumentInfo")) {
+      this.getChoixProfile(4);
+      console.log("CN");
+    }
 
     console.log(this.$parent.$options.name);
     this.avocat = JSON.parse(sessionStorage.getItem("avocatProfile"));
