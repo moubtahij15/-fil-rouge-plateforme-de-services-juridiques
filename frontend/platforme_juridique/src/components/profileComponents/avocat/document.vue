@@ -2,9 +2,7 @@
   <!-- component -->
   <!-- component -->
   <div class="w-full mx-auto my-4 border-b-2 pb-4">
-    <section
-      class="container mx-auto p-6 font-mono"
-    >
+    <section class="container mx-auto p-6 font-mono">
       <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
         <div class="w-full overflow-x-auto">
           <table class="w-full border-white">
@@ -14,7 +12,7 @@
               >
                 <th class="px-4 py-3">avocat</th>
                 <th class="px-4 py-3">catégorie</th>
-                
+
                 <th class="px-4 py-3">montant</th>
                 <th class="px-4 py-3">valdé</th>
               </tr>
@@ -33,11 +31,7 @@
                 >
                   {{ elem.sujet }}
                 </td>
-                
 
-                
-              
-               
                 <td class="px-4 py-3 text-xs">
                   <span
                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
@@ -62,5 +56,35 @@
     </section>
   </div>
 </template>
-<script></script>
+<script>
+import { response } from "express";
+import { mapActions } from "vuex";
+import store from "../../../store";
+export default {
+  name: "document",
+  data() {
+    return {
+      rdv: {},
+      showModal: false,
+      sjt_post: "",
+      rdvUpdate: {},
+    };
+  },
+  methods: {
+    ...mapActions([
+      "redirectTo",
+      "isLogin",
+      "getAvocats",
+      "getDocummentAvocat",
+    ]),
+  },
+  mounted() {
+    this.getDocummentAvocat(
+      JSON.parse(sessionStorage.getItem("avocatProfile")).id
+    ).then((reponse) => {
+      console.log(response);
+    });
+  },
+};
+</script>
 <style lang=""></style>
