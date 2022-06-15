@@ -52,7 +52,7 @@
 
                 <td class="px-4 py-3 text-sm">
                   <button
-                    @click="submit"
+                    @click="submit(elem)"
                     class="flex-no-shrink px-5 py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 hover:bg-primary hover:text-white text-primary rounded-full transition ease-in duration-300"
                   >
                     VOIR
@@ -95,6 +95,8 @@
 </template>
 <script>
 import { mapActions } from "vuex";
+import { StripeCheckout } from "@vue-stripe/vue-stripe";
+
 import store from "../../../store";
 export default {
   name: "document",
@@ -105,9 +107,17 @@ export default {
       sjt_post: "",
       rdvUpdate: {},
       sessionId: null,
+      document: {
+        id_client: sessionStorage.getItem("idUser"),
+        id_document: "",
+        idSession: "",
+      },
       publishableKey:
         "pk_test_51L31WgJpb3Br7exnkJTm0E3Kb1qn8HZpjxZ7WRUS54kYwpIJDbIBbhYaHQbZtWognSJ4GAbFFuHewkuoCRqMV65I00XKNgiwtA",
     };
+  },
+  components: {
+    StripeCheckout,
   },
   methods: {
     ...mapActions([
@@ -115,18 +125,24 @@ export default {
       "isLogin",
       "getAvocats",
       "getDocummentAvocat",
+      "stripeD",
     ]),
     getSession(id) {
       console.log(id);
-      this.stripe(id).then((response) => {
+      this.stripeD(id).then((response) => {
         console.log(response.data.id);
         this.sessionId = response.data.id;
-        this.consultationEcrit.idSession = this.sessionId;
-        sessionStorage.setItem(
-          "consultationInfo",
-          JSON.stringify(this.consultationEcrit)
-        );
+        this.document.idSession = this.sessionId;
+        sessionStorage.setItem("DocumentInfo", JSON.stringify(this.document));
+        this.$refs.checkoutRef.redirectToCheckout();
       });
+    },
+    submit(elem) {
+      // You will be redirected to Stripe's secure checkout page
+
+      this.document.id_document = elem.id;
+      this.getSession(elem.id);
+      // sessionStorage.setItem("idSession", this.sessionId);
     },
   },
 
