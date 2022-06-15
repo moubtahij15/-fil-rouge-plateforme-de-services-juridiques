@@ -75,6 +75,13 @@
           >
             <Consultation />
           </div>
+          <div
+            v-if="
+              $store.state.choix == 4 && this.$options.name == 'profileUser'
+            "
+          >
+            <Documents />
+          </div>
 
           <!-- <div c>
 											<Rendez_vous />
@@ -95,6 +102,7 @@ import { mapActions } from "vuex";
 import ChoixProfile from "@/components/profileComponents/choixProfile.vue";
 import rdvUser from "@/components/profileComponents/user/rendezVous.vue";
 import Consultation from "@/components/profileComponents/user/consultation.vue";
+import Documents from "@/components/profileComponents/user/documents.vue";
 import ProfilFormUser from "@/components/profileFormUser.vue";
 export default {
   name: "profileUser",
@@ -111,7 +119,8 @@ export default {
     ProfilFormUser,
     ChoixProfile,
     rdvUser,
-    Consultation
+    Consultation,
+    Documents
   },
 
   methods: {
