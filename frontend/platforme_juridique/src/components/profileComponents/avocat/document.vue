@@ -10,12 +10,12 @@
       </svg>
 
       <p class="mx-3 font-bold">
-        vous pouvez annuler votre rendez-vous (d'une limite 1 h avant le
-        rendez-vous).​
+        vous pouvez prendre une consultation avec un avocat va comprendre votre
+        contexte et vos spécificités
       </p>
     </div>
 
-    <section class="container mx-auto p-6 font-mono">
+    <section class="container mx-auto p-6 font-mono" v-if="!valide">
       <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
         <div class="w-full overflow-x-auto">
           <table class="w-full border-white">
@@ -69,7 +69,10 @@
       :pk="publishableKey"
       :sessionId="this.sessionId"
     />
-    <div class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl">
+    <div
+      class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
+      v-if="valide"
+    >
       <div class="bg-gray-100 h-screen">
         <div class="bg-white1 p-6 md:mx-auto">
           <svg viewBox="0 0 24 24" class="text-primary w-16 h-16 mx-auto my-6">
@@ -102,10 +105,7 @@ export default {
   name: "document",
   data() {
     return {
-      rdv: {},
-      showModal: false,
-      sjt_post: "",
-      rdvUpdate: {},
+      valide: false,
       sessionId: null,
       document: {
         id_client: sessionStorage.getItem("idUser"),
@@ -126,6 +126,7 @@ export default {
       "getAvocats",
       "getDocummentAvocat",
       "stripeD",
+      "validerDocument",
     ]),
     getSession(id) {
       console.log(id);
@@ -153,6 +154,23 @@ export default {
       console.log(reponse);
       console.log(JSON.parse(sessionStorage.getItem("avocatProfile")).id);
     });
+
+    // check if paid or not
+    if (sessionStorage.getItem("DocumentInfo")) {
+      let documentss = JSON.parse(sessionStorage.getItem("DocumentInfo"));
+      console.log(documentss);
+
+      // console.log(sessionStorage.getItem("consultationInfo").typeConsultation);
+      console.log(documentss);
+
+      this.validerDocument(documentss).then((response) => {
+        console.log(response);
+        if (response.message == "success") {
+          this.valide = true;
+        }
+        sessionStorage.removeItem("DocumentInfo");
+      });
+    }
   },
 };
 </script>
