@@ -280,6 +280,20 @@ const store = createStore({
 
         })
     },
+    // create sessionStripe for document
+    stripeD({ }, id) {
+      return axiosClient.post('Stripe/getSessionD/' + id)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+            return response;
+
+          }
+
+        })
+    },
     // get price of consultation
     // create consultation
     getconsultationInfo({ }, data) {
