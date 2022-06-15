@@ -187,47 +187,48 @@
                 class="text-md font-semibold tracking-wide text-centre text-gray-900 bg-white border-b uppercase"
               >
                 <th class="px-4 py-3">avocat</th>
-                <th class="px-4 py-3">sujet</th>
-                <th class="px-4 py-3">date</th>
+                <th class="px-4 py-3">nom du document</th>
 
-                <th class="px-4 py-3">heure</th>
-                <th class="px-4 py-3">annuler</th>
+                <th class="px-4 py-3">date</th>
+                <th class="px-4 py-3">montant</th>
+                <th class="px-4 py-3">lien de telechargement</th>
               </tr>
             </thead>
             <tbody class="bg-white1">
               <tr
                 class="text-gray-700 border-white border-b-2"
-                v-for="elem in rdv"
+                v-for="elem in document"
               >
                 <td class="px-4 py-3 text-center">
                   <p class="font-semibold">{{ elem.nom }} {{ elem.prenom }}</p>
                 </td>
 
                 <td
-                  class="px-4 py-3 text-left text-md font-semibold text-center cursor-pointer"
-                  @click="toggleModal(elem)"
-                >
-                  {{ elem.sjt_RDV.substring(0, 20) }}
-                </td>
-                <td
                   class="px-4 py-3 text-left text-md font-semibold text-center"
                 >
-                  {{ elem.date_creneau }}
+                  {{ elem.nom_document }}
                 </td>
 
-                <td class="px-4 py-3 text-xs">
+                <td class="px-4 py-3 text-md">
                   <span
                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
-                    {{ elem.heure_debut }}
+                    {{ elem.date }}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-xl">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
+                  >
+                    {{ elem.prix }}DH
                   </span>
                 </td>
                 <td class="px-4 py-3 text-sm">
                   <button
-                    @click="annulerRdv(elem)"
-                    class="flex-no-shrink px-5 py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 hover:bg-red hover:text-white text-primary rounded-full transition ease-in duration-300"
+                    @click="submit(elem)"
+                    class="flex-no-shrink px-5 py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 hover:bg-primary hover:text-white text-primary rounded-full transition ease-in duration-300"
                   >
-                    annuler
+                    telecherger
                   </button>
                 </td>
               </tr>
@@ -245,7 +246,7 @@ export default {
   name: "rdvUser",
   data() {
     return {
-      rdv: {},
+      document: {},
       showModal: false,
       sjt_post: "",
       rdvUpdate: {},
@@ -254,59 +255,19 @@ export default {
     };
   },
   methods: {
-    ...mapActions([
-      "redirectTo",
-      "getVilles",
-      "deleteRdv",
-      "getCategorie",
-      "registerUser",
-      "isLogin",
-      "getAvocats",
-      "getAvocatsBySearch",
-      "getCreneaux",
-      "vaidateRdv",
-      "getRdvUser",
-      "updateSjtRdv",
-    ]),
+    ...mapActions(["redirectTo", "isLogin", "getDocummentClient"]),
 
-    toggleModal(elm) {
-      this.showModal = !this.showModal;
-
-      this.sjt_post = elm.sjt_RDV;
-      this.rdvUpdate = elm;
-    },
-    getAllRdv() {
-      this.getRdvUser(JSON.parse(sessionStorage.getItem("User")).id).then(
-        (response) => {
-          this.rdv = response;
-          console.log(this.rdv);
-        }
-      );
-    },
-    updatePost() {
-      this.rdvUpdate.sjt_RDV = this.sjt_post;
-
-      this.updateSjtRdv(this.rdvUpdate).then((response) => {
-        this.getAllRdv();
-
-        this.showModal = !this.showModal;
-        this.msg = "Bien modifié";
-      });
-      console.log(this.rdvUpdate);
-    },
-    annulerRdv(elem) {
-      this.deleteRdv(elem).then((response) => {
-        this.getAllRdv();
-        if (response.status == "success") {
-          this.msg = "Bien Annuler";
-        } else if ((response.status = "echec")) this.msg1 = response.message;
-
-        console.log(response);
+    getAllDocument() {
+      this.getDocummentClient(
+        JSON.parse(sessionStorage.getItem("User")).id
+      ).then((response) => {
+        this.document = response;
+        console.log(this.document);
       });
     },
   },
   mounted() {
-    this.getAllRdv();
+    this.getAllDocument();
   },
 };
 </script>
