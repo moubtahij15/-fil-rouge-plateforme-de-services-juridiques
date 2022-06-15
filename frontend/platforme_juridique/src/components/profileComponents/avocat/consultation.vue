@@ -348,9 +348,9 @@ export default {
       step4: false,
       step5: false,
       min: "",
-      publishableKey:
-        "pk_test_51L31WgJpb3Br7exnkJTm0E3Kb1qn8HZpjxZ7WRUS54kYwpIJDbIBbhYaHQbZtWognSJ4GAbFFuHewkuoCRqMV65I00XKNgiwtA",
-    };
+        publishableKey:
+          "pk_test_51L31WgJpb3Br7exnkJTm0E3Kb1qn8HZpjxZ7WRUS54kYwpIJDbIBbhYaHQbZtWognSJ4GAbFFuHewkuoCRqMV65I00XKNgiwtA",
+      };
   },
   components: {
     StripeCheckout,
