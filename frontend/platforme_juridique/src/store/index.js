@@ -28,7 +28,8 @@ const store = createStore({
 
     ],
     consultationEcrite: {},
-    consultationTele: {}
+    consultationTele: {},
+    documentsAvocat: {}
 
 
   },
@@ -345,6 +346,23 @@ const store = createStore({
           }
 
         })
+    },
+    // get all cosultations ecrit
+    getDocummentAvocat({ commit }, id) {
+
+      return axiosClient.post('/Document/readByAvocat/' + id)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+            commit('setDocuments', response.data);
+
+            return response.data;
+
+          }
+
+        })
     }
 
   },
@@ -427,6 +445,17 @@ const store = createStore({
     setConsultationsTel: (state, data) => {
       // const array3 = array1.concat(array2);
       state.consultationTele = data;
+
+      // Array.prototype.push.apply(state.consultations, data);
+
+      // state.consultations.push(data);
+      // console.log(state.consultations)
+
+    },
+    // set Documents Avocat
+    setDocuments: (state, data) => {
+      // const array3 = array1.concat(array2);
+      state.documentsAvocat = data;
 
       // Array.prototype.push.apply(state.consultations, data);
 
