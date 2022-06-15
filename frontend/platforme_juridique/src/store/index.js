@@ -73,7 +73,7 @@ const store = createStore({
     // end register user
     // check if is login
     isLogin({ commit }) {
-      if (sessionStorage.getItem("idUser")) {
+      if (JSON.parse(sessionStorage.getItem("User")).id) {
         return true
       } return false
 
