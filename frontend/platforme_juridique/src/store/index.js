@@ -6,9 +6,7 @@ import axios from 'axios';
 
 const store = createStore({
   state: {
-    user: {
-
-    },
+    user:  sessionStorage.getItem("User"),
     villes: {
 
     },
@@ -73,7 +71,8 @@ const store = createStore({
     // end register user
     // check if is login
     isLogin({ commit }) {
-      if (JSON.parse(sessionStorage.getItem("User")).id) {
+      // console.log(JSON.parse(sessionStorage.getItem("User")).id)
+      if (JSON.parse(sessionStorage.getItem("User"))) {
         return true
       } return false
 
@@ -426,12 +425,12 @@ const store = createStore({
     // login user
 
     setUser: (state, user) => {
-      state.user = user;
+      // state.user = user;
 
       // state.user.id = user.id;
 
-      sessionStorage.setItem('idUser', state.user.id);
-      sessionStorage.setItem('User', JSON.stringify(state.user));
+      sessionStorage.setItem('idUser', user.id);
+      sessionStorage.setItem('User', JSON.stringify(user));
       // sessionStorage.setItem('userInfo', JSON.stringify(state.user.data));
       // sessionStorage.setItem('userInfos', "state.user.data");
 
