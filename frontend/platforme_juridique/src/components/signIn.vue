@@ -133,14 +133,7 @@ export default {
     mounted() {
         // console.log(this.$store.state.login.email);
         // console.log(this.$store.state.login.pass);
-        this.isLogin()
-            .then((response) => {
-                if (response) {
-
-                    this.redirectTo({ val: "homeView" });
-                } 
-                
-            })
+        
 
 
     },
