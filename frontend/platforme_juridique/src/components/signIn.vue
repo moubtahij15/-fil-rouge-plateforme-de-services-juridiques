@@ -80,6 +80,14 @@
               Valider
             </button>
           </div>
+          <div class="relative">
+            <button
+              type="submit"
+              class="inline-block w-1/2 px-3 py-2 text-md font-medium text-center text-white1 transition duration-200 bg-yellow-300 rounded-lg bg-primary ease"
+            >
+              je suis Avocat
+            </button>
+          </div>
         </div>
       </div>
     </form>
