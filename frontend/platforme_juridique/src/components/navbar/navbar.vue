@@ -18,29 +18,29 @@
                 </svg> -->
         <img src="../../assets/logo1.”.png" class="w-12 h-12" alt="" />
         <span
-          class="ml-2 text-xXl font-bold tracking-wide text-gray-800 uppercase"
+          class="ml-2  cursor-pointer text-xXl font-bold tracking-wide text-gray-800 uppercase"
           >Avocatice</span
         >
       </a>
       <ul class="flex items-center hidden space-x-8 lg:flex">
         <li>
           <a
-            href="/"
+            @click="redirectTo({ val: 'decouvrire' })"
             aria-label="Our product"
-            class="font-semibold tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+            class="font-semibold  cursor-pointer tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >Découvrir AVOCATICE
           </a>
         </li>
-        <li v-if="user">
+        <li v-if="$store.state.user">
           <a
-            href="/"
             aria-label="Our product"
             title="Our product"
-            class="font-semibold tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >Bienvenue</a
+            @click="redirectTo({ val: 'profileUser' })"
+
+            class="font-semibold tracking-wide cursor-pointer text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+            >Bienvenue {{ $store.state.user.prenom }} {{ $store.state.user.nom }}</a
           >
         </li>
-      
       </ul>
       <ul class="flex items-center hidden space-x-8 lg:flex">
         <li>
@@ -56,10 +56,11 @@
             @click="redirectTo({ val: 'signIn' })"
           />
           <FIcons
+            v-if="$store.state.user"
             id="delete"
             :icon="['fas', 'arrow-right-from-bracket']"
             class="ml-6 h-6 w-6 cursor-pointer"
-            @click="redirectTo({ val: 'signIn' })"
+            @click="logout()"
           />
           <!-- <FIcons id="delete" :icon="['fas', 'arrow-right-from-bracket']" class=" pl-5 h-5 w-5 cursor-pointer"
                         @click="redirectTo({ val: 'signIn' })" /> -->
@@ -185,23 +186,33 @@
 </template>
 <script>
 import { mapActions } from "vuex";
+import store from "../../store";
 
 export default {
   name: "navBar",
-  user: "",
 
   data() {
     return {
       isMenuOpen: false,
+      user: {
+        id: null,
+      },
     };
   },
   methods: {
     ...mapActions(["redirectTo"]),
+    logout() {
+      console.log("a");
+      sessionStorage.clear();
+    },
   },
 
   mounted() {
+    console.log("nav")
     if (sessionStorage.getItem("User")) {
-      this.user = JSON.parse(sessionStorage.getItem("User")).id;
+      this.user = JSON.parse(sessionStorage.getItem("User"));
+      // this.user = JSON.parse(sessionStorage.getItem("User"));
+      console.log(store.state.user);
     }
   },
 };
