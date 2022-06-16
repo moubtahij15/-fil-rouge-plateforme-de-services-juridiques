@@ -18,7 +18,7 @@
                 </svg> -->
         <img src="../../assets/logo1.”.png" class="w-12 h-12" alt="" />
         <span
-          class="ml-2  cursor-pointer text-xXl font-bold tracking-wide text-gray-800 uppercase"
+          class="ml-2 cursor-pointer text-xXl font-bold tracking-wide text-gray-800 uppercase"
           >Avocatice</span
         >
       </a>
@@ -27,18 +27,17 @@
           <a
             @click="redirectTo({ val: 'decouvrire' })"
             aria-label="Our product"
-            class="font-semibold  cursor-pointer tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+            class="font-semibold cursor-pointer tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >Découvrir AVOCATICE
           </a>
         </li>
-        <li v-if="$store.state.user">
+        <li v-if="this.user">
           <a
             aria-label="Our product"
             title="Our product"
             @click="redirectTo({ val: 'profileUser' })"
-
             class="font-semibold tracking-wide cursor-pointer text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >Bienvenue {{ $store.state.user.prenom }} {{ $store.state.user.nom }}</a
+            >Bienvenue {{ user.prenom }} {{ user.nom }}</a
           >
         </li>
       </ul>
@@ -50,13 +49,14 @@
                         Sign up
                     </a> -->
           <FIcons
+            v-if="!this.user"
             id="delete"
             :icon="['fas', 'user']"
             class="h-6 w-6 cursor-pointer"
             @click="redirectTo({ val: 'signIn' })"
           />
           <FIcons
-            v-if="$store.state.user"
+            v-if="user"
             id="delete"
             :icon="['fas', 'arrow-right-from-bracket']"
             class="ml-6 h-6 w-6 cursor-pointer"
@@ -143,37 +143,34 @@
                     aria-label="Our product"
                     title="Our product"
                     class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                    >Comment ça marche ?</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/"
-                    aria-label="Our product"
-                    title="Our product"
-                    class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                     >Découvrir Juris.ma
                   </a>
                 </li>
-                <li>
+                <li v-if="this.user">
                   <a
                     href="/"
                     aria-label="Product pricing"
                     title="Product pricing"
                     class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                    >Pricing</a
+                    >Bienvenue {{ user.prenom }} {{ user.nom }}</a
                   >
                 </li>
 
                 <li>
-                  <a
-                    href="/"
-                    class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                    aria-label="Sign up"
-                    title="Sign up"
-                  >
-                    Sign up
-                  </a>
+                  <FIcons
+                    v-if="!this.user"
+                    id="delete"
+                    :icon="['fas', 'user']"
+                    class="h-6 w-6 cursor-pointer"
+                    @click="redirectTo({ val: 'signIn' })"
+                  />
+                  <FIcons
+                    v-if="user"
+                    id="delete"
+                    :icon="['fas', 'arrow-right-from-bracket']"
+                    class="ml-6 h-6 w-6 cursor-pointer"
+                    @click="logout()"
+                  />
                 </li>
               </ul>
             </nav>
@@ -200,20 +197,25 @@ export default {
     };
   },
   methods: {
+    navChange() {
+      if (sessionStorage.getItem("User")) {
+        // this.user = JSON.parse(sessionStorage.getItem("User"));
+        this.user = JSON.parse(sessionStorage.getItem("User"));
+        console.log(store.state.user);
+      } else this.user = null;
+      console.log("dazt");
+    },
     ...mapActions(["redirectTo"]),
     logout() {
       console.log("a");
       sessionStorage.clear();
+      this.navChange();
     },
   },
 
   mounted() {
-    console.log("nav")
-    if (sessionStorage.getItem("User")) {
-      this.user = JSON.parse(sessionStorage.getItem("User"));
-      // this.user = JSON.parse(sessionStorage.getItem("User"));
-      console.log(store.state.user);
-    }
+    console.log("nav");
+    this.navChange();
   },
 };
 </script>
