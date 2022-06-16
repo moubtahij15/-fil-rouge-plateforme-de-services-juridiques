@@ -7,6 +7,7 @@ import avocats from '../views/users/avocats.vue'
 import avocatProfile from '../views/users/avocatProfile.vue'
 import profileUser from '../views/users/profileUser.vue'
 import decouvrire from '../views/users/decouvrire.vue'
+import dashboard from '../views/avocat/dashboard.vue'
 
 
 const routes = [
@@ -25,8 +26,11 @@ const routes = [
       { path: '/profileUser', name: 'profileUser', component: profileUser },
       { path: '/decouvrire', name: 'decouvrire', component: decouvrire },
 
-    ]
+    ],
+
   },
+  { path: '/dashboard', name: 'dashboard', component: dashboard }
+
 
 ]
 
