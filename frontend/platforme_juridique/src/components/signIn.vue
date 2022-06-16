@@ -5,6 +5,7 @@
       <div
         class="relative z-10 flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl"
       >
+        <p class="text-md font-bold">Espace {{ espace }}</p>
         <div
           v-if="message"
           class="flex w-full max-w-sm mx-auto overflow-hidden bg-white1 rounded-lg shadow-md dark:bg-gray-800"
@@ -292,6 +293,7 @@ export default {
         password: "",
       },
       message: "",
+      espace: "",
       //
     };
   },
@@ -348,6 +350,9 @@ export default {
   mounted() {
     // console.log(this.$store.state.login.email);
     // console.log(this.$store.state.login.pass);
+    if (this.$parent.$options.name == "signIn") {
+      this.espace="client"
+    }
   },
 };
 </script>
