@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const store = createStore({
   state: {
-    user:  sessionStorage.getItem("User"),
+    user: JSON.parse(sessionStorage.getItem("User")),
     villes: {
 
     },
