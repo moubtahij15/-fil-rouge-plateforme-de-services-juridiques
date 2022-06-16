@@ -27,15 +27,6 @@
           <a
             href="/"
             aria-label="Our product"
-            title="Our product"
-            class="font-semibold tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >Comment ça marche ?</a
-          >
-        </li>
-        <li>
-          <a
-            href="/"
-            aria-label="Our product"
             class="font-semibold tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >Découvrir AVOCATICE
           </a>
@@ -43,12 +34,13 @@
         <li v-if="user">
           <a
             href="/"
-            aria-label="Product pricing"
-            title="Product pricing"
-            class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >Pricing</a
+            aria-label="Our product"
+            title="Our product"
+            class="font-semibold tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+            >Bienvenue</a
           >
         </li>
+      
       </ul>
       <ul class="flex items-center hidden space-x-8 lg:flex">
         <li>
@@ -66,7 +58,7 @@
           <FIcons
             id="delete"
             :icon="['fas', 'arrow-right-from-bracket']"
-            class=" ml-6 h-6 w-6 cursor-pointer"
+            class="ml-6 h-6 w-6 cursor-pointer"
             @click="redirectTo({ val: 'signIn' })"
           />
           <!-- <FIcons id="delete" :icon="['fas', 'arrow-right-from-bracket']" class=" pl-5 h-5 w-5 cursor-pointer"
