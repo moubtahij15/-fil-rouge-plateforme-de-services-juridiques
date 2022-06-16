@@ -1,33 +1,49 @@
 <template lang="">
   <div class="bg-white">
-    <div class="max-w-3xl mx-8 mt-4 lg:mx-auto md:mt-16">
-      <h1
-        class="mb-8 text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl"
+    <section class="overflow-hidden">
+      <!-- Background Layer -->
+      <!-- <div class="absolute z-10 w-screen h-full bg-gradient-to-tr from-gray-900 via-gray-900 to-black">
+                <div class="absolute right-0 w-32 h-full -mr-20 transform bg-white bg-opacity-25 opacity-10 rotate-6">
+                </div>
+            </div> -->
+
+      <!-- End Background Layer -->
+
+      <div
+        class="z-30 flex flex-col px-10 pt-10 pb-20 mx-auto md:flex-row max-w-7xl"
       >
-        Keep your Team in the Loop.
-      </h1>
-      <h2
-        class="inline-block px-2 mb-4 text-base font-semibold leading-normal tracking-wide text-gray-800 bg-yellow-200 sm:text-lg"
-      >
-        Having trouble managing your team?
-      </h2>
-      <p
-        class="mb-8 text-base font-light leading-relaxed text-gray-700 sm:text-lg"
-      >
-        Our service can help you keep your team in the loop on latest news,
-        updates, and so much more. Start getting your team organized today.
-      </p>
-      <a
-        href="#_"
-        class="inline-flex items-center px-4 py-2 mr-1 font-bold text-white bg-blue-700 hover:bg-blue-800 rounded"
-        >Try For Free →</a
-      >
-      <a
-        href="#_"
-        class="inline-flex items-center px-4 py-2 font-bold text-gray-700 lowercase bg-gray-200 hover:bg-gray-300 hover:text-gray-900 rounded"
-        >Learn more</a
-      >
-    </div>
+        <div
+          class="flex flex-col items-center justify-center w-full space-y-8 md:w-1/2 sm:pr-8"
+        >
+          <h1
+            class="text-4xl font-extrabold text-primary leading-tight sm:text-5xl md:text-5xl"
+          >
+            Découvrir AVOCATICE
+          </h1>
+          <p class="text-xl text-blue-200">
+            URIS.MA est la première plateforme de services juridiques au Maroc.
+            Ayant une interface claire et facile à utiliser, la plateforme vous
+            permet de voir les avocats qui correspondent à votre besoin, choisir
+            le vôtre et rentrer en contact avec lui pour une consultation
+            juridique (téléphonique ou pas messages) selon vos créneaux libres
+            24h/24 et 7jours/7, avec la possibilité de choisir une consultation
+            urgente pour une réponse sous un délai maximum de 24h.
+          </p>
+        </div>
+
+        <!-- <div class="relative z-0 w-full  mt-8 lg:w-1/2 ">
+                    <img src="../../assets/Law.svg"
+                        class="transform xl:translate-x-20 lg:ml-0 lg:translate-y-20 lg:scale-125  h-1/2 ">
+                </div> -->
+        <div
+          class="relative flex-1 w-full pt-6 text-black lg:pt-12 lg:pl-12 lg:w-6/12"
+        >
+          <!-- Start of Image -->
+          <img src="../../assets/Law2.svg" class="w-full" />
+          <!-- End of Image -->
+        </div>
+      </div>
+    </section>
 
     <section class="w-full bg-white mt-20">
       <div class="bg-white container xl:max-w-6xl mx-auto px-4">
