@@ -479,7 +479,7 @@ const store = createStore({
           console.log("response")
 
           if (response.data.result == "success") {
-            commit('avocat', response.data.client);
+            commit('setAvocat', response.data.client);
           }
           return response.data
         });
