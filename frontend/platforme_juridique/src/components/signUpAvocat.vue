@@ -43,99 +43,122 @@
           >
         </p>
         <div class="relative w-full mt-6 space-y-8">
-          <div class="items-center -mx-2 md:flex">
-            <div class="w-full mx-2">
-              <label
-                class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
-                >Name</label
-              >
-
-              <input
-                class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                type="text"
-              />
-            </div>
-
-            <div class="w-full mx-2 mt-4 md:mt-0">
-              <label
-                class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
-                >E-mail</label
-              >
-
-              <input
-                class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                type="email"
-              />
-            </div>
-          </div>
-          <div class="items-center -mx-2 md:flex">
+          <div class="items-center md:flex">
             <div class="relative">
               <label
                 class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"
                 >Nom</label
               >
               <input
-                v-model="user.nom"
+                v-model="avocat.nom"
                 type="text"
-                class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
                 placeholder="Nom"
                 required
               />
             </div>
-            <div class="relative">
+            <div class="relative ml-4">
               <label
                 class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"
                 >Prenom</label
               >
               <input
-                v-model="user.prenom"
+                v-model="avocat.prenom"
                 type="text"
-                class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
                 placeholder="Prenom"
                 required
               />
             </div>
           </div>
+
           <div class="relative">
             <label
               class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"
               >Email</label
             >
             <input
-              v-model="user.email"
+              v-model="avocat.email"
               type="text"
-              class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
+              class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
               placeholder="******@example.com"
               required
             />
           </div>
-          <div class="relative">
-            <!-- <option>{{ this.categEdit }}</option> -->
+          <div class="items-center w-full md:flex">
+            <div class="relative w-full mr-3">
+              <!-- <option>{{ this.categEdit }}</option> -->
 
-            <label
-              class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"
-              >Ville</label
-            >
-            <select
-              v-model="this.user.ville_id"
-              required
-              class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
-            >
-              <option v-for="elem in $store.state.villes" :value="elem.id">
-                {{ elem.nom }}
-              </option>
-            </select>
+              <label
+                class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"
+                >Ville</label
+              >
+              <select
+                v-model="this.avocat.ville_id"
+                required
+                class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
+              >
+                <option v-for="elem in $store.state.villes" :value="elem.id">
+                  {{ elem.nom }}
+                </option>
+              </select>
+            </div>
+            <div class="relative w-full">
+              <label
+                class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"
+                >telephone</label
+              >
+              <input
+                v-model="avocat.tel"
+                type="number"
+                class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                placeholder="tel"
+                required
+              />
+            </div>
+          </div>
+          <div class="items-center w-full md:flex">
+            <div class="relative w-full">
+              <label
+                class="absolute text-xs px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"
+                >Date naissance</label
+              >
+              <input
+                v-model="avocat.date_naissance"
+                type="date"
+                class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                placeholder="tel"
+                required
+              />
+            </div>
+
+            <div class="relative w-full ml-3">
+              <!-- <option>{{ this.categEdit }}</option> -->
+
+              <label
+                class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"
+                >sexe</label
+              >
+              <select
+                v-model="this.avocat.sexe"
+                required
+                class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
+              >
+                <option :value="'homme'">homme</option>
+                <option :value="'femme'">femme</option>
+              </select>
+            </div>
           </div>
           <div class="relative">
             <label
               class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"
-              >telephone</label
+              >Adresse</label
             >
             <input
-              v-model="user.tel"
-              type="number"
-              class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
-              placeholder="tel"
+              v-model="avocat.adresse"
+              type="text"
+              class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
+              placeholder="Adresse"
               required
             />
           </div>
@@ -145,7 +168,7 @@
               >password</label
             >
             <input
-              v-model="user.password"
+              v-model="avocat.password"
               type="password"
               class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
               placeholder="password"
@@ -359,13 +382,16 @@ export default {
 
   data() {
     return {
-      user: {
+      avocat: {
         nom: "",
         prenom: "",
         email: "",
         tel: "",
         password: "",
         ville_id: "",
+        adresse: "",
+        date_naissance: "",
+        sexe: "",
       },
       message: "",
     };
@@ -389,28 +415,27 @@ export default {
       //         this.redirectTo({ val: "HomePage" });
       //     })
       // console.log(this.$parent.$options.name)
-      // console.log(this.user)
+      console.log(this.avocat);
 
-      if (this.$parent.$options.name == "signUp") {
-        // $store.state.login.email
-        this.registerUser(this.user).then((response) => {
-          console.log(response);
-          // this.user = ""
-          this.user.email = "";
-          this.user.nom = "";
-          this.user.prenom = "";
-          this.user.password = "";
-          this.user.tel = "";
-          this.user.ville_id = "";
-          if (response.message == "bien creer") {
-            // this.error = true
-            this.redirectTo({ val: "signIn" });
-          } else {
-            this.message = response.message;
-          }
-          // this.redirectTo({ val: "HomePage" });
-        });
-      }
+      // $store.state.login.email
+      // this.registerUser(this.user).then((response) => {
+      //   console.log(response);
+      //   // this.user = ""
+      //   this.user.email = "";
+      //   this.user.nom = "";
+      //   this.user.prenom = "";
+      //   this.user.password = "";
+      //   this.user.tel = "";
+      //   this.user.ville_id = "";
+      //   if (response.message == "bien creer") {
+      //     // this.error = true
+      //     this.redirectTo({ val: "signIn" });
+      //   } else {
+      //     this.message = response.message;
+      //   }
+      //   // this.redirectTo({ val: "HomePage" });
+      // });
+
       //  else if (this.$parent.$options.name == 'LoginAdmin') {
 
       //     this.admin.reff_admin = this.user.email;
