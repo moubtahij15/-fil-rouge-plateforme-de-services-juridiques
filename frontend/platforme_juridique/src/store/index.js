@@ -456,18 +456,21 @@ const store = createStore({
       } return false
 
     },
-     // update info user
-     updateInfoAvocat({ commit }, avocat) {
+    // update info user
+    updateInfoAvocat({ commit }, avocat) {
 
-      return axiosClient.post('avocat/updateAvocat', avocat)
+      return axiosClient.post('avocat/updateInfo', avocat)
         .then(response => {
-          if (response.data.message == "bien modifié") {
+          console.log(response)
+
+          if (response.data.message == "success") {
+            console.log(response.data)
             commit('setAvocat', response.data.avocat);
           }
           return response.data
         });
     },
-    
+
 
   },
   mutations: {
@@ -578,8 +581,8 @@ const store = createStore({
 
     //  end user mutations
     // start avocat mutation
-     // set avocats
-     setAvocat: (state, avocat) => {
+    // set avocats
+    setAvocat: (state, avocat) => {
       state.avocat = avocat;
       sessionStorage.setItem('Avocat', JSON.stringify(avocat));
 
