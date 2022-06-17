@@ -325,6 +325,8 @@ export default {
           }
           // this.redirectTo({ val: "HomePage" });
         });
+
+        // Espace avocat
       } else if (this.$parent.$options.name == "sign-in") {
         console.log("z");
 
@@ -336,6 +338,7 @@ export default {
             // console.log(this.$parent.$parent.$parent.navChange());
 
             this.redirectTo({ val: "dashboard" });
+            
           } else {
             this.message = response.message;
           }
