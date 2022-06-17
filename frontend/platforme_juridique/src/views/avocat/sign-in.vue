@@ -28,13 +28,13 @@ export default {
     SignInComponent,
   },
   methods: {
-    ...mapActions(["redirectTo", "loginUser", "isLogin"]),
+    ...mapActions(["redirectTo", "loginUser", "isLogin", "isLoginAvocat"]),
   },
   mounted() {
-    this.isLogin().then((response) => {
+    this.isLoginAvocat().then((response) => {
       if (response) {
-        console.log("dsq");
-        this.redirectTo({ val: "homeView" });
+          this.redirectTo({ val: "dashboard" });
+        console.log("signin avocat");
       }
     });
   },
