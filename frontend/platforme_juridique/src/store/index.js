@@ -456,6 +456,18 @@ const store = createStore({
       } return false
 
     },
+     // update info user
+     updateInfoAvocat({ commit }, avocat) {
+
+      return axiosClient.post('avocat/updateAvocat', avocat)
+        .then(response => {
+          if (response.data.message == "bien modifié") {
+            commit('setAvocat', response.data.avocat);
+          }
+          return response.data
+        });
+    },
+    
 
   },
   mutations: {
