@@ -172,10 +172,16 @@
                 required
                 class="border p-2 rounded w-full"
               >
-                <option :value="'homme'" :selected="this.avocat.sexe == 'homme'">
+                <option
+                  :value="'homme'"
+                  :selected="this.avocat.sexe == 'homme'"
+                >
                   homme
                 </option>
-                <option :value="'femme'" :selected="this.avocat.sexe == 'femme'">
+                <option
+                  :value="'femme'"
+                  :selected="this.avocat.sexe == 'femme'"
+                >
                   femme
                 </option>
               </select>
@@ -328,13 +334,12 @@ export default {
   methods: {
     ...mapActions([
       "redirectTo",
-      "updatePassAvocat",
       "updateInfoAvocat",
       "getVilles",
       "getCategorie",
       "registerUser",
       "isLogin",
-      "getAvocats",
+      "updatePassAvocat",
       "getAvocatsBySearch",
     ]),
 
@@ -348,6 +353,8 @@ export default {
     },
 
     updateAvocatPass(ev) {
+                // console.log(this.userPass);
+
       ev.preventDefault();
       if (this.userPass.confirm == this.userPass.newPass) {
         this.updatePassAvocat(this.userPass).then((response) => {
@@ -377,7 +384,7 @@ export default {
     //
     //
     this.avocat = JSON.parse(sessionStorage.getItem("Avocat"));
-    //     this.userPass.id = this.users.id;
+    this.userPass.id = this.avocat.id;
     //     this.user.id = this.users.id;
     //     this.user.email = this.users.email;
     //     this.user.nom = this.users.nom;
