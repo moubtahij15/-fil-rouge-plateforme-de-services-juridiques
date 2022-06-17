@@ -1,5 +1,13 @@
 <template lang="">
   <div class="relative z-10 w-full max-w-2xl mt-20 lg:mt-0 lg:w-5/12">
+    <button
+      @click="
+        this.$parent.$options.name == 'signIn' ? redirectTo({ val: 'sign-in' }) : redirectTo({ val: 'signIn' })
+      "
+      class="inline-block w-1/2 px-3 py-2 text-md font-medium text-center text-white1 transition duration-200 bg-yellow-300 rounded-lg bg-primary ease"
+    >
+      je suis {{ contre }}
+    </button>
     <form @submit="login">
       <!-- erreur message  -->
       <div
@@ -81,17 +89,11 @@
               Valider
             </button>
           </div>
-          <div class="relative">
-            <button
-              type="submit"
-              class="inline-block w-1/2 px-3 py-2 text-md font-medium text-center text-white1 transition duration-200 bg-yellow-300 rounded-lg bg-primary ease"
-            >
-              je suis Avocat
-            </button>
-          </div>
+          <div class="relative"></div>
         </div>
       </div>
     </form>
+
     <svg
       class="absolute top-0 left-0 z-0 w-32 h-32 -mt-12 -ml-12 text-gray-200 fill-current"
       viewBox="0 0 91 91"
@@ -294,11 +296,12 @@ export default {
       },
       message: "",
       espace: "",
+      contre: "",
       //
     };
   },
   methods: {
-    ...mapActions(["redirectTo", "loginUser", "isLogin"]),
+    ...mapActions(["redirectTo", "loginUser", "isLogin", "loginAvocat"]),
 
     //user methods
     login(ev) {
@@ -322,36 +325,36 @@ export default {
           }
           // this.redirectTo({ val: "HomePage" });
         });
+      } else if (this.$parent.$options.name == "sign-in") {
+        console.log("z");
+
+        this.loginAvocat(this.user).then((response) => {
+          console.log(response);
+          (this.user.email = ""), (this.user.password = "");
+          if (response.message == "success") {
+            // this.error = true
+            // console.log(this.$parent.$parent.$parent.navChange());
+
+            this.redirectTo({ val: "dashboard" });
+          } else {
+            this.message = response.message;
+          }
+          // this.redirectTo({ val: "HomePage" });
+        });
       }
-      //  else if (this.$parent.$options.name == 'LoginAdmin') {
-
-      //     this.admin.reff_admin = this.user.email;
-      //     this.admin.pass = this.user.pass;
-
-      //     store
-      //         .dispatch('loginAdmin', this.admin)
-      //         .then((response) => {
-
-      //             console.log(response);
-      //             if (response.message != "success") {
-      //                 this.error = true
-
-      //             } else if (response.message == "success") {
-
-      //                 this.redirectTo({ val: "dashboardAdmin" });
-
-      //             }
-      //         })
-
-      // }
     },
   },
 
   mounted() {
     // console.log(this.$store.state.login.email);
     // console.log(this.$store.state.login.pass);
+    console.log(this.$parent.$options.name);
     if (this.$parent.$options.name == "signIn") {
-      this.espace="client"
+      this.espace = "client";
+      this.contre = "Avocat";
+    } else if (this.$parent.$options.name == "sign-in") {
+      this.espace = "Avocat";
+      this.contre = "client";
     }
   },
 };
