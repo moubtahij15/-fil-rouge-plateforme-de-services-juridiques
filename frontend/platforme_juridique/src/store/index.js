@@ -13,6 +13,9 @@ const store = createStore({
     avocats: {
 
     },
+    avocat: {
+
+    },
     avocatsSearch: {
 
     },
@@ -424,7 +427,7 @@ const store = createStore({
       return axiosClient.post('avocat/login', avocat)
         .then(response => {
           if (response.data.message == "success") {
-            commit('setAvocats', response.data.avocat);
+            commit('setAvocat', response.data.avocat);
           }
 
           return response.data
@@ -446,7 +449,7 @@ const store = createStore({
     },
     // end register avocat
     // check if is login
-    isLogin({ commit }) {
+    isLoginAvocat({ commit }) {
       // console.log(JSON.parse(sessionStorage.getItem("User")).id)
       if (JSON.parse(sessionStorage.getItem("Avocat"))) {
         return true
@@ -488,10 +491,11 @@ const store = createStore({
     // set avocats
     setAvocats: (state, avocats) => {
       state.avocats = avocats;
-      sessionStorage.setItem('Avocat', JSON.stringify(avocats));
+      // sessionStorage.setItem('Avocat', JSON.stringify(avocats));
 
 
     },
+
     // set avocats search
     setAvocatsSearch: (state, avocats) => {
       state.avocatsSearch = avocats;
@@ -558,9 +562,17 @@ const store = createStore({
       // const array3 = array1.concat(array2);
       state.documentsClient = data;
 
-    }
+    },
 
     //  end user mutations
+    // start avocat mutation
+     // set avocats
+     setAvocat: (state, avocat) => {
+      state.avocat = avocat;
+      sessionStorage.setItem('Avocat', JSON.stringify(avocat));
+
+
+    },
 
   },
   modules: {},
