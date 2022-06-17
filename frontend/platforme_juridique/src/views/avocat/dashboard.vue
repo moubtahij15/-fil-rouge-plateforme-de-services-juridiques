@@ -53,7 +53,7 @@
 
           <div
             v-if="
-              $store.state.choix == 1 && this.$options.name == 'profileUser'
+              $store.state.choix == 1 && this.$options.name == 'dashboard'
             "
           >
             <ProfilFormUser />
@@ -65,7 +65,7 @@
               $store.state.choix == 2 && this.$options.name == 'profileUser'
             "
           >
-            <rdvUser />
+            <!-- <rdvUser /> -->
           </div>
 
           <div
@@ -73,14 +73,14 @@
               $store.state.choix == 3 && this.$options.name == 'profileUser'
             "
           >
-            <Consultation />
+            <!-- <Consultation /> -->
           </div>
           <div
             v-if="
               $store.state.choix == 4 && this.$options.name == 'profileUser'
             "
           >
-            <Documents />
+            <!-- <Documents /> -->
           </div>
 
           <!-- <div c>
@@ -100,10 +100,11 @@
 import store from "@/store";
 import { mapActions } from "vuex";
 import ChoixProfile from "@/components/profileComponents/choixProfile.vue";
-import rdvUser from "@/components/profileComponents/user/rendezVous.vue";
-import Consultation from "@/components/profileComponents/user/consultation.vue";
-import Documents from "@/components/profileComponents/user/documents.vue";
-import ProfilFormUser from "@/components/profileFormUser.vue";
+// import rdvUser from "@/components/profileComponents/user/rendezVous.vue";
+// import Consultation from "@/components/profileComponents/user/consultation.vue";
+// import Documents from "@/components/profileComponents/user/documents.vue";
+import ProfilFormUser from "@/components/avocatComponent/profile/formProfile.vue";  
+// src\components\profileComponents\avocatComponent\profile\formProfile.vue
 export default {
   name: "dashboard",
   data() {
@@ -118,9 +119,6 @@ export default {
   components: {
     ProfilFormUser,
     ChoixProfile,
-    rdvUser,
-    Consultation,
-    Documents
   },
 
   methods: {
