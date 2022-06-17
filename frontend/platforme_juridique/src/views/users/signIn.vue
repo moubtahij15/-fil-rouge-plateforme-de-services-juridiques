@@ -33,7 +33,7 @@ export default {
   mounted() {
     this.isLogin().then((response) => {
       if (response) {
-        console.log("dsq");
+        console.log("SIGNIN USER");
         this.redirectTo({ val: "homeView" });
       }
     });
