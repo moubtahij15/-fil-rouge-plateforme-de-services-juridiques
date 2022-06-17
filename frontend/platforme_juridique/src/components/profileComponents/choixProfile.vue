@@ -117,11 +117,11 @@ export default {
     ]),
 
     choix(choix) {
-      this.isLogin().then((response) => {
-        if (!response) {
-          this.redirectTo({ val: "signIn" });
-        }
-      });
+      // this.isLogin().then((response) => {
+      //   if (!response) {
+      //     this.redirectTo({ val: "signIn" });
+      //   }
+      // });
       this.getChoixProfile(choix);
     },
   },
