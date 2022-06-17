@@ -8,6 +8,7 @@ import avocatProfile from '../views/users/avocatProfile.vue'
 import profileUser from '../views/users/profileUser.vue'
 import decouvrire from '../views/users/decouvrire.vue'
 import dashboard from '../views/avocat/dashboard.vue'
+import sign_in from '../views/avocat/sign-in.vue'
 
 
 const routes = [
@@ -29,7 +30,8 @@ const routes = [
     ],
 
   },
-  { path: '/dashboard', name: 'dashboard', component: dashboard }
+  { path: '/dashboard', name: 'dashboard', component: dashboard },
+  { path: '/sign-in', name: 'sign-in', component: sign_in }
 
 
 ]
