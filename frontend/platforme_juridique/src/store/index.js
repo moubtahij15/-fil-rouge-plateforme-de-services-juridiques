@@ -415,6 +415,45 @@ const store = createStore({
 
     },
 
+    // end methods client
+    // start method avocat
+    // login avocat
+
+    loginAvocat({ commit }, avocat) {
+
+      return axiosClient.post('avocat/login', avocat)
+        .then(response => {
+          if (response.data.message == "success") {
+            commit('setAvocats', response.data.avocat);
+          }
+
+          return response.data
+        });
+    },
+    // end login avocat
+    // start rgister avocat
+
+    registerAvocat({ commit }, user) {
+
+      return axiosClient.post('avocat/register', user)
+        .then(response => {
+          if (response.status == 200) {
+            return response.data;
+
+          }
+
+        })
+    },
+    // end register avocat
+    // check if is login
+    isLogin({ commit }) {
+      // console.log(JSON.parse(sessionStorage.getItem("User")).id)
+      if (JSON.parse(sessionStorage.getItem("Avocat"))) {
+        return true
+      } return false
+
+    },
+
   },
   mutations: {
 
@@ -449,6 +488,8 @@ const store = createStore({
     // set avocats
     setAvocats: (state, avocats) => {
       state.avocats = avocats;
+      sessionStorage.setItem('Avocat', JSON.stringify(avocats));
+
 
     },
     // set avocats search
