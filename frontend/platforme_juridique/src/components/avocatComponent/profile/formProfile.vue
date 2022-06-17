@@ -1,7 +1,7 @@
 <template lang="">
   <div>
     <!-- form for update info -->
-    <form @submit="updateUserInfo">
+    <form @submit="updateAvocatInfo">
       <!-- alert success update -->
       <div v-if="showSucess" class="w-full text-white bg-primary">
         <div
@@ -130,7 +130,7 @@
               <input
                 placeholder="Email "
                 v-model="avocat.email"
-                class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 py-2"
+                class="appearance-none w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 py-2"
                 required="required"
                 type="email"
                 name="integration[shop_name]"
@@ -141,14 +141,14 @@
               <div class="px-4 py-2 font-semibold">ville</div>
 
               <select
-                v-model="this.avocat.ville_id"
+                v-model="this.avocat.ville"
                 required
                 class="border p-2 rounded w-full"
               >
                 <option
                   v-for="elem in $store.state.villes"
                   :value="elem.id"
-                  :selected="this.avocat.idVille == elem.id"
+                  :selected="avocat.ville == elem.id"
                 >
                   {{ elem.nom }}
                 </option>
@@ -158,7 +158,7 @@
               <div class="px-4 py-2 font-semibold">telephone</div>
               <input
                 placeholder="tel"
-                v-model="avocat.tel"
+                v-model="avocat.Tel"
                 class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-3 py-2"
                 type="number"
                 name="integration[shop_name]"
@@ -167,14 +167,18 @@
             </div>
             <div class="grid grid-cols-2 mt-4">
               <div class="px-4 py-2 font-semibold">sexe</div>
-              <input
-                placeholder="sexe"
-                v-model="avocat.sexe"
-                class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-3 py-2"
-                type="number"
-                name="integration[shop_name]"
-                id="integration_shop_name"
-              />
+              <select
+                v-model="this.avocat.sexe"
+                required
+                class="border p-2 rounded w-full"
+              >
+                <option :value="'homme'" :selected="this.avocat.sexe == 'homme'">
+                  homme
+                </option>
+                <option :value="'femme'" :selected="this.avocat.sexe == 'femme'">
+                  femme
+                </option>
+              </select>
             </div>
             <div class="grid grid-cols-2 mt-4">
               <div class="px-4 py-2 font-semibold">adresse</div>
@@ -305,8 +309,8 @@ export default {
         id: "",
         nom: "",
         prenom: "",
-        ville_id: "",
-        tel: "",
+        ville: "",
+        Tel: "",
         password: "",
         email: "",
         date_naissance: "",
@@ -325,7 +329,7 @@ export default {
     ...mapActions([
       "redirectTo",
       "updatePassUser",
-      "updateInfoUser",
+      "updateInfoAvocat",
       "getVilles",
       "getCategorie",
       "registerUser",
@@ -334,9 +338,10 @@ export default {
       "getAvocatsBySearch",
     ]),
 
-    updateUserInfo(ev) {
+    updateAvocatInfo(ev) {
       ev.preventDefault();
-      this.updateInfoUser(this.user).then((response) => {
+      console.log(this.avocat);
+      this.updateInfoAvocat(this.avocat).then((response) => {
         this.showSucess = true;
         console.log(response);
       });
@@ -369,11 +374,9 @@ export default {
     },
   },
   mounted() {
-    // this.isLogin().then((response) => {
-    //   if (!response) {
-    //     this.redirectTo({ val: "signIn" });
-    //   } else {
-    //     this.users = JSON.parse(sessionStorage.getItem("User"));
+    //
+    //
+    this.avocat = JSON.parse(sessionStorage.getItem("Avocat"));
     //     this.userPass.id = this.users.id;
     //     this.user.id = this.users.id;
     //     this.user.email = this.users.email;
@@ -381,8 +384,7 @@ export default {
     //     this.user.prenom = this.users.prenom;
     //     this.user.tel = this.users.tel;
     //     this.user.ville_id = this.users.ville_id;
-    //   }
-    // });
+    //
 
     this.getVilles().then((response) => {
       console.log(response);
