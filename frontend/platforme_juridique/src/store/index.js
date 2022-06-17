@@ -475,6 +475,9 @@ const store = createStore({
 
       return axiosClient.post('avocat/updatePass', pass)
         .then(response => {
+          console.log(response)
+          console.log("response")
+
           if (response.data.result == "success") {
             commit('avocat', response.data.client);
           }
