@@ -398,43 +398,36 @@ export default {
   },
 
   methods: {
-    ...mapActions(["redirectTo", "getVilles", "registerUser", "isLogin"]),
+    ...mapActions(["redirectTo", "getVilles", "registerAvocat", "isLogin"]),
 
     // register user
     register(ev) {
       ev.preventDefault();
 
-      // store
-      //     .dispatch('login', this.user)
-      //     .then((response) => {
-
-      //         console.log(response);
-      //         if (response.data.message != "success") {
-      //             this.error = true
-      //         }
-      //         this.redirectTo({ val: "HomePage" });
-      //     })
-      // console.log(this.$parent.$options.name)
+     
       console.log(this.avocat);
 
       // $store.state.login.email
-      // this.registerUser(this.user).then((response) => {
-      //   console.log(response);
-      //   // this.user = ""
-      //   this.user.email = "";
-      //   this.user.nom = "";
-      //   this.user.prenom = "";
-      //   this.user.password = "";
-      //   this.user.tel = "";
-      //   this.user.ville_id = "";
-      //   if (response.message == "bien creer") {
-      //     // this.error = true
-      //     this.redirectTo({ val: "signIn" });
-      //   } else {
-      //     this.message = response.message;
-      //   }
-      //   // this.redirectTo({ val: "HomePage" });
-      // });
+      this.registerAvocat(this.avocat).then((response) => {
+        console.log(response);
+        // this.user = ""
+        this.avocat.email = "";
+        this.avocat.nom = "";
+        this.avocat.prenom = "";
+        this.avocat.password = "";
+        this.avocat.tel = "";
+        this.avocat.ville_id = "";
+        this.avocat.sexe = "";
+        this.avocat.date_naissance = "";
+        this.avocat.adresse = "";
+        if (response.message == "bien creer") {
+          // this.error = true
+          this.redirectTo({ val: "sign-up" });
+        } else {
+          this.message = response.message;
+        }
+        // this.redirectTo({ val: "HomePage" });
+      });
 
       //  else if (this.$parent.$options.name == 'LoginAdmin') {
 
