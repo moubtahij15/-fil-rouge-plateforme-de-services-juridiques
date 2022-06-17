@@ -105,7 +105,7 @@ import Consultation from "@/components/profileComponents/user/consultation.vue";
 import Documents from "@/components/profileComponents/user/documents.vue";
 import ProfilFormUser from "@/components/profileFormUser.vue";
 export default {
-  name: "profileUser",
+  name: "dashboard",
   data() {
     return {
       avocat: "",
