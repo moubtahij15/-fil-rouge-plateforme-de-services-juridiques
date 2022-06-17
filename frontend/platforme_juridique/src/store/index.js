@@ -470,6 +470,17 @@ const store = createStore({
           return response.data
         });
     },
+    // update pass user
+    updatePassAvocat({ commit }, pass) {
+
+      return axiosClient.post('avocat/updatePass', pass)
+        .then(response => {
+          if (response.data.result == "success") {
+            commit('avocat', response.data.client);
+          }
+          return response.data
+        });
+    },
 
 
   },
