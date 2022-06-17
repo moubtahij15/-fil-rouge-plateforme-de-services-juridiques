@@ -214,7 +214,7 @@
     </form>
     <!-- form for update password -->
 
-    <form @submit="updateUserPass">
+    <form @submit="updateAvocatPass">
       <div class="flex mt-4">
         <FIcons :icon="['fas', 'lock']" class="h-6 w-6 cursor-pointer"></FIcons>
 
@@ -328,7 +328,7 @@ export default {
   methods: {
     ...mapActions([
       "redirectTo",
-      "updatePassUser",
+      "updatePassAvocat",
       "updateInfoAvocat",
       "getVilles",
       "getCategorie",
@@ -347,10 +347,10 @@ export default {
       });
     },
 
-    updateUserPass(ev) {
+    updateAvocatPass(ev) {
       ev.preventDefault();
       if (this.userPass.confirm == this.userPass.newPass) {
-        this.updatePassUser(this.userPass).then((response) => {
+        this.updatePassAvocat(this.userPass).then((response) => {
           (this.userPass.confirm = ""), (this.userPass.oldPass = "");
           this.userPass.newPass = "";
           if (response.result == "erreur") {
