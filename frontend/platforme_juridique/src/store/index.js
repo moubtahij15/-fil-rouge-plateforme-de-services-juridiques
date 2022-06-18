@@ -485,6 +485,20 @@ const store = createStore({
         });
     },
     // cchange etat rdv
+    getTypeConsultation({ commit }, id) {
+
+      return axiosClient.post('avocat/getTypeConsultation/'+id)
+        .then(response => {
+          console.log(response)
+          // console.log("response")
+
+          if (response.data.message == "success") {
+            // commit('setAvocat', response.data.avocat);
+          }
+          return response.data
+        });
+    },
+    // cchange etat rdv
     chageEtatRdv({ commit }, avocat) {
 
       return axiosClient.post('avocat/chageEtatRdv', avocat)
