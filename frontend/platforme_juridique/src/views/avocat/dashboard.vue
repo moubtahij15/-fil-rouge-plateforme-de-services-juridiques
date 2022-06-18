@@ -65,7 +65,7 @@
               $store.state.choix == 2 && this.$options.name == 'profileUser'
             "
           >
-            <!-- <rdvUser /> -->
+            <rdvAvocat/>
           </div>
 
           <div
@@ -100,7 +100,7 @@
 import store from "@/store";
 import { mapActions } from "vuex";
 import ChoixProfile from "@/components/profileComponents/choixProfile.vue";
-// import rdvUser from "@/components/profileComponents/user/rendezVous.vue";
+import rdvAvocat from "@/components/avocatComponent/profile/rdv.vue";
 // import Consultation from "@/components/profileComponents/user/consultation.vue";
 // import Documents from "@/components/profileComponents/user/documents.vue";
 import ProfilFormUser from "@/components/avocatComponent/profile/formProfile.vue";  
@@ -119,6 +119,7 @@ export default {
   components: {
     ProfilFormUser,
     ChoixProfile,
+    rdvAvocat
   },
 
   methods: {
