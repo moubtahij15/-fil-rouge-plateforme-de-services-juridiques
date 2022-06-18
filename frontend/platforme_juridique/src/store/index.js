@@ -513,7 +513,7 @@ const store = createStore({
         });
     },
     // get all cosultations ecrit
-    getConsultationsEcrite({ commit }, id) {
+    getConsultationsEcriteAvocat({ commit }, id) {
 
       return axiosClient.post('ConsultationEcrite/readAllconultationsEcriteAvocat/' + id)
         .then(response => {
@@ -530,7 +530,7 @@ const store = createStore({
         })
     },
     // get all cosultations ecrit
-    getConsultationsTel({ commit }, id) {
+    getConsultationsTelAvocat({ commit }, id) {
 
       return axiosClient.post('/ConsultationTel/readAllconultationsTelAvocat/' + id)
         .then(response => {
