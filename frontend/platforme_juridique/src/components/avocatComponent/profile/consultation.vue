@@ -12,7 +12,9 @@
             ></path>
           </svg>
 
-          <p class="mx-3 font-bold"></p>
+          <p class="mx-3 font-bold">  il faut d'abord determiner le prix  et le type de consultation</p>
+          <p class="mx-3 font-bold">  clicker ici pour determiner</p>
+
         </div>
 
         <button
@@ -139,12 +141,8 @@
         </div>
         <!-- label -->
         <div class="ml-3 text-primary font-medium">
-          <span v-if="value"
-            >cette service est activé (vous pouvez desactiver juste switch )
-          </span>
-          <span v-if="!value"
-            >cette service est desativer (vous pouvez activé juste switch )
-          </span>
+          <span v-if="value">ce service est activé </span>
+          <span v-if="!value">ce service est desativer </span>
         </div>
       </label>
     </div>
@@ -189,7 +187,7 @@
                   {{ elem.sujet }}
                 </td>
                 <td
-                  class="px-4 py-3  w-full text-left text-xs font-semibold text-center"
+                  class="px-4 py-3 w-full text-left text-xs font-semibold text-center"
                 >
                   {{ elem.date_creneau }}
                   {{ elem.date }}
@@ -210,10 +208,8 @@
                     {{ elem.type }}
                   </span>
                 </td>
-                <td class="text-xs bg-primary  py-3 text-white rounded-md ">
-                  <span
-                    class="bg-primary w-full   text-white  "
-                  >
+                <td class="text-xs bg-primary py-3 text-white rounded-md">
+                  <span class="bg-primary w-full text-white">
                     {{ elem[0].etat }}
                   </span>
                 </td>
@@ -224,18 +220,18 @@
                     {{ elem.prix }}DH
                   </span>
                 </td>
-                 <td class="px-4 py-3 text-xs">
+                <td class="px-4 py-3 text-xs">
                   <span
                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
                     {{ elem.email }}
                   </span>
                 </td>
-                 <td class="px-4 py-3 text-xs">
+                <td class="px-4 py-3 text-xs">
                   <span
                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
-                    {{ elem.tel }}   
+                    {{ elem.tel }}
                   </span>
                 </td>
 
@@ -372,6 +368,7 @@ export default {
       rdv: {},
       showModal: false,
       sjt_post: "",
+      type:[],
       rdvUpdate: {},
       msg: "",
       msg1: "",
@@ -400,7 +397,7 @@ export default {
       "getAvocatsBySearch",
       "getCreneaux",
       "vaidateRdv",
-      "getRdvUser",
+      "getTypeConsultation",
       "updateSjtRdv",
       "getConsultationsTelAvocat",
       "getConsultationsEcriteAvocat",
@@ -411,7 +408,7 @@ export default {
       } else {
         this.value = 1;
       }
-      console.log(this.value)
+      console.log(this.value);
       this.changeEtatConsultation({
         id: JSON.parse(sessionStorage.getItem("Avocat")).id,
         value: this.value,
@@ -475,6 +472,12 @@ export default {
   mounted() {
     // this.getAllRdv();
     this.getConsultations(JSON.parse(sessionStorage.getItem("Avocat")).id);
+    this.getTypeConsultation(
+      JSON.parse(sessionStorage.getItem("Avocat")).id
+    ).then((response) => {
+        this.type=response.avocat
+      console.log(response);
+    });
   },
 };
 </script>
