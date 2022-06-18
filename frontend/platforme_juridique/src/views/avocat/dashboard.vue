@@ -52,28 +52,22 @@
           <!-- End of profile tab -->
 
           <div
-            v-if="
-              $store.state.choix == 1 && this.$options.name == 'dashboard'
-            "
+            v-if="$store.state.choix == 1 && this.$options.name == 'dashboard'"
           >
             <ProfilFormUser />
           </div>
           <!-- rdv -->
 
           <div
-            v-if="
-              $store.state.choix == 2 && this.$options.name == 'dashboard'
-            "
+            v-if="$store.state.choix == 2 && this.$options.name == 'dashboard'"
           >
-            <RdvAvocat/>
+            <RdvAvocat />
           </div>
 
           <div
-            v-if="
-              $store.state.choix == 3 && this.$options.name == 'profileUser'
-            "
+            v-if="$store.state.choix == 3 && this.$options.name == 'dashboard'"
           >
-            <!-- <Consultation /> -->
+            <Consultation />
           </div>
           <div
             v-if="
@@ -103,7 +97,8 @@ import ChoixProfile from "@/components/profileComponents/choixProfile.vue";
 import RdvAvocat from "@/components/avocatComponent/profile/rdv.vue";
 // import Consultation from "@/components/profileComponents/user/consultation.vue";
 // import Documents from "@/components/profileComponents/user/documents.vue";
-import ProfilFormUser from "@/components/avocatComponent/profile/formProfile.vue";  
+import ProfilFormUser from "@/components/avocatComponent/profile/formProfile.vue";
+import Consultation from "@/components/avocatComponent/profile/consultation.vue";
 // src\components\profileComponents\avocatComponent\profile\formProfile.vue
 export default {
   name: "dashboard",
@@ -119,7 +114,8 @@ export default {
   components: {
     ProfilFormUser,
     ChoixProfile,
-    RdvAvocat
+    RdvAvocat,
+    Consultation,
   },
 
   methods: {
@@ -135,7 +131,6 @@ export default {
   },
   mounted() {
     // console.log();
-
     // this.avocat = JSON.parse(sessionStorage.getItem('avocatProfile'));
   },
 };
