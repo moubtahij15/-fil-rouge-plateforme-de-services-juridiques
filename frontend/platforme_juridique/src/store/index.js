@@ -487,7 +487,7 @@ const store = createStore({
     // cchange etat rdv
     getTypeConsultation({ commit }, id) {
 
-      return axiosClient.post('avocat/getTypeConsultation/'+id)
+      return axiosClient.post('avocat/getTypeConsultation/' + id)
         .then(response => {
           console.log(response)
           // console.log("response")
@@ -567,6 +567,22 @@ const store = createStore({
           if (response.status == 200) {
             console.log(response.data);
             commit('setConsultationsTel', response.data);
+
+            return response.data;
+
+          }
+
+        })
+    },
+    // add consulttaion info (price...)
+    addConsultation({ commit }, consultation) {
+
+      return axiosClient.post('/avocat/addConsultation' ,consultation)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
 
             return response.data;
 
