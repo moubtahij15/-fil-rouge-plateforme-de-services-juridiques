@@ -479,7 +479,21 @@ const store = createStore({
           console.log("response")
 
           if (response.data.result == "success") {
-            commit('setAvocat', response.data.client);
+            commit('setAvocat', response.data.avocat);
+          }
+          return response.data
+        });
+    },
+    // update pass user
+    chageEtatRdv({ commit }, avocat) {
+
+      return axiosClient.post('avocat/chageEtatRdv', avocat)
+        .then(response => {
+          console.log(response)
+          // console.log("response")
+
+          if (response.data.message == "success") {
+            commit('setAvocat', response.data.avocat);
           }
           return response.data
         });
