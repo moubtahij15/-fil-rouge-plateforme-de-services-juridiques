@@ -1,6 +1,84 @@
 <template lang="">
   <!-- alert 1h before -->
   <div class="block w-full overflow-x-auto">
+    <div
+      v-if="showModal"
+      class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
+    >
+      <div class="relative w-auto my-6 mx-auto w-full max-w-3xl">
+        <!--content-->
+        <div
+          class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
+        >
+          <!--header-->
+          <div
+            class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t"
+          >
+            <h3 class="text-3xl font-semibold">determiner le prix</h3>
+            <button
+              class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+            >
+              <span
+                class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
+              >
+                ×
+              </span>
+            </button>
+          </div>
+          <!--body-->
+          <div class="relative p-6 flex-auto w-full">
+            <div class="items-center md:flex">
+              <div class="relative">
+                <label
+                  class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"
+                  >prix</label
+                >
+                <input
+                  v-model="prix.telephonique"
+                  type="number"
+                  class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                  placeholder="consultation telephonique"
+                  required
+                />
+              </div>
+              <div class="relative ml-4">
+                <label
+                  class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white1"
+                  >prix</label
+                >
+                <input
+                  v-model="prix.ecrite"
+                  type="number"
+                  class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white1 border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                  placeholder="consultation ecrite"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="flex-1 px-2 pt-2 mx-10 m-2"></div>
+          <!--footer-->
+          <div
+            class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
+          >
+            <button
+              class="text-green-500 bg-transparent border border-solid border-green-500 hover:bg-green-500 hover:text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
+              v-on:click="this.showModal = !this.showModal"
+            >
+              Close
+            </button>
+            <button
+              class="text-green-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
+              @click="updatePost()"
+            >
+              Save Changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="w-full text-primary shadow bg-white">
       <div
         class="container flex items-center justify-between px-6 py-4 mx-auto"
@@ -12,9 +90,15 @@
             ></path>
           </svg>
 
-          <p class="mx-3 font-bold">  il faut d'abord determiner le prix  et le type de consultation</p>
-          <p class="mx-3 font-bold">  clicker ici pour determiner</p>
-
+          <p class="mx-3 font-semibold">
+            il faut d'abord determiner le prix et le type de consultation
+          </p>
+          <p
+            class="mx-3 font-bold underline cursor-pointer"
+            @click="toggleModal"
+          >
+            Appuyer ici pour determiner
+          </p>
         </div>
 
         <button
@@ -368,10 +452,14 @@ export default {
       rdv: {},
       showModal: false,
       sjt_post: "",
-      type:[],
+      type: [],
       rdvUpdate: {},
       msg: "",
       msg1: "",
+      prix: {
+        ecrite: "",
+        telephonique: "",
+      },
       consultations: [],
       consultation: {
         type: "",
@@ -468,6 +556,12 @@ export default {
         this.consultation.heure = elem.heure_debut;
       }
     },
+    toggleModal() {
+      this.showModal = !this.showModal;
+
+      //   this.sjt_post = elm.sjt_RDV;
+      //   this.rdvUpdate = elm;
+    },
   },
   mounted() {
     // this.getAllRdv();
@@ -475,7 +569,7 @@ export default {
     this.getTypeConsultation(
       JSON.parse(sessionStorage.getItem("Avocat")).id
     ).then((response) => {
-        this.type=response.avocat
+      this.type = response.avocat;
       console.log(response);
     });
   },
