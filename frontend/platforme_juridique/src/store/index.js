@@ -501,7 +501,7 @@ const store = createStore({
     // update pass user
     getRdvAvocat({ commit }, id) {
 
-      return axiosClient.post('avocat/rdvAvocat/'+id)
+      return axiosClient.post('avocat/rdvAvocat/' + id)
         .then(response => {
           console.log(response)
           // console.log("response")
@@ -511,6 +511,40 @@ const store = createStore({
           }
           return response.data
         });
+    },
+    // get all cosultations ecrit
+    getConsultationsEcrite({ commit }, id) {
+
+      return axiosClient.post('ConsultationEcrite/readAllconultationsEcriteAvocat/' + id)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+            commit('setConsultationsEcrite', response.data);
+
+            return response.data;
+
+          }
+
+        })
+    },
+    // get all cosultations ecrit
+    getConsultationsTel({ commit }, id) {
+
+      return axiosClient.post('/ConsultationTel/readAllconultationsTelAvocat/' + id)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+            commit('setConsultationsTel', response.data);
+
+            return response.data;
+
+          }
+
+        })
     },
 
 
