@@ -12,9 +12,7 @@
             ></path>
           </svg>
 
-          <p class="mx-3 font-bold">
-           
-          </p>
+          <p class="mx-3 font-bold"></p>
         </div>
 
         <button
@@ -116,7 +114,40 @@
         </button>
       </div>
     </div>
-
+    <div class="flex items-center justify-center w-full mb-5">
+      <label for="toggleB" class="flex items-center cursor-pointer">
+        <!-- toggle -->
+        <div class="relative">
+          <!-- input -->
+          <input @click="testt" type="checkbox" id="toggleB" class="sr-only" />
+          <!-- line -->
+          <div
+            :class="
+              value
+                ? 'block bg-primary w-14 h-8 rounded-full'
+                : 'block bg-red w-14 h-8 rounded-full'
+            "
+          ></div>
+          <!-- dot -->
+          <div
+            :class="
+              value
+                ? 'dot absolute right-1 top-1 bg-white1 w-6 h-6 rounded-full transition'
+                : 'dot absolute left-1 top-1 bg-white1 w-6 h-6 rounded-full transition'
+            "
+          ></div>
+        </div>
+        <!-- label -->
+        <div class="ml-3 text-primary font-medium">
+          <span v-if="value"
+            >cette service est activé (vous pouvez desactiver juste switch )
+          </span>
+          <span v-if="!value"
+            >cette service est desativer (vous pouvez activé juste switch )
+          </span>
+        </div>
+      </label>
+    </div>
     <!-- table rdv -->
     <!-- component -->
     <section
@@ -130,7 +161,7 @@
               <tr
                 class="text-md font-semibold tracking-wide text-centre text-gray-900 bg-white border-b uppercase"
               >
-                <th class="px-4 py-3">avocat</th>
+                <th class="px-4 py-3">client</th>
                 <th class="px-4 py-3">sujet</th>
                 <th class="px-4 py-3">date</th>
 
@@ -138,6 +169,8 @@
                 <th class="px-4 py-3">type</th>
                 <th class="px-4 py-3">etat</th>
                 <th class="px-4 py-3">montant</th>
+                <th class="px-4 py-3">email</th>
+                <th class="px-4 py-3">tel</th>
                 <th class="px-4 py-3">Voir</th>
               </tr>
             </thead>
@@ -156,7 +189,7 @@
                   {{ elem.sujet }}
                 </td>
                 <td
-                  class="px-4 py-3 text-left text-md font-semibold text-center"
+                  class="px-4 py-3  w-full text-left text-xs font-semibold text-center"
                 >
                   {{ elem.date_creneau }}
                   {{ elem.date }}
@@ -177,9 +210,9 @@
                     {{ elem.type }}
                   </span>
                 </td>
-                <td class="text-xs">
+                <td class="text-xs bg-primary  text-white rounded-md ">
                   <span
-                    class="bg-primary w-1/2 px-4 py-3 text-white rounded-md px-2"
+                    class="bg-primary w-full  text-white  "
                   >
                     {{ elem[0].etat }}
                   </span>
@@ -189,6 +222,20 @@
                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
                     {{ elem.prix }}DH
+                  </span>
+                </td>
+                 <td class="px-4 py-3 text-xs">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
+                  >
+                    {{ elem.email }}
+                  </span>
+                </td>
+                 <td class="px-4 py-3 text-xs">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
+                  >
+                    {{ elem.tel }}   
                   </span>
                 </td>
 
@@ -338,6 +385,7 @@ export default {
         dateReponse: "",
         heureReponse: "",
       },
+      value: JSON.parse(sessionStorage.getItem("Avocat")).serviceConsultation,
     };
   },
   methods: {
@@ -354,9 +402,23 @@ export default {
       "vaidateRdv",
       "getRdvUser",
       "updateSjtRdv",
-      "getConsultationsEcrite",
-      "getConsultationsTel",
+      "getConsultationsTelAvocat",
+      "getConsultationsEcriteAvocat",
     ]),
+    testt() {
+      if (this.value) {
+        this.value = 0;
+      } else {
+        this.value = 1;
+      }
+      // console.log(this.value)
+    //   this.chageEtatRdv({
+    //     id: JSON.parse(sessionStorage.getItem("Avocat")).id,
+    //     value: this.value,
+    //   }).then((response) => {});
+
+      //   console.log(this.value);
+    },
 
     getAllRdv() {
       this.getRdvUser(JSON.parse(sessionStorage.getItem("User")).id).then(
@@ -368,8 +430,8 @@ export default {
     },
 
     getConsultations(id) {
-      this.getConsultationsTel(id).then((response) => {
-        this.getConsultationsEcrite(id).then((response) => {
+      this.getConsultationsTelAvocat(id).then((response) => {
+        this.getConsultationsEcriteAvocat(id).then((response) => {
           Array.prototype.push.apply(
             this.consultations,
             store.state.consultationEcrite
@@ -412,7 +474,7 @@ export default {
   },
   mounted() {
     // this.getAllRdv();
-    // this.getConsultations(JSON.parse(sessionStorage.getItem("User")).id);
+    this.getConsultations(JSON.parse(sessionStorage.getItem("Avocat")).id);
   },
 };
 </script>
