@@ -1,141 +1,239 @@
 <template lang="">
-  <!-- component -->
-  <!-- component -->
-  <div class="w-full mx-auto my-4 border-b-2 pb-4">
-    <div class="flex pb-3 mx-auto w-full">
-      <div class="flex-1">
-        <div
-          :class="step1 ? 'bg-primary text-white ' : 'bg-white'"
-          class="w-10 h-10 border-grey-light mx-auto rounded-full text-lg flex items-center"
-        >
-          <span class="text-center w-full">1</span>
-        </div>
-      </div>
+  <!-- alert 1h before -->
+  <div class="block w-full overflow-x-auto">
+    
+    <div @click="testt" >
+    <Toggle @chnage="value" />
+    </div>
+    
 
+    <div class="w-full text-primary shadow bg-white">
       <div
-        class="w-1/6 align-center items-center align-middle content-center flex"
+        class="container flex items-center justify-between px-6 py-4 mx-auto"
       >
-        <div
-          class="w-full bg-primary rounded items-center align-middle align-center flex-1"
-        >
-          <div
-            class="bg-primary text-xs leading-none py-1 text-center text-primary rounded"
-          ></div>
-        </div>
-      </div>
+        <div class="flex">
+          <svg viewBox="0 0 40 40" class="w-6 h-6 fill-current">
+            <path
+              d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z"
+            ></path>
+          </svg>
 
-      <div class="flex-1">
-        <div
-          :class="step2 ? 'bg-primary text-white ' : 'bg-white'"
-          class="w-10 h-10 border-grey-light mx-auto rounded-full text-lg flex items-center"
-        >
-          <span class="text-center w-full">2</span>
+          <p class="mx-3 font-bold">
+            vous pouvez annuler votre rendez-vous (d'une limite 1 h avant le
+            rendez-vous).​
+          </p>
         </div>
-      </div>
 
+        <button
+          class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none"
+        >
+          <svg
+            class="w-5 h-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 18L18 6M6 6L18 18"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!-- alert update sucess -->
+    <div v-if="this.msg" class="w-full text-white bg-primary">
       <div
-        class="w-1/6 align-center items-center align-middle content-center flex"
+        class="container flex items-center justify-between px-6 py-4 mx-auto"
       >
-        <div
-          class="w-full bg-primary rounded items-center align-middle align-center flex-1"
-        >
-          <div
-            class="bg-primary text-xs leading-none py-1 text-center text-primary rounded"
-          ></div>
-        </div>
-      </div>
+        <div class="flex">
+          <FIcons
+            id="delete"
+            :icon="['fas', 'check']"
+            class="h-6 w-6 cursor-pointer"
+          ></FIcons>
 
-      <div class="flex-1">
-        <div
-          :class="step3 ? 'bg-primary text-white ' : 'bg-white'"
-          class="w-10 h-10 border-grey-light mx-auto rounded-full text-lg flex items-center"
-        >
-          <span class="text-center w-full">3</span>
+          <p class="mx-3">
+            {{ this.msg }}
+          </p>
         </div>
-      </div>
 
-      <div class="flex-1"></div>
+        <button
+          class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none"
+          @click="this.msg = ''"
+        >
+          <svg
+            class="w-5 h-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 18L18 6M6 6L18 18"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
 
-    <!-- step1 horaires -->
-    <div
-      v-if="step1"
-      class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
-    >
-      <h2
-        class="max-w-lg mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto"
-      >
-        Vos préférences horaires :
-      </h2>
+    <!--  alert erro canceling  -->
 
+    <div v-if="this.msg1" class="w-full text-white bg-red">
       <div
-        class="-my-2 py-2 overflow-x-auto mx-auto max-w-xl mb-10 sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8"
+        class="container flex items-center justify-between px-6 py-4 mx-auto"
       >
-        <div class="col-lg-12 mt-5">
-          <label
-            class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"
-            >DATE</label
-          >
+        <div class="flex">
+          <FIcons
+            id="delete"
+            :icon="['fas', 'check']"
+            class="h-6 w-6 cursor-pointer"
+          ></FIcons>
 
-          <input
-            type="text"
-            placeholder="date Creneau"
-            class="border p-2 rounded w-full"
-            onfocus="(this.type = 'date')"
-            :min="this.min"
-            v-model="date_creneau"
-            required
-          />
+          <p class="mx-3">
+            {{ this.msg1 }}
+          </p>
         </div>
-        <div
-          class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg"
-        >
-          <table class="mx-auto">
-            <thead>
-              <tr>
-                <th
-                  class="px-6 py-3 border-b-2 border-gray-300 text-center leading-4 text-blue-500 tracking-wider"
-                >
-                  heure
-                </th>
-                <th
-                  class="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-500 tracking-wider"
-                ></th>
-                <th
-                  class="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-500 tracking-wider"
-                ></th>
 
-                <th
-                  class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider"
-                >
-                  choisi
-                </th>
+        <button
+          class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none"
+          @click="this.msg = ''"
+        >
+          <svg
+            class="w-5 h-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 18L18 6M6 6L18 18"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- modal suject -->
+    <div
+      v-if="showModal"
+      class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
+    >
+      <div class="relative w-auto my-6 mx-auto w-full max-w-3xl">
+        <!--content-->
+        <div
+          class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
+        >
+          <!--header-->
+          <div
+            class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t"
+          >
+            <h3 class="text-3xl font-semibold">modifier post</h3>
+            <button
+              class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+            >
+              <span
+                class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
+              >
+                ×
+              </span>
+            </button>
+          </div>
+          <!--body-->
+          <div class="relative p-6 flex-auto w-full">
+            <div class="whitespace-pre-wrap mt-7">
+              <textarea
+                v-model="this.sjt_post"
+                placeholder="Sujet"
+                class="bg-purple-white shadow rounded border-0 p-3 w-full"
+                required="required"
+              ></textarea>
+            </div>
+          </div>
+          <div class="flex-1 px-2 pt-2 mx-10 m-2"></div>
+          <!--footer-->
+          <div
+            class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
+          >
+            <button
+              class="text-green-500 bg-transparent border border-solid border-green-500 hover:bg-green-500 hover:text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
+              v-on:click="this.showModal = !this.showModal"
+            >
+              Close
+            </button>
+            <button
+              class="text-green-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
+              @click="updatePost()"
+            >
+              Save Changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- table rdv -->
+    <!-- component -->
+    <section class="container mx-auto p-6 font-mono">
+      <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+        <div class="w-full overflow-x-auto">
+          <table class="w-full border-white">
+            <thead>
+              <tr
+                class="text-md font-semibold tracking-wide text-centre text-gray-900 bg-white border-b uppercase"
+              >
+                <th class="px-4 py-3">avocat</th>
+                <th class="px-4 py-3">sujet</th>
+                <th class="px-4 py-3">date</th>
+
+                <th class="px-4 py-3">heure</th>
+                <th class="px-4 py-3">annuler</th>
               </tr>
             </thead>
-            <tbody class="bg-white">
-              <tr v-for="elem in $store.state.creneaux" :key="elem.id">
-                <td
-                  class="px-6 py-4 whitespace-no-wrap border-b border-gray-500"
-                >
-                  <div class="flex items-center">
-                    <div>
-                      <div class="text-sm leading-5 text-gray-800">
-                        {{ elem.heure_debut }}
-                      </div>
-                    </div>
-                  </div>
+            <tbody class="bg-white1">
+              <tr
+                class="text-gray-700 border-white border-b-2"
+                v-for="elem in rdv"
+              >
+                <td class="px-4 py-3 text-center">
+                  <p class="font-semibold">{{ elem.nom }} {{ elem.prenom }}</p>
                 </td>
-                <td></td>
-                <td></td>
 
                 <td
-                  class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider"
+                  class="px-4 py-3 text-left text-md font-semibold text-center cursor-pointer"
+                  @click="toggleModal(elem)"
                 >
-                  <button
-                    class="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none"
-                    @click="dateValidate(elem)"
+                  {{ elem.sjt_RDV.substring(0, 20) }}
+                </td>
+                <td
+                  class="px-4 py-3 text-left text-md font-semibold text-center"
+                >
+                  {{ elem.date_creneau }}
+                </td>
+
+                <td class="px-4 py-3 text-xs">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
-                    choisie
+                    {{ elem.heure_debut }}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-sm">
+                  <button
+                    @click="annulerRdv(elem)"
+                    class="flex-no-shrink px-5 py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 hover:bg-red hover:text-white text-primary rounded-full transition ease-in duration-300"
+                  >
+                    annuler
                   </button>
                 </td>
               </tr>
@@ -143,99 +241,34 @@
           </table>
         </div>
       </div>
-    </div>
-    <!-- step2 -->
-    <div
-      v-if="step2"
-      class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
-    >
-      <h2
-        class="max-w-lg mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto"
-      >
-        Entrer votre Sujet :
-      </h2>
-      <div class="w-full mt-4">
-        <textarea
-          v-model="this.rdv.sjt_RDV"
-          class="block w-full h-40 px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-        ></textarea>
-      </div>
-      <button
-        class="mt-3 px-5 py-2 border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none"
-        @click="validationRdv"
-      >
-        Valider
-      </button>
-    </div>
-    <!-- step3 -->
-    <div
-      v-if="step3"
-      class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
-    >
-      <div class="bg-gray-100 h-screen">
-        <div class="bg-white1 p-6 md:mx-auto">
-          <svg viewBox="0 0 24 24" class="text-primary w-16 h-16 mx-auto my-6">
-            <path
-              fill="currentColor"
-              d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z"
-            ></path>
-          </svg>
-          <div class="text-center">
-            <h3
-              class="md:text-2xl text-base text-gray-900 font-semibold text-center"
-            >
-              votre rendez-vous est bien passé
-            </h3>
-
-            <p class="text-primary y-2">
-              vous pouvez voir ton rendez-vous dans votre profile
-            </p>
-            <p>Passez une bonne journée !</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- component -->
-    <!-- <div   class="max-w-xl mt-5  md:mx-auto sm:text-center lg:max-w-xl ">
-                <h2
-                    class="max-w-lg mb-6 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto">
-           Entrer votre Sujet :                
-                       
-                </h2>
-                
-                                        <button class=" mt-3 px-5 py-2  border text-blue-500 rounded transition duration-300 hover:bg-primary hover:text-white focus:outline-none">Valider</button>
-
-</div> -->
+    </section>
   </div>
 </template>
 <script>
-import store from "../store";
 import { mapActions } from "vuex";
+import Toggle from "@vueform/toggle";
 
 export default {
-  name: "Rendez_vous",
+  name: "rdvAvocat",
   data() {
     return {
-      rdv: {
-        id_creneau: "",
-        date_creneau: "",
-        sjt_RDV: "",
-        id_client: sessionStorage.getItem("idUser"),
-        id_avocat: JSON.parse(sessionStorage.getItem("avocatProfile")).id,
-      },
-      date_creneau: "",
-
-      step1: true,
-      step2: false,
-      step3: false,
-      min: "",
+      rdv: {},
+      showModal: false,
+      sjt_post: "",
+      rdvUpdate: {},
+      msg: "",
+      msg1: "",
+      value: true,
     };
+  },
+  components: {
+    Toggle,
   },
   methods: {
     ...mapActions([
       "redirectTo",
       "getVilles",
+      "deleteRdv",
       "getCategorie",
       "registerUser",
       "isLogin",
@@ -243,41 +276,57 @@ export default {
       "getAvocatsBySearch",
       "getCreneaux",
       "vaidateRdv",
+      "getRdvUser",
+      "updateSjtRdv",
     ]),
+    testt() {
+    //   this.value = !this.value;
+    //   this.value = !this.value;
+    //   this.value = !this.value;
+      this.value = !this.value;
+      console.log(this.value);
 
-    dateValidate(elem) {
-      (this.step1 = false), (this.step2 = true);
-      this.rdv.date_creneau = this.date_creneau;
-      this.rdv.id_creneau = elem.id;
-      console.log(this.rdv);
     },
-    validationRdv() {
-      console.log(this.rdv);
 
-      this.vaidateRdv(this.rdv).then((response) => {
-        console.log(response);
-        if (response.message == "Created") {
-          this.step3 = true;
-          this.step2 = false;
-          // this.step1 = false;
+    toggleModal(elm) {
+      this.showModal = !this.showModal;
+
+      this.sjt_post = elm.sjt_RDV;
+      this.rdvUpdate = elm;
+    },
+    getAllRdv() {
+      this.getRdvUser(JSON.parse(sessionStorage.getItem("User")).id).then(
+        (response) => {
+          this.rdv = response;
+          console.log(this.rdv);
         }
+      );
+    },
+    updatePost() {
+      this.rdvUpdate.sjt_RDV = this.sjt_post;
+
+      this.updateSjtRdv(this.rdvUpdate).then((response) => {
+        this.getAllRdv();
+
+        this.showModal = !this.showModal;
+        this.msg = "Bien modifié";
+      });
+      console.log(this.rdvUpdate);
+    },
+    annulerRdv(elem) {
+      this.deleteRdv(elem).then((response) => {
+        this.getAllRdv();
+        if (response.status == "success") {
+          this.msg = "Bien Annuler";
+        } else if ((response.status = "echec")) this.msg1 = response.message;
+
+        console.log(response);
       });
     },
   },
-  watch: {
-    date_creneau(value) {
-      this.getCreneaux(value);
-    },
-  },
   mounted() {
-    this.min = new Date().toISOString().slice(0, 10);
-
-    this.getCreneaux(this.rdv.date_creneau).then((response) => {
-      console.log(response);
-      console.log(store.state.creneaux);
-    });
-    // console.log(store.state.creneaux)
+    this.getAllRdv();
   },
 };
 </script>
-<style lang=""></style>
+<style src="@vueform/toggle/themes/default.css"></style>
