@@ -62,10 +62,10 @@
 
           <div
             v-if="
-              $store.state.choix == 2 && this.$options.name == 'profileUser'
+              $store.state.choix == 2 && this.$options.name == 'dashboard'
             "
           >
-            <rdvAvocat/>
+            <RdvAvocat/>
           </div>
 
           <div
@@ -100,7 +100,7 @@
 import store from "@/store";
 import { mapActions } from "vuex";
 import ChoixProfile from "@/components/profileComponents/choixProfile.vue";
-import rdvAvocat from "@/components/avocatComponent/profile/rdv.vue";
+import RdvAvocat from "@/components/avocatComponent/profile/rdv.vue";
 // import Consultation from "@/components/profileComponents/user/consultation.vue";
 // import Documents from "@/components/profileComponents/user/documents.vue";
 import ProfilFormUser from "@/components/avocatComponent/profile/formProfile.vue";  
@@ -119,7 +119,7 @@ export default {
   components: {
     ProfilFormUser,
     ChoixProfile,
-    rdvAvocat
+    RdvAvocat
   },
 
   methods: {
