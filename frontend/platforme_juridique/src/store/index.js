@@ -484,7 +484,7 @@ const store = createStore({
           return response.data
         });
     },
-    // update pass user
+    // cchange etat rdv
     chageEtatRdv({ commit }, avocat) {
 
       return axiosClient.post('avocat/chageEtatRdv', avocat)
@@ -494,6 +494,20 @@ const store = createStore({
 
           if (response.data.message == "success") {
             commit('setAvocat', response.data.avocat);
+          }
+          return response.data
+        });
+    },
+    // update pass user
+    getRdvAvocat({ commit }, id) {
+
+      return axiosClient.post('avocat/rdvAvocat/'+id)
+        .then(response => {
+          console.log(response)
+          // console.log("response")
+
+          if (response.data.message == "success") {
+            // commit('setAvocat', response.data.avocat);
           }
           return response.data
         });
