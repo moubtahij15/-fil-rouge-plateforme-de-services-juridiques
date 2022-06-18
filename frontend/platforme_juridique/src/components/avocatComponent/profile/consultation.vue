@@ -27,59 +27,60 @@
           </div>
           <!--body-->
           <div class="relative p-6 flex-auto w-full">
-            <div class="items-center md:flex">
-              <div class="relative">
-                <label
-                  class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"
-                  >prix</label
-                >
-                <input
-                  v-model="prix.telephonique"
-                  type="number"
-                  class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
-                  placeholder="consultation telephonique"
-                  required
-                />
+            <form @submit="addConsultationPrix">
+              <div class="items-center md:flex">
+                <div class="relative">
+                  <label
+                    class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"
+                    >prix</label
+                  >
+                  <input
+                    v-model="prix.telephonique"
+                    type="number"
+                    class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                    placeholder="consultation telephonique"
+                    required
+                  />
+                </div>
+                <div class="relative ml-4">
+                  <label
+                    class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white1"
+                    >prix</label
+                  >
+                  <input
+                    v-model="prix.ecrite"
+                    type="number"
+                    class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white1 border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                    placeholder="consultation ecrite"
+                    required
+                  />
+                </div>
               </div>
-              <div class="relative ml-4">
-                <label
-                  class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white1"
-                  >prix</label
+              <div
+                class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
+              >
+                <button
+                  class="text-green-500 bg-transparent border border-solid border-green-500 hover:bg-green-500 hover:text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="button"
+                  v-on:click="this.showModal = !this.showModal"
                 >
-                <input
-                  v-model="prix.ecrite"
-                  type="number"
-                  class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white1 border border-gray-300 rounded-md focus:outline-none focus:border-black"
-                  placeholder="consultation ecrite"
-                  required
-                />
+                  Close
+                </button>
+                <button
+                  class="text-green-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="submit"
+                >
+                  Save Changes
+                </button>
               </div>
-            </div>
+            </form>
           </div>
-          <div class="flex-1 px-2 pt-2 mx-10 m-2"></div>
+
           <!--footer-->
-          <div
-            class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
-          >
-            <button
-              class="text-green-500 bg-transparent border border-solid border-green-500 hover:bg-green-500 hover:text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button"
-              v-on:click="this.showModal = !this.showModal"
-            >
-              Close
-            </button>
-            <button
-              class="text-green-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button"
-              @click="updatePost()"
-            >
-              Save Changes
-            </button>
-          </div>
         </div>
       </div>
     </div>
-    <div class="w-full text-primary shadow bg-white">
+    <div class="w-full text-primary shadow bg-white" v-if="type.length == 0">
       <div
         class="container flex items-center justify-between px-6 py-4 mx-auto"
       >
@@ -341,7 +342,7 @@
         <h3
           class="text-gray-800 t dark:text-gray-100 leading-7 font-semibold w-11/12"
         >
-          Votre Sujet :
+          leur Sujet :
         </h3>
 
         <p
@@ -428,15 +429,16 @@
             {{ this.consultation.heureReponse }}
           </p>
         </div>
+
         <div class="flex items-center py-5"></div>
       </div>
-      <!--<div class="py-5">
-          <input
-            class="w-full bg-gray-300 py-5 px-3 rounded-xl"
-            type="text"
-            placeholder="type your message here..."
-          />
-        </div>-->
+      <div class="py-5">
+        <input
+          class="w-full bg-white py-5 px-3 rounded-xl"
+          type="text"
+          placeholder="type your message here..."
+        />
+      </div>
     </div>
     <!-- end message -->
     <div class="w-2/5 border-l-2 px-5"></div>
@@ -483,7 +485,7 @@ export default {
       "isLogin",
       "getAvocats",
       "getAvocatsBySearch",
-      "getCreneaux",
+      "addConsultation",
       "vaidateRdv",
       "getTypeConsultation",
       "updateSjtRdv",
@@ -527,7 +529,25 @@ export default {
           );
 
           // this.consultations = ;
-          console.log(store.state.consultationTele);
+          console.log(this.consultations);
+        });
+      });
+    },
+    addConsultationPrix(ev) {
+      ev.preventDefault();
+
+      this.addConsultation({
+        idAvocat: JSON.parse(sessionStorage.getItem("Avocat")).id,
+        prixTel: this.prix.telephonique,
+        prixEcrite: this.prix.ecrite,
+      }).then((response) => {
+        this.showModal = !this.showModal;
+        this.getConsultations(JSON.parse(sessionStorage.getItem("Avocat")).id);
+        this.getTypeConsultation(
+          JSON.parse(sessionStorage.getItem("Avocat")).id
+        ).then((response) => {
+          this.type = response.avocat;
+          console.log(response);
         });
       });
     },
