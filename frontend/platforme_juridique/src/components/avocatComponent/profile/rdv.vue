@@ -1,6 +1,58 @@
 <template lang="">
   <!-- alert 1h before -->
   <div class="block w-full overflow-x-auto">
+    <div
+      v-if="showModal"
+      class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
+    >
+      <div class="relative w-auto my-6 mx-auto w-full max-w-3xl">
+        <!--content-->
+        <div
+          class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
+        >
+          <!--header-->
+          <div
+            class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t"
+          >
+            <h3 class="text-3xl font-semibold">modifier post</h3>
+            <button
+              class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+            >
+              <span
+                class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
+              >
+                ×
+              </span>
+            </button>
+          </div>
+          <!--body-->
+          <div class="relative p-6 flex-auto w-full">
+            <div class="whitespace-pre-wrap mt-7">
+              <textarea
+                v-model="this.sjt_post"
+                placeholder="Sujet"
+                class="bg-purple-white shadow rounded border-0 p-3 w-full"
+                required="required"
+              ></textarea>
+            </div>
+          </div>
+          <div class="flex-1 px-2 pt-2 mx-10 m-2"></div>
+          <!--footer-->
+          <div
+            class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
+          >
+            <button
+              class="text-green-500 bg-transparent border border-solid border-green-500 hover:bg-primary hover:text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
+              v-on:click="this.showModal = !this.showModal"
+            >
+              Close
+            </button>
+           
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="flex items-center justify-center w-full mb-5">
       <label for="toggleB" class="flex items-center cursor-pointer">
         <!-- toggle -->
@@ -74,20 +126,26 @@
                   {{ elem.date_creneau }}
                 </td>
 
-                <td class="px-4 py-3 text-xs">
+                <td class="px-4 py-3 text-md">
                   <span
                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
                     {{ elem.heure_debut }}
                   </span>
                 </td>
-                <td class="px-4 py-3 text-sm">
-                  <button
-                    @click="annulerRdv(elem)"
-                    class="flex-no-shrink px-5 py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 hover:bg-red hover:text-white text-primary rounded-full transition ease-in duration-300"
+                <td class="px-4 py-3 text-md">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
-                    annuler
-                  </button>
+                    {{ elem.tel }}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-md">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
+                  >
+                    {{ elem.email }}
+                  </span>
                 </td>
               </tr>
             </tbody>
@@ -129,7 +187,7 @@ export default {
       "getAvocatsBySearch",
       "getCreneaux",
       "vaidateRdv",
-      "getRdvUser",
+      "getRdvAvocat",
       "chageEtatRdv",
     ]),
     testt() {
@@ -154,9 +212,9 @@ export default {
       this.rdvUpdate = elm;
     },
     getAllRdv() {
-      this.getRdvUser(JSON.parse(sessionStorage.getItem("User")).id).then(
+      this.getRdvAvocat(JSON.parse(sessionStorage.getItem("Avocat")).id).then(
         (response) => {
-          this.rdv = response;
+          this.rdv = response.rdv;
           console.log(this.rdv);
         }
       );
@@ -185,7 +243,7 @@ export default {
   },
   mounted() {
     // statut
-    // this.getAllRdv();
+    this.getAllRdv();
   },
 };
 </script>
