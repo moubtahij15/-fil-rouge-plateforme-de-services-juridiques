@@ -210,9 +210,9 @@
                     {{ elem.type }}
                   </span>
                 </td>
-                <td class="text-xs bg-primary  text-white rounded-md ">
+                <td class="text-xs bg-primary  py-3 text-white rounded-md ">
                   <span
-                    class="bg-primary w-full  text-white  "
+                    class="bg-primary w-full   text-white  "
                   >
                     {{ elem[0].etat }}
                   </span>
@@ -393,7 +393,7 @@ export default {
       "redirectTo",
       "getVilles",
       "deleteRdv",
-      "getCategorie",
+      "changeEtatConsultation",
       "registerUser",
       "isLogin",
       "getAvocats",
@@ -411,11 +411,11 @@ export default {
       } else {
         this.value = 1;
       }
-      // console.log(this.value)
-    //   this.chageEtatRdv({
-    //     id: JSON.parse(sessionStorage.getItem("Avocat")).id,
-    //     value: this.value,
-    //   }).then((response) => {});
+      console.log(this.value)
+      this.changeEtatConsultation({
+        id: JSON.parse(sessionStorage.getItem("Avocat")).id,
+        value: this.value,
+      }).then((response) => {});
 
       //   console.log(this.value);
     },
