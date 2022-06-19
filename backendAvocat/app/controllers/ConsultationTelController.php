@@ -122,6 +122,29 @@ class ConsultationTelController
       array('message' => 'change method to POST')
     );
   }
+  // readAllconultationsEcrite
+
+  public function readAllconultationsTelAvocat($id)
+  {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+      $Consultation = new ConsultationTel();
+
+      // Blog post query
+      $result = $Consultation->readAllconultationsTeleAvocat($id);
+
+      // Turn to JSON & output
+      if ($result) {
+        echo json_encode($result);
+      } else {
+        echo json_encode(
+          array('message' => ' aucun Rdv pour ce avocat')
+        );
+      }
+    } else  echo json_encode(
+      array('message' => 'change method to POST')
+    );
+  }
 
   public function update()
   {
