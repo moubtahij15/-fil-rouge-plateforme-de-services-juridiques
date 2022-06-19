@@ -71,10 +71,10 @@
           </div>
           <div
             v-if="
-              $store.state.choix == 4 && this.$options.name == 'profileUser'
+              $store.state.choix == 4 && this.$options.name == 'dashboard'
             "
           >
-            <!-- <Documents /> -->
+            <Documents />
           </div>
 
           <!-- <div c>
@@ -99,6 +99,7 @@ import RdvAvocat from "@/components/avocatComponent/profile/rdv.vue";
 // import Documents from "@/components/profileComponents/user/documents.vue";
 import ProfilFormUser from "@/components/avocatComponent/profile/formProfile.vue";
 import Consultation from "@/components/avocatComponent/profile/consultation.vue";
+import Documents from "@/components/avocatComponent/profile/document.vue";
 // src\components\profileComponents\avocatComponent\profile\formProfile.vue
 export default {
   name: "dashboard",
@@ -116,6 +117,8 @@ export default {
     ChoixProfile,
     RdvAvocat,
     Consultation,
+    Documents
+
   },
 
   methods: {
