@@ -74,6 +74,48 @@ class ConsultationTel extends DataBase
         }
     }
 
+    // read all consultation tele
+    public function  readAllconultationsTeleAvocat($id)
+    {
+        date_default_timezone_set('Africa/casablanca');
+
+
+        $dateToday = date("Y-m-d");
+        $heureNow = date("H:i:s");
+        $result3 = [];
+        $sql = 'SELECT ct.id,ct.sujet,ct.date_creneau,c.heure_debut ,a.nom ,a.prenom  , co.prix , co.type FROM `consultation_tele` ct join creneau c on c.id=ct.id_creneau join avocat a on a.id=ct.id_avocat JOIN consultation co on co.id=ct.id_consultation  join client cl on cl.id=ct.id_client   WHERE a.id = ?';
+        $result = $this->conn->prepare($sql);
+        // $id_client=md5($id_client);
+        if ($result->execute([$id])) {
+
+            $result = $result->fetchALL(PDO::FETCH_ASSOC);
+
+
+
+            foreach ($result as $response) {
+
+                $categorie = "";
+                if ($response['date_creneau'] > $dateToday) {
+                    array_push($response, ["etat" => "en attente"]);
+                } elseif ($response['date_creneau'] < $dateToday) {
+
+                    array_push($response, ["etat" => "terminé"]);
+                } elseif ($response['date_creneau'] == $dateToday) {
+                    if ($response['heure_debut'] > $heureNow) {
+                        array_push($response, ["etat" => "en attente"]);
+                    } else {
+                        array_push($response, ["etat" => "terminé"]);
+                    }
+                }
+
+                array_push($result3, $response);
+            }
+            return ($result3);
+        } else {
+            return false;
+        }
+    }
+
     // Get Single Post
     // public function read_single($id_produit) {
 
