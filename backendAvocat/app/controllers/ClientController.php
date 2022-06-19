@@ -83,6 +83,21 @@ class ClientController
                   array('message' => 'change method to PUT')
             );
       }
+      public function read()
+      {
+
+
+            if ($_SERVER["REQUEST_METHOD"] == "GET") {
+
+                  $client = new Client();
+                  //get client data
+                  $data = (file_get_contents("php://input"));
+                  // create client
+                  echo $client->read();
+            } else  echo json_encode(
+                  array('message' => 'change method to GET')
+            );
+      }
       //update user pass
       public function updatePass()
       {
@@ -95,6 +110,21 @@ class ClientController
                   $data = json_decode(file_get_contents("php://input"));
                   // create client
                   return $client->updatePass($data);
+            } else  echo json_encode(
+                  array('message' => 'change method to PUT')
+            );
+      }
+      
+      public function delete($id)
+      {
+
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                  $client = new Client();
+                  //get client data
+                  // create client
+                  return $client->delete($id);
             } else  echo json_encode(
                   array('message' => 'change method to PUT')
             );
