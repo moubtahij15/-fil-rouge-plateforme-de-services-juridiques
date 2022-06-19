@@ -606,7 +606,68 @@ const store = createStore({
 
         })
     },
+    // crud document
 
+    getAlldocument({ commit }, id) {
+
+      return axiosClient.post('/Document/getAlldocument/' + id)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+
+            return response.data;
+
+          }
+
+        })
+    },
+    createDocument({ commit }, document) {
+
+      return axiosClient.post('/Document/createDocument', document)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+
+            return response.data;
+
+          }
+
+        })
+    },
+    deleteDocument({ commit }, id) {
+
+      return axiosClient.post('/Document/deleteDocument/' + id)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+
+            return response.data;
+
+          }
+
+        })
+    },
+    updateDocument({ commit }, document) {
+
+      return axiosClient.post('/Document/updateDocument', document)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+
+            return response.data;
+
+          }
+
+        })
+    },
 
   },
   mutations: {
