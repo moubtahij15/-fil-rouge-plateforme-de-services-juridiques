@@ -79,10 +79,9 @@ class ConsultationEcrite extends DataBase
                     // echo json_encode($result1);
                     if (count($result1) == 0) {
 
-                        array_push($response, ["etat"=>"non repondu"]);
-                    } else{
-                        array_push($response, ["etat"=>" repondu"]);
-
+                        array_push($response, ["etat" => "non repondu"]);
+                    } else {
+                        array_push($response, ["etat" => " repondu"]);
                     }
                     array_push($response, $result1);
                     array_push($result3, $response);
@@ -93,6 +92,45 @@ class ConsultationEcrite extends DataBase
             return false;
         }
     }
+    // read all consultations By client
+
+    public function  readAllconultationsEcriteAvocat($id)
+    {
+
+        $result3 = [];
+        $sql = 'SELECT cl.nom,cl.prenom ,cl.email,cl.tel,ce.sujet,ce.id ,ce.date ,ce.heure,c.type,c.prix FROM `consultation_ecrite` ce join avocat a on a.id=ce.id_avocat  join consultation c on c.id=ce.id_consultation join client cl on cl.id=ce.id_client  where a.id=?';
+        $sql1 = "SELECT * FROM `reponse` WHERE  `reponse`.`id_consultation` = ? ";
+        $result = $this->conn->prepare($sql);
+        // $id_client=md5($id_client);
+        if ($result->execute([$id])) {
+
+            $result = $result->fetchALL(PDO::FETCH_ASSOC);
+
+
+
+            foreach ($result as $response) {
+                $result1 = $this->conn->prepare($sql1);
+
+                $categorie = "";
+                if ($result1->execute([$response['id']])) {
+                    $result1 = $result1->fetchALL(PDO::FETCH_ASSOC);
+                    // echo json_encode($result1);
+                    if (count($result1) == 0) {
+
+                        array_push($response, ["etat" => "non repondu"]);
+                    } else {
+                        array_push($response, ["etat" => " repondu"]);
+                    }
+                    array_push($response, $result1);
+                    array_push($result3, $response);
+                }
+            }
+            return ($result3);
+        } else {
+            return false;
+        }
+    }
+
 
     // Get Single Post
     // public function read_single($id_produit) {
