@@ -10,6 +10,7 @@ import decouvrire from '../views/users/decouvrire.vue'
 import dashboard from '../views/avocat/dashboard.vue'
 import sign_in from '../views/avocat/sign-in.vue'
 import sign_up from '../views/avocat/sign-up.vue'
+import login from '../views/admin/login.vue'
 
 
 const routes = [
@@ -33,7 +34,8 @@ const routes = [
   },
   { path: '/dashboard', name: 'dashboard', component: dashboard },
   { path: '/sign-in', name: 'sign-in', component: sign_in },
-  { path: '/sign-up', name: 'sign-up', component: sign_up }
+  { path: '/sign-up', name: 'sign-up', component: sign_up },
+  { path: '/login', name: 'login', component: login }
 
 
 ]
