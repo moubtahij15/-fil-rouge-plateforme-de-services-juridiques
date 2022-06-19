@@ -33,7 +33,7 @@ const store = createStore({
     documentsAvocat: {},
     documentsClient: {}
 
-
+    
   },
   getters: {},
 
@@ -833,6 +833,10 @@ const store = createStore({
     // set avocats search
     setAvocatsSearch: (state, avocats) => {
       state.avocatsSearch = avocats;
+      console.log(avocats)
+      sessionStorage.setItem('avocatsSearch', JSON.stringify(avocats));
+
+
 
     },
     // set avocats Profile
