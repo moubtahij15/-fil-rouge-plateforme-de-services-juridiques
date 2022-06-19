@@ -746,6 +746,21 @@ const store = createStore({
           return response.data
         });
     },
+    // get all avocat
+    deleteClient({ commit }, id) {
+
+      return axiosClient.post('client/delete/'+id)
+        .then(response => {
+          console.log(response)
+
+          // if (response.data.message == "success") {
+          //   console.log(response)
+          //   sessionStorage.setItem('admin', JSON.stringify(response.data.admin));
+          // }
+
+          return response.data
+        });
+    },
   },
   mutations: {
 
