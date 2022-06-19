@@ -97,18 +97,8 @@
 
                 </router-link> -->
 
-          <router-link
-            :to="'/dashboardAdmin'"
-            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 block px-3 py-2 rounded-md text-base font-medium"
-          >
-            users
-          </router-link>
-          <router-link
-            :to="'/users'"
-            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 block px-3 py-2 rounded-md text-base font-medium"
-          >
-            avocat
-          </router-link>
+      
+          
         </div>
         <div class="pt-4 pb-3 border-t border-gray-700">
           <div class="flex items-center px-5">
@@ -170,24 +160,29 @@
                     <thead>
                       <tr>
                         <th
-                          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                         >
                           Nom
                         </th>
                         <th
-                          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                         >
                           Prenom
                         </th>
                         <th
-                          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                         >
                           Email
                         </th>
                         <th
-                          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                         >
-                          age
+                          ville
+                        </th>
+                        <th
+                          class="px-6 py-3 border-b border-gray-200 bg-gray-50"
+                        >
+                          tele
                         </th>
                         <th
                           class="px-6 py-3 border-b border-gray-200 bg-gray-50"
@@ -198,13 +193,12 @@
                     </thead>
 
                     <tbody class="bg-white">
-                      <tr
-                      >
+                      <tr v-for="elem in users" :value="elem.id" :key="elem.id">
                         <td
                           class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
                         >
                           <div class="text-bold leading-5 text-gray-900">
-                           azert
+                            {{ elem.nom }}
                           </div>
                         </td>
 
@@ -212,7 +206,7 @@
                           class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
                         >
                           <div class="text-sm leading-5 text-gray-900">
-                          azert
+                            {{ elem.prenom }}
                           </div>
                         </td>
 
@@ -220,18 +214,23 @@
                           class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
                         >
                           <div class="text-sm leading-5 text-gray-900">
-                           azert
+                            {{ elem.email }}
                           </div>
                         </td>
 
                         <td
                           class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"
                         >
-                        azert
+                          {{ elem.ville }}
+                        </td>
+                        <td
+                          class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"
+                        >
+                          {{ elem.tel }}
                         </td>
 
                         <td
-                          class="px-6 py-4 whitespace-no-wrap text-center border-b border-gray-200 text-sm leading-5 font-medium"
+                          class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"
                         >
                           <FIcons
                             id="delete"
@@ -268,6 +267,7 @@ import { computed } from "@vue/reactivity";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import store from "../../store";
+import { mapActions } from "vuex";
 
 // const user={}
 // const user = {
@@ -286,8 +286,7 @@ export default {
   name: "navBar",
   data() {
     return {
-      admin: sessionStorage.getItem("TOKEN_ADMIN"),
-      userss: sessionStorage.getItem("TOKEN"),
+      users: [],
     };
   },
   components: {
@@ -303,6 +302,12 @@ export default {
     XIcon,
   },
   methods: {
+    ...mapActions(["redirectTo", "loginAdmin", "getAllClients"]),
+    getClients() {
+      this.getAllClients().then((response) => {
+        this.users = response;
+      });
+    },
     logout() {
       store.commit("logout");
       router.push({
@@ -312,22 +317,10 @@ export default {
     },
   },
   mounted() {
-    console.log("hada" + this.userss);
-    console.log(this.$parent.$options.name);
     if (!sessionStorage.getItem("admin")) {
       this.redirectTo({ val: "login" });
     }
-  },
-  setup() {
-    const store = useStore();
-    const router = useRouter();
-    // console.log(this.$parent.$options.name)
-    function test() {
-      console.log("ok");
-    }
-    return {
-      user: computed(() => store.state.user.data),
-    };
+    this.getClients()
   },
 };
 </script>
