@@ -142,7 +142,15 @@ class Avocat extends DataBase
       );
     }
   }
+  public function readAvocat()
+  {
+    $sql = "SELECT c.id ,c.nom , c.prenom ,c.tel ,c.email, c.statut , v.nom as ville  FROM `avocat` c join ville v on c.ville=v.id";
+    $result = $this->conn->prepare($sql);
 
+    if ($result->execute()) {
+      return json_encode($result->fetchAll(PDO::FETCH_ASSOC));
+    } else return false;
+  }
 
   public function read()
   {
@@ -403,6 +411,26 @@ class Avocat extends DataBase
       )
     );
   }
+  public function  changeEtatDocument($data)
+
+  {
+    $sql = "UPDATE `avocat` SET `serviceDocument` = ? WHERE `avocat`.`id` = ?";
+    $result = $this->conn->prepare($sql);
+
+    if ($result->execute([$data->value, $data->id])) {
+      return json_encode(
+        array(
+          'message' => 'success',
+          'avocat' => $this->readById($data->id)
+        )
+      );
+    }
+    return json_encode(
+      array(
+        'message' => 'failed',
+      )
+    );
+  }
   // get consultation type for avocat
   public function addConsultation($data)
   {
@@ -459,6 +487,41 @@ class Avocat extends DataBase
         'message' => 'failed',
       )
     );
+  }
+  public function delete($id)
+  {
+    //  clean data
+
+    // $data->id_client = htmlspecialchars(strip_tags($data->id_client));
+
+    $sql = "DELETE FROM `avocat` WHERE `avocat`.`id` =  ?";
+    $result = $this->conn->prepare($sql);
+    // Bind data
+    return json_encode($result->execute([
+      $id
+    ]));
+  }
+  public function changeStatut($id)
+  {
+    //  clean data
+
+    // $data->id_client = htmlspecialchars(strip_tags($data->id_client));
+    $test = $this->readById($id)["statut"];
+    // echo json_encode($test);
+
+    if ($test=='activé') {
+      $test = "non activé";
+    } else {
+      $test = "activé";
+    }
+      // echo json_encode($test);
+    $sql = "UPDATE `avocat` SET `statut` = ? WHERE `avocat`.`id` = ?    ";
+    $result = $this->conn->prepare($sql);
+    // Bind data
+    return json_encode($result->execute([
+      $test,
+      $id
+    ]));
   }
 
   // function getAge 
