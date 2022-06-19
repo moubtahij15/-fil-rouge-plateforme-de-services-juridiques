@@ -109,15 +109,21 @@ export default {
     //   }
     // },
     login(ev) {
-        console.log("ztyui")
+      console.log("ztyui");
       ev.preventDefault();
 
       this.loginAdmin(this.admin).then((response) => {
-        if ((response.message == "success")) {
+        if (response.message == "success") {
           this.redirectTo({ val: "adminDashboard" });
         }
       });
     },
+  },
+  mounted() {
+    if (sessionStorage.getItem("admin")) {
+                    this.redirectTo({ val: "adminDashboard" });
+
+    }
   },
 };
 </script>
