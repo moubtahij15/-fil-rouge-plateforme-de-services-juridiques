@@ -749,7 +749,37 @@ const store = createStore({
     // get all avocat
     deleteClient({ commit }, id) {
 
-      return axiosClient.post('client/delete/'+id)
+      return axiosClient.post('client/delete/' + id)
+        .then(response => {
+          console.log(response)
+
+          // if (response.data.message == "success") {
+          //   console.log(response)
+          //   sessionStorage.setItem('admin', JSON.stringify(response.data.admin));
+          // }
+
+          return response.data
+        });
+    },
+    // get all avocat
+    deleteAvocat({ commit }, id) {
+
+      return axiosClient.post('avocat/delete/' + id)
+        .then(response => {
+          console.log(response)
+
+          // if (response.data.message == "success") {
+          //   console.log(response)
+          //   sessionStorage.setItem('admin', JSON.stringify(response.data.admin));
+          // }
+
+          return response.data
+        });
+    },
+    // get all avocat
+    changeStatut({ commit }, id) {
+
+      return axiosClient.post('avocat/changeStatut/' + id)
         .then(response => {
           console.log(response)
 
