@@ -267,12 +267,13 @@
 
                 <td class="px-4 py-3 text-sm">
                   <FIcons
+                  @click="passingData(elem)"
                     id="delete"
                     :icon="['fas', 'edit']"
                     class="h-6 w-6 mr-3 cursor-pointer"
                   ></FIcons>
                   <FIcons
-                    @click="deleteDocument(elem)"
+                    @click="deleteDocuments(elem)"
                     id="delete"
                     :icon="['fas', 'trash']"
                     class="h-6 w-6 cursor-pointer"
@@ -294,6 +295,7 @@ export default {
   data() {
     return {
       documentAdd: {
+        id_document: "",
         lien_document: "",
         prix: "",
         nom_document: "",
@@ -305,6 +307,7 @@ export default {
       rdvUpdate: {},
       msg: "",
       msg1: "",
+      action: "add",
     };
   },
   methods: {
@@ -315,12 +318,21 @@ export default {
       "getAlldocument",
       "createDocument",
       "deleteDocument",
+      "updateDocument"
     ]),
     toggleModal() {
       this.showModal = !this.showModal;
 
       //   this.sjt_post = elm.sjt_RDV;
       //   this.rdvUpdate = elm;
+    },
+    passingData(elem){
+          this.documentAdd.lien_document = elem.lien_document;
+          this.documentAdd.nom_document = elem.nom_document;
+          this.documentAdd.prix = elem.prix;
+          this.documentAdd.id_document = elem.id;
+                this.showModal = !this.showModal;
+
     },
 
     getAllDocuments() {
@@ -333,18 +345,29 @@ export default {
     },
     addDocument(ev) {
       ev.preventDefault();
-      this.createDocument(this.documentAdd).then((response) => {
-        this.getAllDocuments();
-        this.documentAdd.lien_document = "";
-        this.documentAdd.nom_document = "";
-        this.documentAdd.prix = "";
+      if ((this.action = !"update")) {
+        this.createDocument(this.documentAdd).then((response) => {
+          this.getAllDocuments();
+          this.documentAdd.lien_document = "";
+          this.documentAdd.nom_document = "";
+          this.documentAdd.prix = "";
 
-        this.showModal = !this.showModal;
-      });
+          this.showModal = !this.showModal;
+        });
+      } else {
+        this.updateDocument(this.documentAdd).then((response) => {
+          this.getAllDocuments();
+          this.documentAdd.lien_document = "";
+          this.documentAdd.nom_document = "";
+          this.documentAdd.prix = "";
+            this.action="add"
+          this.showModal = !this.showModal;
+        });
+      }
+
       //   console.log(this.documentAdd);
     },
-    deleteDocument(elem) {
-      console.log(elem);
+    deleteDocuments(elem) {
       this.deleteDocument(elem.id).then((response) => {
         this.getAllDocuments();
       });
