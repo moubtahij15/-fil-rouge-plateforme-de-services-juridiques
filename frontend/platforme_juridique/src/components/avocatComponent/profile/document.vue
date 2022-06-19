@@ -51,7 +51,7 @@
                   <input
                     v-model="documentAdd.prix"
                     type="number"
-                    min=5
+                    min="5"
                     class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white1 border border-gray-300 rounded-md focus:outline-none focus:border-black"
                     placeholder="prix de document"
                     required
@@ -77,7 +77,7 @@
                 <button
                   class="text-green-500 bg-transparent border border-solid border-green-500 hover:bg-green-500 hover:text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   type="button"
-                  v-on:click="this.showModal = !this.showModal "
+                  v-on:click="this.showModal = !this.showModal"
                 >
                   Close
                 </button>
@@ -272,7 +272,7 @@
                     class="h-6 w-6 mr-3 cursor-pointer"
                   ></FIcons>
                   <FIcons
-                  @click="deleteDocument(elem)"
+                    @click="deleteDocument(elem)"
                     id="delete"
                     :icon="['fas', 'trash']"
                     class="h-6 w-6 cursor-pointer"
@@ -314,6 +314,7 @@ export default {
       "getDocummentClient",
       "getAlldocument",
       "createDocument",
+      "deleteDocument",
     ]),
     toggleModal() {
       this.showModal = !this.showModal;
@@ -334,18 +335,20 @@ export default {
       ev.preventDefault();
       this.createDocument(this.documentAdd).then((response) => {
         this.getAllDocuments();
-        this.documentAdd.lien_document="";
-        this.documentAdd.nom_document="";
-        this.documentAdd.prix="";
+        this.documentAdd.lien_document = "";
+        this.documentAdd.nom_document = "";
+        this.documentAdd.prix = "";
 
         this.showModal = !this.showModal;
       });
-    //   console.log(this.documentAdd);
+      //   console.log(this.documentAdd);
     },
-    deleteDocument(elem){
+    deleteDocument(elem) {
       console.log(elem);
-
-    }
+      this.deleteDocument(elem.id).then((response) => {
+        this.getAllDocuments();
+      });
+    },
   },
   mounted() {
     this.getAllDocuments();
