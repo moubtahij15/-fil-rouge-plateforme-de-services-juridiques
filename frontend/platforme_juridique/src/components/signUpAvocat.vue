@@ -175,6 +175,23 @@
               required
             />
           </div>
+          <div class="relative w-full mr-3">
+            <!-- <option>{{ this.categEdit }}</option> -->
+
+            <label
+              class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"
+              >specialité</label
+            >
+            <select
+              v-model="this.avocat.categorie"
+              required
+              class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
+            >
+              <option v-for="elem in categories" :value="elem.id">
+                {{ elem.nom_categorie }}
+              </option>
+            </select>
+          </div>
           <div class="relative">
             <button
               type="submit"
@@ -404,14 +421,13 @@
               >
                 <!-- Heroicon name: outline/exclamation -->
               </div>
-               <FIcons
-                  v-if="!this.user"
-                  id="delete"
-                  :icon="['fas', 'check']"
-                  class="h-6 w-6 cursor-pointer"
-                />
+              <FIcons
+                v-if="!this.user"
+                id="delete"
+                :icon="['fas', 'check']"
+                class="h-6 w-6 cursor-pointer"
+              />
               <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-               
                 <h3
                   class="text-lg leading-6 font-medium text-gray-900"
                   id="modal-title"
@@ -431,11 +447,10 @@
             <button
               @click="redirectTo({ val: 'sign-in' })"
               type="button"
-              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-white text-base font-medium text-primary  hover:text-white hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-white text-base font-medium text-primary hover:text-white hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
             >
               compris
             </button>
-           
           </div>
         </div>
       </div>
@@ -461,14 +476,16 @@ export default {
         adresse: "",
         date_naissance: "",
         sexe: "",
+        categorie:""
       },
       message: "",
-      succus:false
+      succus: false,
+      categories:"",
     };
   },
 
   methods: {
-    ...mapActions(["redirectTo", "getVilles", "registerAvocat", "isLogin"]),
+    ...mapActions(["redirectTo", "getVilles", "registerAvocat", "isLogin","getCategorie"]),
 
     // register user
     register(ev) {
@@ -491,8 +508,8 @@ export default {
         this.avocat.adresse = "";
         if (response.message == "bien creer") {
           // this.error = true
-          this.succus=true;
-        //   this.redirectTo({ val: "sign-up" });
+          this.succus = true;
+          //   this.redirectTo({ val: "sign-up" });
         } else {
           this.message = response.message;
         }
@@ -523,6 +540,10 @@ export default {
     },
   },
   mounted() {
+     this.getCategorie().then((response) => {
+      console.log(response);
+      this.categories = response;
+    });
     this.getVilles().then((response) => {
       console.log(response);
       console.log(store.state.villes);
