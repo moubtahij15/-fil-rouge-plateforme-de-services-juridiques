@@ -22,18 +22,18 @@
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
-                <router-link
-                  :to="'/dashboardAdmin'"
-                  class="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-bold"
+                <H4
+                  @click="getAvocats"
+                  class="text-white cursor-pointer hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-bold"
                 >
-                  avocats</router-link
+                  avocats</H4
                 >
-                <router-link
-                  :to="'/Allusers'"
-                  class="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-bold"
+                <H4
+                  @click="getClients"
+                  class="text-white cursor-pointer hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-bold"
                 >
                   users
-                </router-link>
+                </H4>
               </div>
             </div>
           </div>
@@ -96,9 +96,6 @@
             {{ item.name }}
 
                 </router-link> -->
-
-      
-          
         </div>
         <div class="pt-4 pb-3 border-t border-gray-700">
           <div class="flex items-center px-5">
@@ -145,7 +142,9 @@
       <div class="flex-1 flex flex-col overflow-hidden">
         <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
           <div class="container mx-auto px-6 py-8">
-            <h3 class="text-gray-700 text-3xl font-medium">All users :</h3>
+            <h3 class="text-gray-700 text-3xl font-medium">
+              All {{ this.type }} :
+            </h3>
 
             <div class="mt-8"></div>
 
@@ -180,14 +179,20 @@
                           ville
                         </th>
                         <th
-                          class="px-6 py-3 border-b border-gray-200 bg-gray-50"
+                          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                         >
                           tele
                         </th>
                         <th
-                          class="px-6 py-3 border-b border-gray-200 bg-gray-50"
+                          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                         >
                           Supprimer
+                        </th>
+                        <th
+                          v-if="this.type == 'avocats'"
+                          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          statut
                         </th>
                       </tr>
                     </thead>
@@ -235,9 +240,14 @@
                           <FIcons
                             id="delete"
                             :icon="['fas', 'trash']"
-                            class="h-5 w-5"
+                            class="h-5 w-5 cursor-pointer"
                             @click="deleteUser(elem.id)"
                           />
+                        </td>
+                        <td
+                          class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"
+                        >
+                          {{ elem.tel }}
                         </td>
                       </tr>
                     </tbody>
@@ -287,6 +297,7 @@ export default {
   data() {
     return {
       users: [],
+      type: "avocats",
     };
   },
   components: {
@@ -302,10 +313,30 @@ export default {
     XIcon,
   },
   methods: {
-    ...mapActions(["redirectTo", "loginAdmin", "getAllClients"]),
+    ...mapActions([
+      "redirectTo",
+      "loginAdmin",
+      "getAllClients",
+      "deleteClient",
+      "getAllAvocats",
+    ]),
     getClients() {
+      this.type = "clients";
       this.getAllClients().then((response) => {
         this.users = response;
+      });
+    },
+    getAvocats() {
+      this.type = "avocats";
+
+      this.getAllAvocats().then((response) => {
+        this.users = response;
+      });
+    },
+    deleteUser(id) {
+      console.log(id);
+      this.deleteClient(id).then((response) => {
+        this.getClients();
       });
     },
     logout() {
@@ -320,7 +351,7 @@ export default {
     if (!sessionStorage.getItem("admin")) {
       this.redirectTo({ val: "login" });
     }
-    this.getClients()
+    this.getClients();
   },
 };
 </script>
