@@ -14,17 +14,8 @@ class Document extends DataBase
 
 
 
-    // get sing RDV
 
-    public function read_single($id_RDV)
-    {
-        $sql = "select * from rdv where id_RDV = ?";
-        $result = $this->conn->prepare($sql);
 
-        if ($result->execute([$id_RDV])) {
-            return $result->fetch(PDO::FETCH_ASSOC);
-        } else return false;
-    }
 
     public function  read($id)
     {
@@ -77,6 +68,22 @@ class Document extends DataBase
             return false;
         }
     }
+    // read document buying by avoccat
+    public function  readByClients($id)
+    {
+
+
+        $sql = 'SELECT cl.nom , pd.date,cl.prenom,a.id,d.lien_document, d.prix ,d.nom_document ,cl.email,cl.tel FROM `prendre_document` pd join document d on pd.id_document=d.id join avocat a on a.id=d.id_avocat join client cl on cl.id=pd.id_client where a.id=? ';
+
+        $result = $this->conn->prepare($sql);
+        // $id_client=md5($id_client);
+        if ($result->execute([$id])) {
+
+            return  json_encode($result->fetchAll(PDO::FETCH_ASSOC)) ;
+        } else {
+            return false;
+        }
+    }
 
     // Get Single Post
     // public function read_single($id_produit) {
@@ -91,7 +98,7 @@ class Document extends DataBase
 
 
     // }
-    // create document
+    // create document for client
     public function create($data)
     {
         //  clean data
@@ -113,28 +120,73 @@ class Document extends DataBase
 
         ]);
     }
+    // crud document
+    // create document
+    public function  getAlldocument($id)
+    {
+
+        $sql = 'SELECT * FROM `document` where id_avocat = ? ';
+
+        $result = $this->conn->prepare($sql);
+        // $id_client=md5($id_client);
+        if ($result->execute([$id])) {
+
+            return json_encode($result->fetchAll(PDO::FETCH_ASSOC));
+        } else {
+            return false;
+        }
+    }
+    public function createDocument($data)
+    {
+        //  clean data
+
+        // $data->id_client = htmlspecialchars(strip_tags($data->id_client));
+
+        $sql = "INSERT INTO `document` ( `lien_document`, `prix`, `nom_document`, `id_avocat`) VALUES ( :lien_document, :prix, :nom_document, :id_avocat)   ";
+        $result = $this->conn->prepare($sql);
+        // Bind data
+
+        echo json_encode($data);
+        return  json_encode($result->execute([
+            ':lien_document' => $data->lien_document,
+            ':prix' => $data->prix,
+            ':id_avocat' => $data->id_avocat,
+            ':nom_document' => $data->nom_document
+
+        ]));
+    }
+    public function deleteDocument($id)
+    {
+        //  clean data
+
+        // $data->id_client = htmlspecialchars(strip_tags($data->id_client));
+
+        $sql = " DELETE FROM `document` WHERE `document`.`id` = ?";
+        $result = $this->conn->prepare($sql);
+        // Bind data
+        return json_encode($result->execute([
+            $id
+        ]));
+    }
 
     // update RDV
-    public function update($data)
+    public function updateDocument($data)
     {
         //create instance client and creneau
         $client = new Client();
         $creneau = new Creneau();
         // check existance foreign keys && primaryKey 
 
-        $sql = "update rdv set sjt_RDV = :sjt_RDV , date_creneau= :date_creneau ,id_client = :id_client, id_creneau = :id_creneau , id_avocat=:id_avocat where id=:id";
+        $sql = "UPDATE `document` SET `lien_document` = :lien_document, `prix` = :prix , `nom_document` = :nom_document WHERE `document`.`id` = :id_document ";
         $result = $this->conn->prepare($sql);
         //  clean data
-        $data->sjt_RDV = htmlspecialchars(strip_tags($data->sjt_RDV));
-        $data->date_creneau = htmlspecialchars(strip_tags($data->date_creneau));
+
         // Bind data 
         return  $result->execute([
-            ':sjt_RDV' => $data->sjt_RDV,
-            ':date_creneau' => $data->date_creneau,
-            ':id_client' => $data->id_client,
-            ':id_creneau' => $data->id_creneau,
-            ':id_avocat' => $data->id_avocat,
-            ':id' => $data->id_RDV
+            ':lien_document' => $data->lien_document,
+            ':prix' => $data->prix,
+            ':nom_document' => $data->nom_document,
+            ':id_document' => $data->id_document
         ]);
     }
 
