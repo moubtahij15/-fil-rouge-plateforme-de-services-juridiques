@@ -526,6 +526,20 @@ const store = createStore({
           return response.data
         });
     },
+    // cchange etat document
+    changeEtatDocument({ commit }, avocat) {
+
+      return axiosClient.post('avocat/changeEtatDocument', avocat)
+        .then(response => {
+          console.log(response)
+          // console.log("response")
+
+          if (response.data.message == "success") {
+            commit('setAvocat', response.data.avocat);
+          }
+          return response.data
+        });
+    },
     // update pass user
     getRdvAvocat({ commit }, id) {
 
