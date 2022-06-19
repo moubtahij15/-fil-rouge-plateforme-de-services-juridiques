@@ -476,16 +476,22 @@ export default {
         adresse: "",
         date_naissance: "",
         sexe: "",
-        categorie:""
+        categorie: "",
       },
       message: "",
       succus: false,
-      categories:"",
+      categories: "",
     };
   },
-
+  
   methods: {
-    ...mapActions(["redirectTo", "getVilles", "registerAvocat", "isLogin","getCategorie"]),
+    ...mapActions([
+      "redirectTo",
+      "getVilles",
+      "registerAvocat",
+      "isLogin",
+      "getCategorie",
+    ]),
 
     // register user
     register(ev) {
@@ -540,7 +546,7 @@ export default {
     },
   },
   mounted() {
-     this.getCategorie().then((response) => {
+    this.getCategorie().then((response) => {
       console.log(response);
       this.categories = response;
     });
