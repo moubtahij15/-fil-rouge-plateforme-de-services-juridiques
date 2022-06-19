@@ -199,29 +199,23 @@
                 v-for="elem in document"
               >
                 <td class="px-4 py-3 text-center">
-                  <p class="font-semibold">{{ elem.nom }} {{ elem.prenom }}</p>
+                  <p class="font-semibold">{{ elem.nom_document}} </p>
                 </td>
 
                 <td
                   class="px-4 py-3 text-left text-md font-semibold text-center"
                 >
-                  {{ elem.nom_document }}
+                  {{ elem.prix }}
                 </td>
 
                 <td class="px-4 py-3 text-md">
                   <span
                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
-                    {{ elem.date }}
+                    {{ elem.lien_document }}
                   </span>
                 </td>
-                <td class="px-4 py-3 text-xl">
-                  <span
-                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
-                  >
-                    {{ elem.prix }}DH
-                  </span>
-                </td>
+               
                 <td class="px-4 py-3 text-sm">
                   <button
                     @click="submit(elem)"
@@ -254,11 +248,11 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["redirectTo", "isLogin", "getDocummentClient"]),
+    ...mapActions(["redirectTo", "isLogin", "getDocummentClient","getAlldocument"]),
 
-    getAllDocument() {
-      this.getDocummentClient(
-        JSON.parse(sessionStorage.getItem("User")).id
+    getAllDocuments() {
+      this.getAlldocument(
+        JSON.parse(sessionStorage.getItem("Avocat")).id
       ).then((response) => {
         this.document = response;
         console.log(this.document);
@@ -266,7 +260,7 @@ export default {
     },
   },
   mounted() {
-    this.getAllDocument();
+    this.getAllDocuments();
   },
 };
 </script>
