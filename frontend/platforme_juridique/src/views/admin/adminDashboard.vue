@@ -247,7 +247,43 @@
                         <td
                           class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"
                         >
-                          {{ elem.tel }}
+                          <div
+                            class="flex items-center justify-center w-full mb-5"
+                          >
+                            <label
+                              for="toggleB"
+                              class="flex items-center cursor-pointer"
+                            >
+                              <!-- toggle -->
+                              <div class="relative">
+                                <!-- input -->
+                                <input
+                                  @click="testt(elem.id)"
+                                  type="checkbox"
+                                  id="toggleB"
+                                  class="sr-only"
+                                />
+                                <!-- line -->
+                                <div
+                                  :class="
+                                    elem.statut
+                                      ? 'block bg-primary w-14 h-8 rounded-full'
+                                      : 'block bg-red w-14 h-8 rounded-full'
+                                  "
+                                ></div>
+                                <!-- dot -->
+                                <div
+                                  :class="
+                                   elem.statut
+                                      ? 'dot absolute right-1 top-1 bg-white1 w-6 h-6 rounded-full transition'
+                                      : 'dot absolute left-1 top-1 bg-white1 w-6 h-6 rounded-full transition'
+                                  "
+                                ></div>
+                              </div>
+                              <!-- label -->
+                              
+                            </label>
+                          </div>
                         </td>
                       </tr>
                     </tbody>
