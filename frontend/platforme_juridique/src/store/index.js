@@ -716,6 +716,36 @@ const store = createStore({
           return response.data
         });
     },
+    // get all clients
+    getAllClients({ commit }) {
+
+      return axiosClient.get('client/read')
+        .then(response => {
+          console.log(response)
+
+          // if (response.data.message == "success") {
+          //   console.log(response)
+          //   sessionStorage.setItem('admin', JSON.stringify(response.data.admin));
+          // }
+
+          return response.data
+        });
+    },
+    // get all avocat
+    getAllAvocats({ commit }) {
+
+      return axiosClient.get('avocat/read',)
+        .then(response => {
+          console.log(response)
+
+          // if (response.data.message == "success") {
+          //   console.log(response)
+          //   sessionStorage.setItem('admin', JSON.stringify(response.data.admin));
+          // }
+
+          return response.data
+        });
+    },
   },
   mutations: {
 
