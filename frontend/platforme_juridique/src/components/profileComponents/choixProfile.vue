@@ -98,7 +98,7 @@
   </div>
 </template>
 <script>
-// import store from "../store";
+import store from "../../store";
 import { mapActions } from "vuex";
 export default {
   name: "choixProfile",
@@ -122,6 +122,7 @@ export default {
       //     this.redirectTo({ val: "signIn" });
       //   }
       // });
+      console.log(store.state.choix)
       this.getChoixProfile(choix);
     },
   },
