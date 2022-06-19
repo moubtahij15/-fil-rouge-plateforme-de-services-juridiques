@@ -706,9 +706,12 @@ const store = createStore({
 
       return axiosClient.post('admin/login', admin)
         .then(response => {
+          console.log(response)
+
           if (response.data.message == "success") {
             console.log(response)
-            sessionStorage.setItem('admin', response.data.admin);          }
+            sessionStorage.setItem('admin', JSON.stringify(response.data.admin));
+          }
 
           return response.data
         });
