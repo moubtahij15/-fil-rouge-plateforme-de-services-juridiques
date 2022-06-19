@@ -209,27 +209,32 @@
     <!-- table rdv -->
     <!-- component -->
 
-    <div class="flex    justify-between mr-8 mt-4">
-      <div class=" flex cursor-pointer" @click="toggleModal">
-      <FIcons
-        id="delete"
-        :icon="['fas', 'add']"
-        class="h-6 w-6  items-end cursor-pointer mr-3"
-      ></FIcons>
+    <div class="flex justify-between mr-8 mt-4">
+      <div class="flex cursor-pointer" @click="toggleModal">
+        <FIcons
+          id="delete"
+          :icon="['fas', 'add']"
+          class="h-6 w-6 items-end cursor-pointer mr-3"
+        ></FIcons>
 
-      <span class="text-md font-semibold text-center underline">
-        ajouter document
-      </span>
+        <span class="text-md font-semibold text-center underline">
+          ajouter document
+        </span>
       </div>
-      <FIcons
-        id="delete"
-        :icon="['fas', 'add']"
-        class="h-6 w-6 cursor-pointer flex-center  mr-3"
-      ></FIcons>
+      <div class="flex cursor-pointer" @click="getDocumentVendu">
+        <FIcons
+          id="delete"
+          :icon="['fas', 'eye']"
+          class="h-6 w-6 items-end cursor-pointer mr-3"
+        ></FIcons>
 
+        <span class="text-md font-semibold text-center underline">
+          voir les documents qui sont vendus
+        </span>
+      </div>
     </div>
 
-    <section class="container mx-auto p-6 font-mono">
+    <section class="container mx-auto p-6 font-mono" v-if="etat == 'inactif'">
       <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
         <div class="w-full overflow-x-auto">
           <table class="w-full border-white">
@@ -286,6 +291,83 @@
         </div>
       </div>
     </section>
+
+    <!-- section for documents vendu -->
+
+    <section class="container mx-auto p-6 font-mono" v-if="etat == 'actif'">
+      <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+        <div class="w-full overflow-x-auto">
+          <table class="w-full border-white">
+            <thead>
+              <tr
+                class="text-md font-semibold tracking-wide text-centre text-gray-900 bg-white border-b uppercase"
+              >
+                <th class="px-4 py-3">client</th>
+                <th class="px-4 py-3">prix</th>
+                <th class="px-4 py-3">lien de telechargement</th>
+                <th class="px-4 py-3">date</th>
+                <th class="px-4 py-3">email</th>
+                <th class="px-4 py-3">tele</th>
+                <th class="px-4 py-3">nom de document</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white1">
+              <tr
+                class="text-gray-700 border-white border-b-2"
+                v-for="elem in documentVendu"
+              >
+                <td class="px-4 py-3 text-center">
+                  <p class="font-semibold">{{ elem.noms }} {{ elem.prenom }}</p>
+                </td>
+
+                <td
+                  class="px-4 py-3 text-left text-md font-semibold text-center"
+                >
+                  {{ elem.prix }}DH
+                </td>
+
+                <td class="px-4 py-3 text-md">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
+                  >
+                    {{ elem.lien_document }}
+                  </span>
+                </td>
+
+                <td class="px-4 py-3 text-md">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
+                  >
+                    {{ elem.date }}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-md">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
+                  >
+                    {{ elem.email }}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-md">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
+                  >
+                    {{ elem.tel }}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-md">
+                  <span
+                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
+                  >
+                    {{ elem.nom_document }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 <script>
@@ -295,6 +377,7 @@ export default {
   name: "document",
   data() {
     return {
+      documentVendu: {},
       documentAdd: {
         id_document: "",
         lien_document: "",
@@ -302,6 +385,7 @@ export default {
         nom_document: "",
         id_avocat: JSON.parse(sessionStorage.getItem("Avocat")).id,
       },
+      etat: "inactif",
       document: {},
       showModal: false,
       sjt_post: "",
@@ -322,6 +406,7 @@ export default {
       "deleteDocument",
       "updateDocument",
       "changeEtatDocument",
+      "getDocummentClients",
     ]),
     testt() {
       if (this.value) {
@@ -386,6 +471,17 @@ export default {
     deleteDocuments(elem) {
       this.deleteDocument(elem.id).then((response) => {
         this.getAllDocuments();
+      });
+    },
+    getDocumentVendu() {
+      this.getDocummentClients(
+        JSON.parse(sessionStorage.getItem("Avocat")).id
+      ).then((response) => {
+        this.documentVendu = JSON.parse(response);
+        this.etat = "actif";
+
+        console.log(this.documentVendu);
+        console.log(this.document);
       });
     },
   },
