@@ -398,12 +398,10 @@ export default {
       }
     },
     logout() {
-      store.commit("logout");
-      router.push({
-        name: "Login",
-      });
-      console.log("ok");
-    },
+      sessionStorage.clear();
+      this.redirectTo({ val: "login" });
+  },
+
   },
   mounted() {
     if (!sessionStorage.getItem("admin")) {
