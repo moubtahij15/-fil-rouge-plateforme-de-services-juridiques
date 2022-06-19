@@ -83,7 +83,7 @@ class ClientController
                   array('message' => 'change method to PUT')
             );
       }
-      //update user info
+      //update user pass
       public function updatePass()
       {
 
