@@ -682,6 +682,23 @@ const store = createStore({
 
         })
     },
+    // get all cosultations vendu for cliavocatent
+    getDocummentClients({ commit }, id) {
+
+      return axiosClient.post('/Document/readByclients/' + id)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+            // commit('setDocumentsClient', response.data);
+
+            return response.data;
+
+          }
+
+        })
+    },
 
   },
   mutations: {
