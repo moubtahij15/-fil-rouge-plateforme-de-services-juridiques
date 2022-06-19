@@ -61,6 +61,23 @@ class Document extends DataBase
         }
     }
 
+
+    public function  readByClient($id)
+    {
+
+
+        $sql = 'SELECT a.nom , pd.date,a.prenom,a.id,d.lien_document, d.prix ,d.nom_document FROM `prendre_document` pd join document d on pd.id_document=d.id join avocat a on a.id=d.id_avocat where pd.id_client= ? ';
+
+        $result = $this->conn->prepare($sql);
+        // $id_client=md5($id_client);
+        if ($result->execute([$id])) {
+
+            return $result->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
     // Get Single Post
     // public function read_single($id_produit) {
 
@@ -78,16 +95,21 @@ class Document extends DataBase
     public function create($data)
     {
         //  clean data
+        date_default_timezone_set('Africa/casablanca');
+
+        $dateToday = date("Y-m-d");
+        $heureNow = date("H:i:s");
 
         // $id_document = htmlspecialchars(strip_tags($data->id_document));
         // $data->id_client = htmlspecialchars(strip_tags($data->id_client));
 
-        $sql = "INSERT INTO `prendre_document` (`id_client`, `id_document`) VALUES ( :id_client ,  :id_document )  ";
+        $sql = "INSERT INTO `prendre_document` (`id_client`, `id_document`,date) VALUES ( :id_client ,  :id_document,:date )  ";
         $result = $this->conn->prepare($sql);
         // Bind data
         return  $result->execute([
             ':id_client' => $data->id_client,
-            ':id_document' => $data->id_document
+            ':id_document' => $data->id_document,
+            ':id_document' => $dateToday
 
         ]);
     }
