@@ -577,7 +577,23 @@ const store = createStore({
     // add consulttaion info (price...)
     addConsultation({ commit }, consultation) {
 
-      return axiosClient.post('/avocat/addConsultation' ,consultation)
+      return axiosClient.post('/avocat/addConsultation', consultation)
+        .then(response => {
+          // console.log(response.data);
+
+          if (response.status == 200) {
+            console.log(response.data);
+
+            return response.data;
+
+          }
+
+        })
+    },
+    // add reponse to consultation (price...)
+    addReponse({ commit }, consultation) {
+
+      return axiosClient.post('/avocat/addReponse', consultation)
         .then(response => {
           // console.log(response.data);
 
