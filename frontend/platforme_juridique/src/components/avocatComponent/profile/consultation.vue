@@ -432,13 +432,13 @@
 
         <div class="flex items-center py-5"></div>
       </div>
+      <!-- {{this.etatt}} -->
 
-      <form @submit="addReponseEcrite" v-if="this.consultation.etat != 'repondu'">
+      <form @submit="addReponseEcrite" v-if="this.etatt == 'non repondu'">
         <label for="chat" class="sr-only">Your message</label>
         <div
           class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700"
         >
-        {{this.consultation.etat}}
           <textarea
             v-model="reponse.sujet"
             id="chat"
@@ -507,6 +507,7 @@ export default {
         dateReponse: "",
         heureReponse: "",
       },
+      etatt: "",
       value: JSON.parse(sessionStorage.getItem("Avocat")).serviceConsultation,
     };
   },
@@ -636,7 +637,7 @@ export default {
         this.consultation.sujet = elem.sujet;
         this.consultation.date = elem.date;
         this.consultation.heure = elem.heure;
-
+        this.etatt = elem[0].etat;
         // console.log(elem[0].etat);
         var etat = elem[0].etat;
 
