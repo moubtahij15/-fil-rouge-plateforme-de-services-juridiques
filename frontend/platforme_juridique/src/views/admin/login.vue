@@ -1,21 +1,14 @@
 <template>
     <div>
-        <img class="mx-auto h-24 w-24" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Taskful_Logo.svg"
+        <img class="mx-auto h-24 w-24" src="../../assets/logo1.”.png"
             alt="Workflow" />
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account {{ role }}</h2>
-        <p class="mt-2 text-center text-sm text-gray-600" v-if="this.$parent.$options.name == 'SignInForm'">
-            <!-- 
-          {{ ' ' }} -->
-            Or
-            <router-link :to="{ name: 'Register' }"> <a href="#"
-                    class="font-medium text-indigo-600 hover:text-indigo-500">
-                    register for free </a></router-link>
-        </p>
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">AVOCATICE </h2>
+       
     </div>
     <div v-if="error" class="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3" role="alert">
         email ou mot de pass incorrect !
     </div>
-    <form class="mt-8 space-y-6" @submit="login">
+    <form class=" mx-auto  w-1/3 mt-8 space-y-6" @submit="login">
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
             <div class="mb-3 space-y-2 w-full text-xs" v-if="this.$parent.$options.name == 'SignInForm'">
@@ -47,11 +40,11 @@
 
         <div>
             <button type="submit"
-                class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                class="group relative bg-primary w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                     <LockClosedIcon class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
                 </span>
-                Sign in
+               login
             </button>
         </div>
     </form>
@@ -85,9 +78,7 @@ export default {
     components: {
         LockClosedIcon
     },
-    props: {
-        role: String
-    },
+    
     methods: {
         ...mapActions(["redirectTo"]),
 
