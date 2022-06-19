@@ -244,29 +244,33 @@
                             @click="deleteUser(elem.id)"
                           />
                         </td>
+
                         <td
+                          v-if="this.type == 'avocats'"
                           class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"
                         >
+                            
                           <div
                             class="flex items-center justify-center w-full mb-5"
                           >
-                            <label
+                            <label 
                               for="toggleB"
                               class="flex items-center cursor-pointer"
                             >
                               <!-- toggle -->
-                              <div class="relative">
+                              <div class="relative"
+
+                              >
                                 <!-- input -->
                                 <input
-                                  @click="testt(elem.id)"
                                   type="checkbox"
                                   id="toggleB"
                                   class="sr-only"
                                 />
                                 <!-- line -->
-                                <div
+                                <div  @click="testt(elem.id)"
                                   :class="
-                                    elem.statut
+                                    elem.statut == 'activé'
                                       ? 'block bg-primary w-14 h-8 rounded-full'
                                       : 'block bg-red w-14 h-8 rounded-full'
                                   "
@@ -274,14 +278,13 @@
                                 <!-- dot -->
                                 <div
                                   :class="
-                                   elem.statut
+                                    elem.statut == 'activé'
                                       ? 'dot absolute right-1 top-1 bg-white1 w-6 h-6 rounded-full transition'
                                       : 'dot absolute left-1 top-1 bg-white1 w-6 h-6 rounded-full transition'
                                   "
                                 ></div>
                               </div>
                               <!-- label -->
-                              
                             </label>
                           </div>
                         </td>
@@ -355,7 +358,18 @@ export default {
       "getAllClients",
       "deleteClient",
       "getAllAvocats",
+      "deleteAvocat",
+      "changeStatut",
     ]),
+    testt(id) {
+        console.log(id)
+      this.changeStatut(id).then((response) => {
+
+        this.getAvocats()
+      });
+
+        // console.log(this.value);
+    },
     getClients() {
       this.type = "clients";
       this.getAllClients().then((response) => {
@@ -371,9 +385,17 @@ export default {
     },
     deleteUser(id) {
       console.log(id);
-      this.deleteClient(id).then((response) => {
-        this.getClients();
-      });
+      if (this.type == "clients") {
+        this.deleteClient(id).then((response) => {
+          this.getClients();
+        });
+      } else if (this.type == "avocats") {
+        this.deleteAvocat(id).then((response) => {
+          //   this.getClients();
+
+          this.getAvocats();
+        });
+      }
     },
     logout() {
       store.commit("logout");
