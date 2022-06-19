@@ -23,6 +23,21 @@ class AvocatController
             );
       }
 
+      public function read()
+      {
+
+
+            if ($_SERVER["REQUEST_METHOD"] == "GET") {
+
+                  $avocat = new Avocat();
+                  //get client data
+                  $data = (file_get_contents("php://input"));
+                  // create client
+                  echo $avocat->readAvocat();
+            } else  echo json_encode(
+                  array('message' => 'change method to GET')
+            );
+      }
       // register avocat
 
       public function register()
@@ -169,6 +184,19 @@ class AvocatController
                   array('message' => 'change method to Post')
             );
       }
+      // change etat consultation
+      public function changeEtatDocument()
+      {
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                  $avocat = new Avocat();                  //get client data
+                  $data = json_decode(file_get_contents("php://input"));
+
+                  echo $avocat->changeEtatDocument($data);
+            } else  echo json_encode(
+                  array('message' => 'change method to Post')
+            );
+      }
       // change etat rdv
       public function rdvAvocat($id)
       {
@@ -182,7 +210,34 @@ class AvocatController
                   array('message' => 'change method to Post')
             );
       }
+      public function delete($id)
+      {
 
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                  $avocat = new Avocat();
+                  //get client data
+                  // create client
+                  return $avocat->delete($id);
+            } else  echo json_encode(
+                  array('message' => 'change method to PUT')
+            );
+      }
+      public function changeStatut($id)
+      {
+
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                  $avocat = new Avocat();
+                  //get client data
+                  // create client
+                  return $avocat->changeStatut($id);
+            } else  echo json_encode(
+                  array('message' => 'change method to PUT')
+            );
+      }
 
       //ville
       public function villes()
