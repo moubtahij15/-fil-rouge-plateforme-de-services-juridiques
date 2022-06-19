@@ -93,7 +93,7 @@ class ConsultationEcriteController
       array('message' => 'change method to Post')
     );
   }
-  // readAllconultationsEcrite
+  // readAllconultationsEcrite for clients
 
   public function readAllconultationsEcrite($id)
   {
@@ -110,6 +110,29 @@ class ConsultationEcriteController
       } else {
         echo json_encode(
           array('message' => ' aucun Rdv pour ce client')
+        );
+      }
+    } else  echo json_encode(
+      array('message' => 'change method to POST')
+    );
+  }
+  // readAllconultationsEcrite for avocat
+
+  public function readAllconultationsEcriteAvocat($id)
+  {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+      $Consultation = new ConsultationEcrite();
+
+      // Blog post query
+      $result = $Consultation->readAllconultationsEcriteAvocat($id);
+
+      // Turn to JSON & output
+      if ($result) {
+        echo json_encode($result);
+      } else {
+        echo json_encode(
+          array('message' => ' aucun consulatation pour ce Avocat')
         );
       }
     } else  echo json_encode(
