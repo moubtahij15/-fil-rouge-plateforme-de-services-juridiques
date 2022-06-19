@@ -22,7 +22,6 @@
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
-                
                 <router-link
                   :to="'/dashboardAdmin'"
                   class="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-bold"
@@ -97,33 +96,18 @@
             {{ item.name }}
 
                 </router-link> -->
-          <router-link
-            :to="'/HomePage'"
-            v-if="userss"
-            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2block px-3 py-2 rounded-md text-base font-medium"
-          >
-            home
-          </router-link>
-          <router-link
-            :to="'/ProfileUser'"
-            v-if="userss"
-            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 block px-3 py-2 rounded-md text-base font-medium"
-          >
-            Profile</router-link
-          >
+
           <router-link
             :to="'/dashboardAdmin'"
-            v-if="admin"
-            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 block px-3 py-2 rounded-md text-base font-medium"
-          >
-            dashboard
-          </router-link>
-          <router-link
-            :to="'/users'"
-            v-if="admin"
             class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 block px-3 py-2 rounded-md text-base font-medium"
           >
             users
+          </router-link>
+          <router-link
+            :to="'/users'"
+            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 block px-3 py-2 rounded-md text-base font-medium"
+          >
+            avocat
           </router-link>
         </div>
         <div class="pt-4 pb-3 border-t border-gray-700">
@@ -159,8 +143,113 @@
         </div>
       </DisclosurePanel>
     </Disclosure>
+    <!-- user tab -->
 
-    <router-view></router-view>
+    <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
+      <div
+        :class="sidebarOpen ? 'block' : 'hidden'"
+        @click="sidebarOpen = false"
+        class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"
+      ></div>
+
+      <div class="flex-1 flex flex-col overflow-hidden">
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+          <div class="container mx-auto px-6 py-8">
+            <h3 class="text-gray-700 text-3xl font-medium">All users :</h3>
+
+            <div class="mt-8"></div>
+
+            <div class="flex flex-col mt-8">
+              <div
+                class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
+              >
+                <div
+                  class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200"
+                >
+                  <table class="min-w-full">
+                    <thead>
+                      <tr>
+                        <th
+                          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Nom
+                        </th>
+                        <th
+                          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Prenom
+                        </th>
+                        <th
+                          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Email
+                        </th>
+                        <th
+                          class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          age
+                        </th>
+                        <th
+                          class="px-6 py-3 border-b border-gray-200 bg-gray-50"
+                        >
+                          Supprimer
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody class="bg-white">
+                      <tr
+                      >
+                        <td
+                          class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+                        >
+                          <div class="text-bold leading-5 text-gray-900">
+                           azert
+                          </div>
+                        </td>
+
+                        <td
+                          class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+                        >
+                          <div class="text-sm leading-5 text-gray-900">
+                          azert
+                          </div>
+                        </td>
+
+                        <td
+                          class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+                        >
+                          <div class="text-sm leading-5 text-gray-900">
+                           azert
+                          </div>
+                        </td>
+
+                        <td
+                          class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"
+                        >
+                        azert
+                        </td>
+
+                        <td
+                          class="px-6 py-4 whitespace-no-wrap text-center border-b border-gray-200 text-sm leading-5 font-medium"
+                        >
+                          <FIcons
+                            id="delete"
+                            :icon="['fas', 'trash']"
+                            class="h-5 w-5"
+                            @click="deleteUser(elem.id)"
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -225,6 +314,9 @@ export default {
   mounted() {
     console.log("hada" + this.userss);
     console.log(this.$parent.$options.name);
+    if (!sessionStorage.getItem("admin")) {
+      this.redirectTo({ val: "login" });
+    }
   },
   setup() {
     const store = useStore();
