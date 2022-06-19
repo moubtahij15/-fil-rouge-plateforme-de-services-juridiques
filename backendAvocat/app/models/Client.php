@@ -10,6 +10,15 @@ class Client extends DataBase
 
     $this->conn = $this->connect();
   }
+  public function read()
+  {
+    $sql = "SELECT  c.id ,c.nom , c.prenom ,c.tel ,c.email , v.nom as ville FROM `client` c join ville v on c.ville_id=v.id";
+    $result = $this->conn->prepare($sql);
+
+    if ($result->execute()) {
+      return json_encode($result->fetchAll(PDO::FETCH_ASSOC));
+    } else return false;
+  }
   //get single client 
   public function read_single($email)
   {
@@ -29,7 +38,19 @@ class Client extends DataBase
       return $result->fetch(PDO::FETCH_ASSOC);
     } else return false;
   }
+  public function delete($id)
+  {
+    //  clean data
 
+    // $data->id_client = htmlspecialchars(strip_tags($data->id_client));
+
+    $sql = "DELETE FROM `client` WHERE `client`.`id` =  ?";
+    $result = $this->conn->prepare($sql);
+    // Bind data
+    return json_encode($result->execute([
+      $id
+    ]));
+  }
   // get ville 
 
   public function getVilles()
@@ -186,41 +207,38 @@ class Client extends DataBase
 
 
 
-//update password client 
-public function updatePass($data)
-{
-  // clean data
-  $data->id = htmlspecialchars(strip_tags($data->id));
-  // test old password
-  if (password_verify($data->oldPass, $this->read_singleById($data->id)["password"])) {
-    $data->newPass = htmlspecialchars(strip_tags($data->newPass));
-    $data->newPass = password_hash($data->newPass, PASSWORD_DEFAULT);
-    $sql = "UPDATE client SET  password=:password WHERE id = :id ";
+  //update password client 
+  public function updatePass($data)
+  {
+    // clean data
+    $data->id = htmlspecialchars(strip_tags($data->id));
+    // test old password
+    if (password_verify($data->oldPass, $this->read_singleById($data->id)["password"])) {
+      $data->newPass = htmlspecialchars(strip_tags($data->newPass));
+      $data->newPass = password_hash($data->newPass, PASSWORD_DEFAULT);
+      $sql = "UPDATE client SET  password=:password WHERE id = :id ";
 
-    $result = $this->conn->prepare($sql);
-    $result->execute([
-      ':password' => $data->newPass,
-      ':id' => $data->id,
-    ]);
-    if ($result) {
+      $result = $this->conn->prepare($sql);
+      $result->execute([
+        ':password' => $data->newPass,
+        ':id' => $data->id,
+      ]);
+      if ($result) {
+        echo json_encode(
+          array(
+            'result' => 'success', 'message' => " le mot de passe  est Bien Modifier", 'client' => $this->read_singleById($data->id)
+          )
+        );
+      }
+      // return false;
+    } else {
       echo json_encode(
         array(
-          'result' => 'success', 'message' => " le mot de passe  est Bien Modifier" ,'client'=> $this->read_singleById($data->id)
+          'result' => 'erreur', 'message' => " le mot de passe actuel est incorrect"
         )
       );
     }
-    // return false;
-  } else {
-    echo json_encode(
-      array(
-        'result' => 'erreur', 'message' => " le mot de passe actuel est incorrect"
-      )
-    );
   }
-
-
-  
-}
 
   // function getAge 
   public function  getAge($date_naissance)
