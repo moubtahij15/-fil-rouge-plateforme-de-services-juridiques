@@ -1,6 +1,100 @@
 <template lang="">
   <!-- alert 1h before -->
   <div class="block w-full overflow-x-auto">
+    <!-- modal -->
+    <div
+      v-if="showModal"
+      class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
+    >
+      <div class="relative w-auto my-6 mx-auto w-full max-w-3xl">
+        <!--content-->
+        <div
+          class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
+        >
+          <!--header-->
+          <div
+            class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t"
+          >
+            <h3 class="text-3xl font-semibold">ajouter un document</h3>
+            <button
+              class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+            >
+              <span
+                class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
+              >
+                ×
+              </span>
+            </button>
+          </div>
+          <!--body-->
+          <div class="relative p-6 flex-auto w-full">
+            <form @submit="addDocument">
+              <div class="items-center md:flex">
+                <div class="relative">
+                  <label
+                    class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white"
+                    >nom_document</label
+                  >
+                  <input
+                    v-model="documentAdd.nom_document"
+                    type="text"
+                    class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                    placeholder="nom de document"
+                    required
+                  />
+                </div>
+                <div class="relative ml-4">
+                  <label
+                    class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white1"
+                    >prix</label
+                  >
+                  <input
+                    v-model="documentAdd.prix"
+                    type="number"
+                    min=5
+                    class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white1 border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                    placeholder="prix de document"
+                    required
+                  />
+                </div>
+                <div class="relative ml-4">
+                  <label
+                    class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white1"
+                    >lien</label
+                  >
+                  <input
+                    v-model="documentAdd.lien_document"
+                    type="text"
+                    class="block w-full px-4 py-3 mt-2 text-base placeholder-gray-400 bg-white1 border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                    placeholder="url de document"
+                    required
+                  />
+                </div>
+              </div>
+              <div
+                class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
+              >
+                <button
+                  class="text-green-500 bg-transparent border border-solid border-green-500 hover:bg-green-500 hover:text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="button"
+                  v-on:click="this.showModal = !this.showModal "
+                >
+                  Close
+                </button>
+                <button
+                  class="text-green-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="submit"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!--footer-->
+        </div>
+      </div>
+    </div>
     <div class="w-full text-primary shadow bg-white">
       <div
         class="container flex items-center justify-between px-6 py-4 mx-auto"
@@ -118,66 +212,22 @@
     </div>
 
     <!-- modal suject -->
-    <div
-      v-if="showModal"
-      class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
-    >
-      <div class="relative w-auto my-6 mx-auto w-full max-w-3xl">
-        <!--content-->
-        <div
-          class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
-        >
-          <!--header-->
-          <div
-            class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t"
-          >
-            <h3 class="text-3xl font-semibold">modifier post</h3>
-            <button
-              class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-            >
-              <span
-                class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
-              >
-                ×
-              </span>
-            </button>
-          </div>
-          <!--body-->
-          <div class="relative p-6 flex-auto w-full">
-            <div class="whitespace-pre-wrap mt-7">
-              <textarea
-                v-model="this.sjt_post"
-                placeholder="Sujet"
-                class="bg-purple-white shadow rounded border-0 p-3 w-full"
-                required="required"
-              ></textarea>
-            </div>
-          </div>
-          <div class="flex-1 px-2 pt-2 mx-10 m-2"></div>
-          <!--footer-->
-          <div
-            class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
-          >
-            <button
-              class="text-green-500 bg-transparent border border-solid border-green-500 hover:bg-green-500 hover:text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button"
-              v-on:click="this.showModal = !this.showModal"
-            >
-              Close
-            </button>
-            <button
-              class="text-green-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button"
-              @click="updatePost()"
-            >
-              Save Changes
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <!-- table rdv -->
     <!-- component -->
+
+    <div class="flex mr-8 mt-4 cursor-pointer" @click="toggleModal">
+      <FIcons
+        id="delete"
+        :icon="['fas', 'add']"
+        class="h-6 w-6 cursor-pointer mr-3"
+      ></FIcons>
+
+      <span class="text-md font-semibold text-center underline">
+        ajouter document
+      </span>
+    </div>
+
     <section class="container mx-auto p-6 font-mono">
       <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
         <div class="w-full overflow-x-auto">
@@ -189,8 +239,7 @@
                 <th class="px-4 py-3">nom du document</th>
                 <th class="px-4 py-3">prix</th>
                 <th class="px-4 py-3">lien de telechargement</th>
-
-                -->
+                <th class="px-4 py-3">action</th>
               </tr>
             </thead>
             <tbody class="bg-white1">
@@ -199,7 +248,7 @@
                 v-for="elem in document"
               >
                 <td class="px-4 py-3 text-center">
-                  <p class="font-semibold">{{ elem.nom_document}} </p>
+                  <p class="font-semibold">{{ elem.nom_document }}</p>
                 </td>
 
                 <td
@@ -215,14 +264,19 @@
                     {{ elem.lien_document }}
                   </span>
                 </td>
-               
+
                 <td class="px-4 py-3 text-sm">
-                  <button
-                    @click="submit(elem)"
-                    class="flex-no-shrink px-5 py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 hover:bg-primary hover:text-white text-primary rounded-full transition ease-in duration-300"
-                  >
-                    telecherger
-                  </button>
+                  <FIcons
+                    id="delete"
+                    :icon="['fas', 'edit']"
+                    class="h-6 w-6 mr-3 cursor-pointer"
+                  ></FIcons>
+                  <FIcons
+                  @click="deleteDocument(elem)"
+                    id="delete"
+                    :icon="['fas', 'trash']"
+                    class="h-6 w-6 cursor-pointer"
+                  ></FIcons>
                 </td>
               </tr>
             </tbody>
@@ -239,6 +293,12 @@ export default {
   name: "document",
   data() {
     return {
+      documentAdd: {
+        lien_document: "",
+        prix: "",
+        nom_document: "",
+        id_avocat: JSON.parse(sessionStorage.getItem("Avocat")).id,
+      },
       document: {},
       showModal: false,
       sjt_post: "",
@@ -248,16 +308,44 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["redirectTo", "isLogin", "getDocummentClient","getAlldocument"]),
+    ...mapActions([
+      "redirectTo",
+      "isLogin",
+      "getDocummentClient",
+      "getAlldocument",
+      "createDocument",
+    ]),
+    toggleModal() {
+      this.showModal = !this.showModal;
+
+      //   this.sjt_post = elm.sjt_RDV;
+      //   this.rdvUpdate = elm;
+    },
 
     getAllDocuments() {
-      this.getAlldocument(
-        JSON.parse(sessionStorage.getItem("Avocat")).id
-      ).then((response) => {
-        this.document = response;
-        console.log(this.document);
-      });
+      this.getAlldocument(JSON.parse(sessionStorage.getItem("Avocat")).id).then(
+        (response) => {
+          this.document = response;
+          console.log(this.document);
+        }
+      );
     },
+    addDocument(ev) {
+      ev.preventDefault();
+      this.createDocument(this.documentAdd).then((response) => {
+        this.getAllDocuments();
+        this.documentAdd.lien_document="";
+        this.documentAdd.nom_document="";
+        this.documentAdd.prix="";
+
+        this.showModal = !this.showModal;
+      });
+    //   console.log(this.documentAdd);
+    },
+    deleteDocument(elem){
+      console.log(elem);
+
+    }
   },
   mounted() {
     this.getAllDocuments();
