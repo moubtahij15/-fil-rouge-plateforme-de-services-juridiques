@@ -186,7 +186,7 @@
               <tr
                 class="text-md font-semibold tracking-wide text-centre text-gray-900 bg-white border-b uppercase"
               >
-                <th class="px-4 py-3">avocat</th>
+                <th class="px-4 py-3">nom du document</th>
                 <th class="px-4 py-3">nom du document</th>
 
                 <th class="px-4 py-3">date</th>
