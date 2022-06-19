@@ -95,42 +95,35 @@
         </div>
       </div>
     </div>
-    <div class="w-full text-primary shadow bg-white">
-      <div
-        class="container flex items-center justify-between px-6 py-4 mx-auto"
-      >
-        <div class="flex">
-          <svg viewBox="0 0 40 40" class="w-6 h-6 fill-current">
-            <path
-              d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z"
-            ></path>
-          </svg>
-
-          <p class="mx-3 font-bold">
-            vous pouvez annuler votre rendez-vous (d'une limite 1 h avant le
-            rendez-vous).​
-          </p>
+    <div class="flex items-center justify-center w-full mb-5">
+      <label for="toggleB" class="flex items-center cursor-pointer">
+        <!-- toggle -->
+        <div class="relative">
+          <!-- input -->
+          <input @click="testt" type="checkbox" id="toggleB" class="sr-only" />
+          <!-- line -->
+          <div
+            :class="
+              value
+                ? 'block bg-primary w-14 h-8 rounded-full'
+                : 'block bg-red w-14 h-8 rounded-full'
+            "
+          ></div>
+          <!-- dot -->
+          <div
+            :class="
+              value
+                ? 'dot absolute right-1 top-1 bg-white1 w-6 h-6 rounded-full transition'
+                : 'dot absolute left-1 top-1 bg-white1 w-6 h-6 rounded-full transition'
+            "
+          ></div>
         </div>
-
-        <button
-          class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none"
-        >
-          <svg
-            class="w-5 h-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6 18L18 6M6 6L18 18"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </button>
-      </div>
+        <!-- label -->
+        <div class="ml-3 text-primary font-medium">
+          <span v-if="value">ce service est activé </span>
+          <span v-if="!value">ce service est desativer </span>
+        </div>
+      </label>
     </div>
     <!-- alert update sucess -->
     <div v-if="this.msg" class="w-full text-white bg-primary">
@@ -216,16 +209,24 @@
     <!-- table rdv -->
     <!-- component -->
 
-    <div class="flex mr-8 mt-4 cursor-pointer" @click="toggleModal">
+    <div class="flex    justify-between mr-8 mt-4">
+      <div class=" flex cursor-pointer" @click="toggleModal">
       <FIcons
         id="delete"
         :icon="['fas', 'add']"
-        class="h-6 w-6 cursor-pointer mr-3"
+        class="h-6 w-6  items-end cursor-pointer mr-3"
       ></FIcons>
 
       <span class="text-md font-semibold text-center underline">
         ajouter document
       </span>
+      </div>
+      <FIcons
+        id="delete"
+        :icon="['fas', 'add']"
+        class="h-6 w-6 cursor-pointer flex-center  mr-3"
+      ></FIcons>
+
     </div>
 
     <section class="container mx-auto p-6 font-mono">
@@ -267,7 +268,7 @@
 
                 <td class="px-4 py-3 text-sm">
                   <FIcons
-                  @click="passingData(elem)"
+                    @click="passingData(elem)"
                     id="delete"
                     :icon="['fas', 'edit']"
                     class="h-6 w-6 mr-3 cursor-pointer"
@@ -308,6 +309,7 @@ export default {
       msg: "",
       msg1: "",
       action: "add",
+      value: JSON.parse(sessionStorage.getItem("Avocat")).serviceDocument,
     };
   },
   methods: {
@@ -318,21 +320,35 @@ export default {
       "getAlldocument",
       "createDocument",
       "deleteDocument",
-      "updateDocument"
+      "updateDocument",
+      "changeEtatDocument",
     ]),
+    testt() {
+      if (this.value) {
+        this.value = 0;
+      } else {
+        this.value = 1;
+      }
+      console.log(this.value);
+      this.changeEtatDocument({
+        id: JSON.parse(sessionStorage.getItem("Avocat")).id,
+        value: this.value,
+      }).then((response) => {});
+
+      //   console.log(this.value);
+    },
     toggleModal() {
       this.showModal = !this.showModal;
 
       //   this.sjt_post = elm.sjt_RDV;
       //   this.rdvUpdate = elm;
     },
-    passingData(elem){
-          this.documentAdd.lien_document = elem.lien_document;
-          this.documentAdd.nom_document = elem.nom_document;
-          this.documentAdd.prix = elem.prix;
-          this.documentAdd.id_document = elem.id;
-                this.showModal = !this.showModal;
-
+    passingData(elem) {
+      this.documentAdd.lien_document = elem.lien_document;
+      this.documentAdd.nom_document = elem.nom_document;
+      this.documentAdd.prix = elem.prix;
+      this.documentAdd.id_document = elem.id;
+      this.showModal = !this.showModal;
     },
 
     getAllDocuments() {
@@ -360,7 +376,7 @@ export default {
           this.documentAdd.lien_document = "";
           this.documentAdd.nom_document = "";
           this.documentAdd.prix = "";
-            this.action="add"
+          this.action = "add";
           this.showModal = !this.showModal;
         });
       }
