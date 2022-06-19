@@ -19,11 +19,7 @@ class DocumentController
 {
     public function readByAvocat($id)
     {
-
         // $data = json_decode(file_get_contents("php://input"));
-
-
-
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -38,6 +34,29 @@ class DocumentController
             } else {
                 echo json_encode(
                     array('message' => ' aucun document pour ce avocat')
+                );
+            }
+        } else  echo json_encode(
+            array('message' => 'change method to POST')
+        );
+    }
+    public function readByClient($id)
+    {
+        // $data = json_decode(file_get_contents("php://input"));
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $document = new Document();
+
+            // Blog post query
+            $document = $document->readByClient($id);
+
+            // Turn to JSON & output
+            if ($document) {
+                echo json_encode($document);
+            } else {
+                echo json_encode(
+                    array('message' => ' aucun document pour ce Client')
                 );
             }
         } else  echo json_encode(
