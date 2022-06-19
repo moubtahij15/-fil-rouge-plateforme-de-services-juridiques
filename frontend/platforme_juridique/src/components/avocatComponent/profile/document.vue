@@ -254,7 +254,7 @@
                 <td
                   class="px-4 py-3 text-left text-md font-semibold text-center"
                 >
-                  {{ elem.prix }}
+                  {{ elem.prix }}DH
                 </td>
 
                 <td class="px-4 py-3 text-md">
