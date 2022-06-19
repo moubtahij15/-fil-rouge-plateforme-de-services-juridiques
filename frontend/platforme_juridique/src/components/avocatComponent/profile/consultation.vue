@@ -432,12 +432,15 @@
 
         <div class="flex items-center py-5"></div>
       </div>
-      <form>
+
+      <form @submit="addReponseEcrite" v-if="this.consultation.etat != 'repondu'">
         <label for="chat" class="sr-only">Your message</label>
         <div
           class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700"
-        >      
+        >
+        {{this.consultation.etat}}
           <textarea
+            v-model="reponse.sujet"
             id="chat"
             rows="1"
             class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -490,6 +493,10 @@ export default {
         ecrite: "",
         telephonique: "",
       },
+      reponse: {
+        consultation: "",
+        sujet: "",
+      },
       consultations: [],
       consultation: {
         type: "",
@@ -514,7 +521,7 @@ export default {
       "getAvocats",
       "getAvocatsBySearch",
       "addConsultation",
-      "vaidateRdv",
+      "addReponse",
       "getTypeConsultation",
       "updateSjtRdv",
       "getConsultationsTelAvocat",
@@ -579,9 +586,52 @@ export default {
         });
       });
     },
+    addReponseEcrite(ev) {
+      ev.preventDefault();
+
+      this.addReponse({
+        reponse: this.reponse.sujet,
+        id_consultation: this.reponse.consultation,
+      }).then((response) => {
+        // console.log(response);
+        this.consultations = [];
+        this.getConsultationsEcriteAvocat(
+          JSON.parse(sessionStorage.getItem("Avocat")).id
+        ).then((response) => {
+          console.log(store.state.consultationEcrite);
+          let cl = [];
+          cl = store.state.consultationEcrite.find(
+            (obj) => obj.type == "ecrite" && obj.id == this.reponse.consultation
+          );
+          this.consultation.reponse = cl[1][0].reponse;
+          this.consultation.dateReponse = cl[1][0].date_reponse;
+          this.consultation.heureReponse = cl[1][0].heure_reponse;
+          this.reponse.sujet = "";
+
+          // this.consultations = ;
+          console.log(this.consultations);
+        });
+        // this.getConsultations(JSON.parse(sessionStorage.getItem("Avocat")).id);
+        // let cl = [];
+        // cl = store.state.consultationEcrite.find(
+        //   (obj) => obj.type == "ecrite" && obj.id == this.reponse.consultation
+        // );
+        // console.log(store.state.consultationEcrite);
+
+        // this.getTypeConsultation(
+        //   JSON.parse(sessionStorage.getItem("Avocat")).id
+        // ).then((response) => {
+        //   this.type = response.avocat;
+        //   console.log(response);
+      });
+      // });
+    },
 
     voirConsultationEcrite(elem) {
+      console.log(elem);
       if (elem.type == "ecrite") {
+        this.reponse.consultation = elem.id;
+
         this.consultation.type = "ecrite";
         this.consultation.sujet = elem.sujet;
         this.consultation.date = elem.date;
