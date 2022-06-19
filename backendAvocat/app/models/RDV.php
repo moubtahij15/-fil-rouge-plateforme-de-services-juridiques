@@ -45,6 +45,32 @@ class RDV extends DataBase
       return false;
     }
   }
+  // reads rdv for single avocat
+  public function  readAvocat($id_avocat)
+  {
+
+
+    $sql = 'SELECT r.id, r.sjt_RDV ,r.date_creneau, c.heure_debut , cl.nom , cl.prenom ,cl.email,cl.tel, a.id as id_avocat ,c.id as id_creneau FROM rdv r join creneau c on r.id_creneau =c.id join avocat a on a.id=r.id_avocat JOIN client cl on cl.id=r.id_client where a.id = ?
+    ORDER BY r.date_creneau DESC';
+
+    $result = $this->conn->prepare($sql);
+    // $id_client=md5($id_client);
+    if ($result->execute([$id_avocat])) {
+      return json_encode(
+        array(
+          'message' => 'success',
+          'rdv' => $result->fetchAll(PDO::FETCH_ASSOC)
+        )
+      );
+    }
+
+    return json_encode(
+      array(
+        'message' => 'failed'
+
+      )
+    );
+  }
 
   // Get Single Post
   // public function read_single($id_produit) {
@@ -108,6 +134,8 @@ class RDV extends DataBase
       ':id' => $data->id_RDV
     ]);
   }
+  // change eatat rdv
+
 
   // delete RDV
   public function delete($data)
