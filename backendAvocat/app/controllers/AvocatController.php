@@ -23,10 +23,9 @@ class AvocatController
             );
       }
 
+      // register avocat
 
-
-      //  client
-      public function search()
+      public function register()
       {
 
 
@@ -36,22 +35,149 @@ class AvocatController
                   //get client data
                   $data = json_decode(file_get_contents("php://input"));
                   // create client
-                  echo $avocat->readSearch($data);
+                  echo $avocat->register($data);
             } else  echo json_encode(
                   array('message' => 'change method to POST')
             );
       }
 
+      // update avocat
+      // public function register()
+      // {
+
+
+      //       if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+      //             $avocat = new Avocat();
+      //             //get client data
+      //             $data = json_decode(file_get_contents("php://input"));
+      //             // create client
+      //             echo $avocat->register($data);
+      //       } else  echo json_encode(
+      //             array('message' => 'change method to POST')
+      //       );
+      // }
+      //  client
+      public function updateInfo()
+      {
+
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                  $avocat = new Avocat();
+                  //get client data
+                  $data = json_decode(file_get_contents("php://input"));
+                  // create client
+                  echo $avocat->updateInfo($data);
+            } else  echo json_encode(
+                  array('message' => 'change method to POST')
+            );
+      }
+      //update user pass
+      public function updatePass()
+      {
+
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                  $avocat = new Avocat();
+                  //get client data
+                  $data = json_decode(file_get_contents("php://input"));
+                  // create client
+                  echo $avocat->updatePass($data);
+            } else  echo json_encode(
+                  array('message' => 'change method to PUT')
+            );
+      }
       //login client
       public function login()
       {
 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                  $client = new Client();
-                  //get client data
+                  $avocat = new Avocat();                  //get client data
                   $data = json_decode(file_get_contents("php://input"));
 
-                  echo $client->login($data);
+                  echo $avocat->login($data);
+            } else  echo json_encode(
+                  array('message' => 'change method to Post')
+            );
+      }
+      // change etat rdv
+      public function chageEtatRdv()
+      {
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                  $avocat = new Avocat();                  //get client data
+                  $data = json_decode(file_get_contents("php://input"));
+
+                  echo $avocat->chageEtatRdv($data);
+            } else  echo json_encode(
+                  array('message' => 'change method to Post')
+            );
+      }
+      //  add consultation
+      public function addConsultation()
+      {
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                  $avocat = new Avocat();                  //get client data
+                  $data = json_decode(file_get_contents("php://input"));
+
+                  echo $avocat->addConsultation($data);
+            } else  echo json_encode(
+                  array('message' => 'change method to Post')
+            );
+      }
+
+      //  add consultation
+      public function addReponse()
+      {
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                  $avocat = new Avocat();                  //get client data
+                  $data = json_decode(file_get_contents("php://input"));
+
+                  echo $avocat->addReponse($data);
+            } else  echo json_encode(
+                  array('message' => 'change method to Post')
+            );
+      }
+
+      // check type consultation
+      public function getTypeConsultation($id)
+      {
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                  $avocat = new Avocat();                  //get client data
+                  // $data = json_decode(file_get_contents("php://input"));
+
+                  echo $avocat->getTypeConsultation($id);
+            } else  echo json_encode(
+                  array('message' => 'change method to Post')
+            );
+      }
+      // change etat consultation
+      public function changeEtatConsultation()
+      {
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                  $avocat = new Avocat();                  //get client data
+                  $data = json_decode(file_get_contents("php://input"));
+
+                  echo $avocat->chageEtatConsultation($data);
+            } else  echo json_encode(
+                  array('message' => 'change method to Post')
+            );
+      }
+      // change etat rdv
+      public function rdvAvocat($id)
+      {
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                  $rdv = new RDV();                  //get client data
+                  // $data = json_decode(file_get_contents("php://input"));
+
+                  echo $rdv->readAvocat($id);
             } else  echo json_encode(
                   array('message' => 'change method to Post')
             );
