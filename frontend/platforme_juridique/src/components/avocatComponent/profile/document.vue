@@ -187,11 +187,10 @@
                 class="text-md font-semibold tracking-wide text-centre text-gray-900 bg-white border-b uppercase"
               >
                 <th class="px-4 py-3">nom du document</th>
-                <th class="px-4 py-3">nom du document</th>
-
-                <th class="px-4 py-3">date</th>
-                <th class="px-4 py-3">montant</th>
+                <th class="px-4 py-3">prix</th>
                 <th class="px-4 py-3">lien de telechargement</th>
+
+                -->
               </tr>
             </thead>
             <tbody class="bg-white1">
