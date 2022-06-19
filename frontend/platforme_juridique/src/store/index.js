@@ -700,6 +700,19 @@ const store = createStore({
         })
     },
 
+    // end avocats actions
+    // start admin actions
+    loginAdmin({ commit }, admin) {
+
+      return axiosClient.post('admin/login', admin)
+        .then(response => {
+          if (response.data.message == "success") {
+            console.log(response)
+            sessionStorage.setItem('admin', response.data.admin);          }
+
+          return response.data
+        });
+    },
   },
   mutations: {
 
