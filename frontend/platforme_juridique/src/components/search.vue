@@ -1,4 +1,4 @@
-<template lang="">
+  <template lang="">
   <div
     class="w-full mx-auto flex items-center justify-center rounded-md p-4 bg-white"
   >
@@ -131,7 +131,7 @@ export default {
       console.log(store.state.avocats);
     });
 
-    if (
+    if (  
       this.avocat.idAvocat == "" &&
       this.avocat.idCategorie == "" &&
       this.avocat.idVille == ""
