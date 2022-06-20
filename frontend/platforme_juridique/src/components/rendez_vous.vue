@@ -2,7 +2,16 @@
   <!-- component -->
   <!-- component -->
   <div class="w-full mx-auto my-4 border-b-2 pb-4">
-    <div class="flex pb-3 mx-auto w-full">
+  <div
+      class="w-full flex items-center my-auto justify-center p-4 sm:flex"
+      v-if="this.service == 0"
+    >
+      <p class="text-2xl text-primary md:text-3xl font-light leading-normal">
+      ce service est desactivé par ce avocat
+      </p>
+    </div>
+    
+    <div class="flex pb-3 mx-auto w-full"  v-if="this.service == 1" >
       <div class="flex-1">
         <div
           :class="step1 ? 'bg-primary text-white ' : 'bg-white'"
@@ -59,7 +68,7 @@
 
     <!-- step1 horaires -->
     <div
-      v-if="step1"
+      v-if="step1 && this.service == 1"
       class="max-w-xl mt-5 md:mx-auto sm:text-center lg:max-w-xl"
     >
       <h2
@@ -217,6 +226,9 @@ export default {
   name: "Rendez_vous",
   data() {
     return {
+      
+      service: JSON.parse(sessionStorage.getItem("avocatProfile")).serviceRdv,
+
       rdv: {
         id_creneau: "",
         date_creneau: "",
