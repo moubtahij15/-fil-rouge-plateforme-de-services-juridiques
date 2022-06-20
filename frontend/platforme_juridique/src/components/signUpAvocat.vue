@@ -37,7 +37,7 @@
         <p class="text-md mx-auto mt-3 text-center">
           Déja inscrit ?
           <a
-            @click="redirectTo({ val: 'signIn' })"
+            @click="redirectTo({ val: 'sign-in' })"
             class="text-blue cursor-pointer underline"
             >Connectez-vous</a
           >
@@ -483,7 +483,6 @@ export default {
       categories: "",
     };
   },
-  
   methods: {
     ...mapActions([
       "redirectTo",
