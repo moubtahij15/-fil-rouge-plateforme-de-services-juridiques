@@ -1,6 +1,14 @@
 <template lang="">
   <div class="w-full mx-auto my-4 border-b-2 pb-4">
-    <div class="flex pb-3 mx-auto w-full">
+    <div
+      class="w-full flex items-center my-auto justify-center p-4 sm:flex"
+      v-if="this.service == 0"
+    >
+      <p class="text-2xl text-primary md:text-3xl font-light leading-normal">
+      ce service est desactivé par ce avocat
+      </p>
+    </div>
+    <div class="flex pb-3 mx-auto w-full" v-if="this.service == 1">
       <div class="flex-1">
         <div
           :class="step1 ? 'bg-primary text-white ' : 'bg-white'"
@@ -83,7 +91,7 @@
           ></div>
         </div>
       </div>
-      <div class="flex-1">
+      <div class="flex-1" >
         <div
           v-if="step5"
           :class="step5 == 'tele' ? 'bg-primary text-white ' : 'bg-white'"
@@ -96,7 +104,8 @@
 
     <!-- step1 choix de type de consultation -->
 
-    <div v-if="step1" class="w-full mt-5 md:mx-auto sm:text-center lg:max-w-xl">
+    <div v-if="step1 && this.service == 1" class="w-full mt-5 md:mx-auto sm:text-center lg:max-w-xl"
+    >
       <h2
         class="w-full mb-10 font-sans text-3xl font-medium leading-none tracking-tight text-gray-900 sm:text-3xl md:mx-auto"
       >
@@ -324,8 +333,11 @@ export default {
   name: "Rendez_vous",
   data() {
     return {
+      //       serviceConsultation: 1
+      // serviceDocument: 1
+      // serviceRdv: 1
       // idSession typeConsultation prix id_client id_avocat sujet
-
+      service: JSON.parse(sessionStorage.getItem("avocatProfile")).serviceConsultation,
       sessionId: null,
 
       // consultationEcrit for ecrit and tele
@@ -348,9 +360,9 @@ export default {
       step4: false,
       step5: false,
       min: "",
-        publishableKey:
-          "pk_test_51L31WgJpb3Br7exnkJTm0E3Kb1qn8HZpjxZ7WRUS54kYwpIJDbIBbhYaHQbZtWognSJ4GAbFFuHewkuoCRqMV65I00XKNgiwtA",
-      };
+      publishableKey:
+        "pk_test_51L31WgJpb3Br7exnkJTm0E3Kb1qn8HZpjxZ7WRUS54kYwpIJDbIBbhYaHQbZtWognSJ4GAbFFuHewkuoCRqMV65I00XKNgiwtA",
+    };
   },
   components: {
     StripeCheckout,
@@ -454,6 +466,8 @@ export default {
     },
   },
   mounted() {
+      console.log(this.service);
+
     if (sessionStorage.getItem("consultationInfo")) {
       let consultationType = JSON.parse(
         sessionStorage.getItem("consultationInfo")
