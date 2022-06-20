@@ -2,7 +2,15 @@
   <!-- component -->
   <!-- component -->
   <div class="w-full mx-auto my-4 border-b-2 pb-4">
-    <div class="flex">
+  <div
+      class="w-full flex items-center my-auto justify-center p-4 sm:flex"
+      v-if="this.service == 0"
+    >
+      <p class="text-2xl text-primary md:text-3xl font-light leading-normal">
+      ce service est desactivé par ce avocat
+      </p>
+    </div>
+    <div class="flex"  v-if="this.service == 1">
       <svg viewBox="0 0 40 40" class="w-6 h-6 fill-current">
         <path
           d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z"
@@ -15,7 +23,7 @@
       </p>
     </div>
 
-    <section class="container mx-auto p-6 font-mono" v-if="!valide">
+    <section class="container mx-auto p-6 font-mono" v-if="!valide && this.service == 1">
       <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
         <div class="w-full overflow-x-auto">
           <table class="w-full border-white">
@@ -105,6 +113,8 @@ export default {
   name: "document",
   data() {
     return {
+      service: JSON.parse(sessionStorage.getItem("avocatProfile")).serviceDocument,
+
       valide: false,
       sessionId: null,
       document: {
