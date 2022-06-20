@@ -2,7 +2,9 @@
   <div class="relative z-10 w-full max-w-2xl mt-20 lg:mt-0 lg:w-5/12">
     <button
       @click="
-        this.$parent.$options.name == 'signIn' ? redirectTo({ val: 'sign-in' }) : redirectTo({ val: 'signIn' })
+        this.$parent.$options.name == 'signIn'
+          ? redirectTo({ val: 'sign-in' })
+          : redirectTo({ val: 'signIn' })
       "
       class="inline-block w-1/2 px-3 py-2 text-md font-medium text-center text-white1 transition duration-200 bg-yellow-300 rounded-lg bg-primary ease"
     >
@@ -48,7 +50,12 @@
         <p class="text-md mx-auto mt-3 text-center">
           Vous êtes nouveau ?
           <a
-            @click="redirectTo({ val: 'signUp' })"
+            @click="
+              this.$parent.$options.name == 'signIn'
+                ? redirectTo({ val: 'signUp' })
+                : redirectTo({ val: 'sign-up' })
+            "
+
             class="text-blue cursor-pointer underline"
             >inscrit-vous</a
           >
@@ -338,7 +345,6 @@ export default {
             // console.log(this.$parent.$parent.$parent.navChange());
 
             this.redirectTo({ val: "dashboard" });
-            
           } else {
             this.message = response.message;
           }
