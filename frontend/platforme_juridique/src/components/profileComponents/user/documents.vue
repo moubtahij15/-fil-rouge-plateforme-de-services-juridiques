@@ -223,13 +223,12 @@
                     {{ elem.prix }}DH
                   </span>
                 </td>
-                <td class="px-4 py-3 text-sm">
-                  <button
-                    @click="submit(elem)"
-                    class="flex-no-shrink px-5 py-2 text-xs shadow-sm hover:shadow-lg font-bold tracking-wider border-2 hover:bg-primary hover:text-white text-primary rounded-full transition ease-in duration-300"
+               <td class="px-4 py-3 text-xl">
+                  <span
+                    class="px-2 py-1 font-medium leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
-                    telecherger
-                  </button>
+                    {{ elem.lien_document }}DH
+                  </span>
                 </td>
               </tr>
             </tbody>
@@ -265,6 +264,7 @@ export default {
         console.log(this.document);
       });
     },
+  
   },
   mounted() {
     this.getAllDocument();
