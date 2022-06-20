@@ -1,7 +1,7 @@
 <template>
   <div class="text-primary">
     <!-- start header -->
-
+    
     <section class="overflow-hidden">
       <!-- Background Layer -->
       <!-- <div class="absolute z-10 w-screen h-full bg-gradient-to-tr from-gray-900 via-gray-900 to-black">
@@ -34,7 +34,7 @@
             Sans vous déplacerService simple, rapide et sécurisé !
           </p> -->
           <a
-                  @click="redirectTo({ val: 'avocats' })"
+            @click="redirectTo({ val: 'avocats' })"
             class="inline-block cursor-pointer bg-primary text-white active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
             >fait le depart</a
           >
