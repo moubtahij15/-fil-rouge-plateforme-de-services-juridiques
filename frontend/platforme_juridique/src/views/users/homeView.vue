@@ -22,12 +22,24 @@
           >
             Trouvez un avocat simplement
           </h1>
-          <p class="text-xl text-blue-200">
+          <p class="text-xl">
             Nous offrons toutes les réponses à vos questions juridiques,
-            rédigées par de vrais avocats.
+            rédigées par de vrais avocats. Sans vous déplacerService simple,
+            rapide et sécurisé !
           </p>
+          <!-- <p class="text-xl text-start">
+            Avocatice Vos consultations juridiques 100% à distance
+            <br />
 
-          <Search />
+            Sans vous déplacerService simple, rapide et sécurisé !
+          </p> -->
+          <a
+                  @click="redirectTo({ val: 'avocats' })"
+            class="inline-block cursor-pointer bg-primary text-white active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+            >fait le depart</a
+          >
+
+          <!-- <Search /> -->
         </div>
 
         <!-- <div class="relative z-0 w-full  mt-8 lg:w-1/2 ">
@@ -116,7 +128,9 @@
         class="box-border flex flex-col items-center content-center px-8 mx-auto leading-6 text-black border-0 border-gray-300 border-solid md:mt-20 xl:mt-0 md:flex-row max-w-7xl lg:px-16"
       >
         <!-- Content -->
+
         <div
+          @click="redirectTo({ val: 'avocats' })"
           class="pt-5 cursor-pointer shadow-md rounded-md hover:shadow-2xl hover:mb-10 order-first w-full text-black border-solid md:w-1/2 md:pl-10 md:order-none"
         >
           <h2
@@ -159,6 +173,7 @@
 
         <!-- Content -->
         <div
+          @click="redirectTo({ val: 'avocats' })"
           class="pt-5 cursor-pointer hover:mb-10 shadow-md rounded-md hover:shadow-2xl box-border order-first w-full text-black border-solid md:w-1/2 md:pl-10 md:order-none"
         >
           <h2
