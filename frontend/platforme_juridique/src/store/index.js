@@ -33,7 +33,7 @@ const store = createStore({
     documentsAvocat: {},
     documentsClient: {}
 
-    
+
   },
   getters: {},
 
