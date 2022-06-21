@@ -352,7 +352,7 @@
                   <span
                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"
                   >
-                    {{ elem.tel   }}
+                    {{ elem.tel }}
                   </span>
                 </td>
                 <td class="px-4 py-3 text-md">
@@ -424,11 +424,13 @@ export default {
     },
     toggleModal() {
       this.showModal = !this.showModal;
-
+      this.action = "add";
       //   this.sjt_post = elm.sjt_RDV;
       //   this.rdvUpdate = elm;
     },
     passingData(elem) {
+              this.action = "update";
+
       this.documentAdd.lien_document = elem.lien_document;
       this.documentAdd.nom_document = elem.nom_document;
       this.documentAdd.prix = elem.prix;
@@ -445,8 +447,11 @@ export default {
       );
     },
     addDocument(ev) {
+      // console.log(this.documentAdd)
       ev.preventDefault();
-      if ((this.action = !"update")) {
+      if (this.action == "add") {
+        // console.log(this.documentAdd)
+
         this.createDocument(this.documentAdd).then((response) => {
           this.getAllDocuments();
           this.documentAdd.lien_document = "";
@@ -456,6 +461,8 @@ export default {
           this.showModal = !this.showModal;
         });
       } else {
+        console.log(this.documentAdd);
+
         this.updateDocument(this.documentAdd).then((response) => {
           this.getAllDocuments();
           this.documentAdd.lien_document = "";
