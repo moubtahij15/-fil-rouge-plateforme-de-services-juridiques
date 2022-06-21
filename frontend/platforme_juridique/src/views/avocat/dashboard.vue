@@ -11,7 +11,7 @@
             <div class="image overflow-hidden">
               <img
                 class="h-auto w-full mx-auto"
-                src="../../assets/profileUser.jpg"
+                src="https://www.le-tout-lyon.fr/content/articles/18190/main_justiceavocatlyon.jpg"
                 alt=""
               />
             </div>
