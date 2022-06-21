@@ -37,6 +37,9 @@ export default {
         console.log("signin avocat");
       }
     });
+     if (sessionStorage.getItem("Avocat")) {
+      this.redirectTo({ val: "dashboard" });
+    }
   },
 };
 </script>
