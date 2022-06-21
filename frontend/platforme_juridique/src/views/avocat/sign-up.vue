@@ -27,5 +27,10 @@ export default {
   components: {
     signUpComponent,
   },
+  mounted() {
+    if (sessionStorage.getItem("Avocat")) {
+      this.redirectTo({ val: "dashboard" });
+    }
+  },
 };
 </script>
