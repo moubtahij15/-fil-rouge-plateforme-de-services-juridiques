@@ -20,11 +20,11 @@
           <h1
             class="text-5xl font-extrabold text-primary leading-tight sm:text-6xl md:text-6xl"
           >
-            Trouvez un avocat simplement
+            Trouvez un avocat  simplement
           </h1>
           <p class="text-xl">
             Nous offrons toutes les réponses à vos questions juridiques,
-            rédigées par de vrais avocats. Sans vous déplacerService simple,
+            rédigées par de vrais avocats. Sans vous déplacer. Service simple,
             rapide et sécurisé !
           </p>
           <!-- <p class="text-xl text-start">
@@ -36,7 +36,7 @@
           <a
             @click="redirectTo({ val: 'avocats' })"
             class="inline-block cursor-pointer bg-primary text-white active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
-            >fait le depart</a
+            >Fait le depart</a
           >
 
           <!-- <Search /> -->
@@ -86,7 +86,7 @@
                 height="24"
               ></rect>
             </svg>
-            <span class="relative">Notre</span>
+            <span class="relative">Nos</span>
           </span>
           services :
         </h2>
@@ -112,7 +112,7 @@
           <h2
             class="m-0 text-xl font-semibold leading-tight border-0 border-gray-300 lg:text-3xl md:text-2xl"
           >
-            Prendre Rendez-vous <br />
+            prenez un  Rendez-vous <br />
             chez un Avocat
           </h2>
           <p
@@ -231,10 +231,7 @@
           de 1.000 clients nous ont déjà fait confiance
         </h2>
 
-        <p class="text-base text-gray-700 md:text-lg">
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque rem aperiam, eaque ipsa quae.
-        </p>
+     
       </div>
 
       <div class="grid gap-8 row-gap-8 lg:grid-cols-4">
