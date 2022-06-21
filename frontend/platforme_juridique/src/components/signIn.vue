@@ -307,7 +307,7 @@ export default {
       //
     };
   },
-  methods: {
+  methods: {  
     ...mapActions(["redirectTo", "loginUser", "isLogin", "loginAvocat"]),
 
     //user methods
