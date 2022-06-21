@@ -117,7 +117,7 @@
                 <th
                   class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm leading-4 text-blue-500 tracking-wider"
                 >
-                  choisi
+                  action
                 </th>
               </tr>
             </thead>
@@ -197,7 +197,7 @@
             </h3>
 
             <p class="text-primary y-2">
-              vous pouvez voir ton rendez-vous dans votre profile
+              vous pouvez voir ton rendez-vous sur votre profile
             </p>
             <p>Passez une bonne journée !</p>
           </div>
