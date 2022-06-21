@@ -20,7 +20,14 @@
             </h1>
           </div>
           <!-- End of profile card -->
-          <div class="my-4"></div>
+          <div class="my-4">
+          
+          <FIcons
+            id="delete"
+            :icon="['fas', 'arrow-right-from-bracket']"
+            class="ml-6 h-6 w-6 cursor-pointer"
+            @click="logout()"
+          /></div>
 
           <!-- End of friends card -->
         </div>
@@ -131,8 +138,15 @@ export default {
       "getAvocats",
       "getAvocatsBySearch",
     ]),
+    logout() {
+      sessionStorage.clear();
+      this.redirectTo({ val: "sign-in" });
+  },
   },
   mounted() {
+     if (!sessionStorage.getItem("Avocat")) {
+      this.redirectTo({ val: "sign-in" });
+    }
     // console.log();
     // this.avocat = JSON.parse(sessionStorage.getItem('avocatProfile'));
   },
